@@ -8,9 +8,9 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-type StatCardIconType = 'applications' | 'responses' | 'interviews' | 'offers';
+export type StatCardIconType = 'applications' | 'responses' | 'interviews' | 'offers';
 
-type IconType = {
+export type IconType = {
   icon: LucideIcon;
   primary: string;
   secondary: string;
@@ -39,9 +39,9 @@ const StatCardIcons: Record<StatCardIconType, IconType> = {
   },
 };
 
-type StatCardProps = {
+export type StatCardType = {
   type: StatCardIconType;
-  value?: string;
+  value?: number;
   label?: string;
   growth?: number;
   compare?: string;
@@ -49,11 +49,11 @@ type StatCardProps = {
 
 export default function StatCard({
   type = 'applications',
-  value = '42',
+  value = 42,
   label = 'Applications',
   growth = 12,
   compare = 'last month',
-}: StatCardProps) {
+}: StatCardType) {
   const icon = StatCardIcons[type];
   const Icon = icon.icon;
   return (
@@ -62,21 +62,21 @@ export default function StatCard({
         <Icon />
       </div>
 
-      <div className="flex flex-col content-start">
+      <div className="flex flex-col content-start leading-3">
         <div>
           <p className="text-2xl font-semibold">{value}</p>
           <p className="text-slate-800">{label}</p>
         </div>
 
-        <div className="flex flex-col pt-2 text-sm text-slate-500">
+        <div className="flex flex-col pt-2 text-sm text-slate-500 gap-0 leading-4">
           <div
             className={[
-              'flex gap-1 text-sm',
+              'flex gap-1 text-sm items-center',
               growth > 0 ? 'text-green-700' : growth < 0 ? 'text-red-600' : '',
             ].join(' ')}
           >
             {growth > 0 ? (
-              <MoveUpRight className="w-4" />
+              <MoveUpRight className="w-4 h-4" />
             ) : growth === 0 ? (
               <Minus className="w-4" />
             ) : (
