@@ -1,17 +1,23 @@
-import {
-  applicationActivityMock,
-  ApplicationsActivityDatas,
-} from '@/features/dashboard/data/applicationActivity';
 import ApplicationActivityChart from '../features/dashboard/components/ApplicationActivityChart';
 import DashboardHeader from '../features/dashboard/components/DahsboardHeader';
 import StatGrid from '@/features/dashboard/components/StatGrid';
 import { useEffect, useState } from 'react';
-import type { ApplicationActivity } from '@/features/dashboard/types/types';
-import { getApplicationActivity } from '@/features/dashboard/services/dahsboard.service';
+import {
+  type ApplicationActivity,
+  type ApplicationStatusDistribution,
+} from '@/features/dashboard/types/types';
+import {
+  getApplicationActivity,
+  getApplicationStatusDistribution,
+} from '@/features/dashboard/services/dahsboard.service';
 import ApplicationActivityChartSkeleton from '@/features/dashboard/components/ApplicationActivityChartSkeleton';
+import ApplicationStatusChart from '@/features/dashboard/components/ApplicationStatusChart';
 
 export default function Dashboard() {
   const [activityLoading, setActivityLoading] = useState<boolean>(true);
+  const [statusLoading, setStatusLoading] = useState(true);
+
+  const [statusDistribution, setStatusDistribution] = useState<ApplicationStatusDistribution[]>([]);
   const [applicationsActivity, setApplicationsActivity] = useState<ApplicationActivity[]>([]);
 
   useEffect(() => {
@@ -21,11 +27,20 @@ export default function Dashboard() {
         setApplicationsActivity(data);
       });
     }
+
+    async function loadApplicationStatusDistribution() {
+      getApplicationStatusDistribution().then((data) => {
+        setStatusLoading(false);
+        setStatusDistribution(data);
+      });
+    }
+
     loadApplicationsActivity();
+    loadApplicationStatusDistribution();
   });
 
   return (
-    <main className="min-h-screen p-8 space-y-16">
+    <main className="min-h-screen p-8 space-y-3">
       <DashboardHeader name="Jean" />
       <StatGrid />
       <section className="flex gap-5">
@@ -36,7 +51,7 @@ export default function Dashboard() {
             <ApplicationActivityChart data={applicationsActivity} />
           </>
         )}
-        <div className="flex-1 bg-red-100"></div>
+        <ApplicationStatusChart data={statusDistribution} />
       </section>
     </main>
   );
