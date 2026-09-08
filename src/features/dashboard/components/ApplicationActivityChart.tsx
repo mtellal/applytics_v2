@@ -1,7 +1,7 @@
-import Selector from '@/components/ui/Selector';
-import type { ActivityPeriod, ApplicationActivity } from '@/features/dashboard/types/types';
 import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import type { ActivityPeriod, ApplicationActivity } from '../types/types';
+import Selector from '@/components/ui/Selector';
 
 type ApplicationActivityChartProps = {
   data: ApplicationActivity[];
@@ -38,7 +38,7 @@ export default function ApplicationActivityChart({ data }: ApplicationActivityCh
   const filteredData = filterActivityByPeriod(data, period);
 
   return (
-    <section className="flex-2 border p-3 rounded-lg bg-white space-y-3">
+    <section className="flex-3 border p-3 rounded-lg bg-white space-y-3">
       <div className="flex justify-between">
         <div>
           <h2 className="text-xl leading-5 mt-1 font-semibold">Applications activity</h2>
@@ -80,7 +80,7 @@ export default function ApplicationActivityChart({ data }: ApplicationActivityCh
               }
               formatter={(value) => [value, 'Applications']}
             />
-            <Bar dataKey="applications" fill="#3b82f6" radius={[6, 6, 0, 0]} maxBarSize={36} />{' '}
+            <Bar dataKey="applications" fill="#2f6dd1" radius={[6, 6, 0, 0]} maxBarSize={36} />{' '}
           </BarChart>
         </ResponsiveContainer>
       </div>

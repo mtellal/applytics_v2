@@ -1,6 +1,6 @@
 export default function ApplicationActivityChartSkeleton() {
   return (
-    <section className=" flex-2 rounded-xl border bg-white p-3 animate-pulse">
+    <section className=" flex-3 rounded-xl border bg-white p-3 animate-pulse">
       <div className="mb-6 flex items-start justify-between">
         <div className="space-y-2">
           <div className="h-5 w-40 rounded bg-gray-200" />

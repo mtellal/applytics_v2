@@ -1,4 +1,4 @@
-import DateRangePicker from '../../../components/ui/DateRangePicker';
+import DateRangePicker from '@/components/ui/DateRangePicker';
 
 export type DashboardHeaderProps = {
   name: string;
