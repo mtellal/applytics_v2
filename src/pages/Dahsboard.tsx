@@ -5,20 +5,28 @@ import { useEffect, useState } from 'react';
 import {
   type ApplicationActivity,
   type ApplicationStatusDistribution,
+  type RecentApplication,
 } from '@/features/dashboard/types/types';
 import {
   getApplicationActivity,
   getApplicationStatusDistribution,
+  getRecentApplications,
 } from '@/features/dashboard/services/dahsboard.service';
 import ApplicationActivityChartSkeleton from '@/features/dashboard/components/ApplicationActivityChartSkeleton';
 import ApplicationStatusChart from '@/features/dashboard/components/ApplicationStatusChart';
+import ApplicationStatusChartSkeleton from '@/features/dashboard/components/ApplicationStatusChartSkeleton';
+import RecentApplciations from '@/features/dashboard/components/RecentApplications';
+import RecentApplicationsSkeleton from '@/features/dashboard/components/RecentApplicationsSkeleton';
 
 export default function Dashboard() {
+  const [applicationsActivity, setApplicationsActivity] = useState<ApplicationActivity[]>([]);
   const [activityLoading, setActivityLoading] = useState<boolean>(true);
-  const [statusLoading, setStatusLoading] = useState(true);
 
   const [statusDistribution, setStatusDistribution] = useState<ApplicationStatusDistribution[]>([]);
-  const [applicationsActivity, setApplicationsActivity] = useState<ApplicationActivity[]>([]);
+  const [statusLoading, setStatusLoading] = useState(true);
+
+  const [recents, setRecents] = useState<RecentApplication[]>([]);
+  const [loadingRecents, setLoadingRecents] = useState(true);
 
   useEffect(() => {
     async function loadApplicationsActivity() {
@@ -35,12 +43,20 @@ export default function Dashboard() {
       });
     }
 
+    async function loadRecentApplications() {
+      getRecentApplications().then((data) => {
+        setLoadingRecents(false);
+        setRecents(data);
+      });
+    }
+
     loadApplicationsActivity();
     loadApplicationStatusDistribution();
+    loadRecentApplications();
   });
 
   return (
-    <main className="min-h-screen p-8 space-y-3">
+    <main className="min-h-screen p-4 space-y-3">
       <DashboardHeader name="Jean" />
       <StatGrid />
       <section className="flex gap-5">
@@ -51,8 +67,13 @@ export default function Dashboard() {
             <ApplicationActivityChart data={applicationsActivity} />
           </>
         )}
-        <ApplicationStatusChart data={statusDistribution} />
+        {statusLoading ? (
+          <ApplicationStatusChartSkeleton />
+        ) : (
+          <ApplicationStatusChart data={statusDistribution} />
+        )}
       </section>
+      {loadingRecents ? <RecentApplicationsSkeleton /> : <RecentApplciations data={recents} />}
     </main>
   );
 }

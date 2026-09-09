@@ -11,3 +11,14 @@ export type ApplicationStatusDistribution = {
   status: ApplicationStatus;
   count: number;
 };
+
+export type RecentApplication = {
+  id: string;
+  company: string;
+  companyLogo?: string;
+  position: string;
+  status: ApplicationStatus;
+  appliedAt: string;
+  location: string;
+  link: string;
+};
