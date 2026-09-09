@@ -1,7 +1,11 @@
+import ApplicationFilters from '@/features/applications/components/ApplicationsFilters';
+import ApplicationHeader from '@/features/applications/components/ApplicationsHeader';
+
 export default function Applications() {
   return (
-    <div className="min-h-screen p-8">
-      <h1 className="text-4xl font-bold text-slate-900">Applications</h1>
-    </div>
+    <main className="min-h-screen p-4 space-y-3">
+      <ApplicationHeader />
+      <ApplicationFilters />
+    </main>
   );
 }
