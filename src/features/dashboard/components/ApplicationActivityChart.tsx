@@ -61,18 +61,26 @@ export default function ApplicationActivityChart({ data }: ApplicationActivityCh
                 fontSize: 13,
                 fill: '#6B7280',
               }}
-              tickFormatter={(value) =>
-                new Date(value).toLocaleDateString('en-US', {
+              tickFormatter={(value) => {
+                const date = new Date(value);
+
+                if (period === '7d' || period === '14d') {
+                  return date.toLocaleDateString('en-US', {
+                    weekday: 'short',
+                  });
+                }
+
+                return date.toLocaleDateString('en-US', {
                   day: 'numeric',
                   month: 'short',
-                })
-              }
+                });
+              }}
             />
             <YAxis width="auto" axisLine={false} tickLine={false} allowDecimals={false} />
             <Tooltip
-              cursor={{ fill: '#F3F4F6' }}
+              cursor={{ fill: '#fafafa' }}
               labelFormatter={(label) =>
-                new Date(label as string).toLocaleDateString('eu-US', {
+                new Date(label as string).toLocaleDateString('en-US', {
                   day: 'numeric',
                   month: 'long',
                   year: 'numeric',
@@ -80,7 +88,7 @@ export default function ApplicationActivityChart({ data }: ApplicationActivityCh
               }
               formatter={(value) => [value, 'Applications']}
             />
-            <Bar dataKey="applications" fill="#2f6dd1" radius={[6, 6, 0, 0]} maxBarSize={36} />{' '}
+            <Bar dataKey="applications" fill="#93C5FD" radius={[6, 6, 0, 0]} maxBarSize={36} />{' '}
           </BarChart>
         </ResponsiveContainer>
       </div>

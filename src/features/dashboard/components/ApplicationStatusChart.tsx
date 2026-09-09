@@ -12,26 +12,29 @@ type ApplicationStatusConfig = {
   dotClass: string;
 };
 
-const applicationStatusConfig: Record<ApplicationStatus, ApplicationStatusConfig> = {
+export const applicationStatusConfig: Record<ApplicationStatus, ApplicationStatusConfig> = {
   'in-progress': {
     label: 'In progress',
-    color: '#3B82F6',
-    dotClass: 'bg-blue-500',
+    color: '#93C5FD',
+    dotClass: 'bg-blue-300',
   },
+
   interview: {
     label: 'Interviews',
-    color: '#8B5CF6',
-    dotClass: 'bg-violet-500',
+    color: '#C4B5FD',
+    dotClass: 'bg-violet-300',
   },
+
   offer: {
     label: 'Offers',
-    color: '#22C55E',
-    dotClass: 'bg-green-500',
+    color: '#86EFAC',
+    dotClass: 'bg-green-300',
   },
+
   rejected: {
     label: 'Rejected',
-    color: '#EF4444',
-    dotClass: 'bg-red-500',
+    color: '#FCA5A5',
+    dotClass: 'bg-red-300',
   },
 };
 
@@ -40,38 +43,6 @@ const renderStatusShape = (props: PieSectorShapeProps) => {
   const config = applicationStatusConfig[status];
   return <Sector {...props} fill={config.color} />;
 };
-
-type CenterLabelProps = {
-  cx: number;
-  cy: number;
-  total: number;
-};
-
-function CenterLabel({ cx, cy, total }: CenterLabelProps) {
-  return (
-    <g>
-      <text
-        x={cx}
-        y={cy - 5}
-        textAnchor="middle"
-        dominantBaseline="middle"
-        className="fill-gray-900 text-2xl font-semibold"
-      >
-        {total}
-      </text>
-
-      <text
-        x={cx}
-        y={cy + 18}
-        textAnchor="middle"
-        dominantBaseline="middle"
-        className="fill-gray-500 text-xs"
-      >
-        Applications
-      </text>
-    </g>
-  );
-}
 
 export default function ApplicationStatusChart({ data }: ApplicationStatusChartProps) {
   const totalApplications = data.reduce((total, item) => total + item.count, 0);

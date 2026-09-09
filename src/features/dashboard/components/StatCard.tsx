@@ -19,17 +19,17 @@ export type IconType = {
 const StatCardIcons: Record<StatCardIconType, IconType> = {
   applications: {
     icon: FileText,
-    primary: 'text-blue-500',
+    primary: 'text-blue-400',
     secondary: 'bg-blue-100',
   },
   responses: {
     icon: MoveUpRight,
-    primary: 'text-green-500',
+    primary: 'text-green-400',
     secondary: 'bg-green-100',
   },
   interviews: {
     icon: CalendarDays,
-    primary: 'text-violet-500',
+    primary: 'text-violet-400',
     secondary: 'bg-violet-100',
   },
   offers: {
@@ -57,7 +57,7 @@ export default function StatCard({
   const icon = StatCardIcons[type];
   const Icon = icon.icon;
   return (
-    <div className="bg-white flex gap-6 p-5 w-fit items-start border border-gray-200 rounded-xl">
+    <div className="bg-white flex gap-6 py-3 px-5 w-fit items-start border border-gray-200 rounded-xl">
       <div className={`${icon.primary} ${icon.secondary} p-3 rounded-lg`}>
         <Icon />
       </div>
