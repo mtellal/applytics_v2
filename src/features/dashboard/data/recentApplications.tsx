@@ -1,12 +1,11 @@
-import type { RecentApplication } from '../types/types';
-
 import quonto from '@/assets/companies/quonto.svg';
 import alan from '@/assets/companies/alan.webp';
 import doctolib from '@/assets/companies/doctolib.svg';
 import backMarket from '@/assets/companies/backMarket.png';
 import swile from '@/assets/companies/swile.svg';
+import type { Application } from '@/models/applications';
 
-export const recentApplicationsMock: RecentApplication[] = [
+export const recentApplicationsMock: Application[] = [
   {
     id: '1',
     company: 'Qonto',

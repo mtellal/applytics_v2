@@ -2,11 +2,7 @@ import ApplicationActivityChart from '../features/dashboard/components/Applicati
 import DashboardHeader from '../features/dashboard/components/DahsboardHeader';
 import StatGrid from '@/features/dashboard/components/StatGrid';
 import { useEffect, useState } from 'react';
-import {
-  type ApplicationActivity,
-  type ApplicationStatusDistribution,
-  type RecentApplication,
-} from '@/features/dashboard/types/types';
+import { type ApplicationActivity } from '@/features/dashboard/types/types';
 import {
   getApplicationActivity,
   getApplicationStatusDistribution,
@@ -17,6 +13,7 @@ import ApplicationStatusChart from '@/features/dashboard/components/ApplicationS
 import ApplicationStatusChartSkeleton from '@/features/dashboard/components/ApplicationStatusChartSkeleton';
 import RecentApplciations from '@/features/dashboard/components/RecentApplications';
 import RecentApplicationsSkeleton from '@/features/dashboard/components/RecentApplicationsSkeleton';
+import type { Application, ApplicationStatusDistribution } from '@/models/applications';
 
 export default function Dashboard() {
   const [applicationsActivity, setApplicationsActivity] = useState<ApplicationActivity[]>([]);
@@ -25,7 +22,7 @@ export default function Dashboard() {
   const [statusDistribution, setStatusDistribution] = useState<ApplicationStatusDistribution[]>([]);
   const [statusLoading, setStatusLoading] = useState(true);
 
-  const [recents, setRecents] = useState<RecentApplication[]>([]);
+  const [recents, setRecents] = useState<Application[]>([]);
   const [loadingRecents, setLoadingRecents] = useState(true);
 
   useEffect(() => {

@@ -33,7 +33,7 @@ const filterActivityByPeriod = (data: ApplicationActivity[], period: string) => 
 };
 
 export default function ApplicationActivityChart({ data }: ApplicationActivityChartProps) {
-  const [period, setPeriod] = useState<ActivityPeriod>('7d');
+  const [period, setPeriod] = useState<ActivityPeriod>('14d');
 
   const filteredData = filterActivityByPeriod(data, period);
 
