@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react';
 import StatCard, { type StatCardType } from './StatCard';
-import { getDashboardStats } from '../services/dahsboard.service';
 import StatCardSkeleton from './StatCardSkeleton';
 
-export default function StatGrid() {
-  const [stats, setStats] = useState<StatCardType[]>([]);
-  const [loading, setLoading] = useState<Boolean>(true);
+type StatGridProps = {
+  stats: StatCardType[];
+  loading: boolean;
+};
 
-  useEffect(() => {
-    getDashboardStats().then((datas: StatCardType[]) => {
-      setLoading(false);
-      setStats(datas);
-    });
-  }, []);
-
+export default function StatGrid({ stats, loading }: StatGridProps) {
   return (
     <section aria-busy={loading as boolean} className="flex gap-3">
       {loading ? (
