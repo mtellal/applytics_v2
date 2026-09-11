@@ -1,4 +1,3 @@
-import { statusColorsConfig } from '@/features/dashboard/components/RecentApplications';
 import type { Application } from '@/models/applications';
 import { ExternalLink } from 'lucide-react';
 import ApplicationsPagination from './ApplicationsPagination';
@@ -6,6 +5,7 @@ import { ApplicationsTableBodySkeleton } from './ApplicationsTableSkeleton';
 import { APPLICATIONS_PAGE_SIZE } from '../constants';
 
 import ApplicationActions from './ApplicationsActions';
+import { cardVisualConfig } from '@/constants/cardVisual';
 
 export type ApplicationtableProps = {
   applications: Application[];
@@ -68,7 +68,7 @@ export default function ApplicationsTable({
                 <td>
                   <span className={`flex items-center justify-center mr-5 rounded-full`}>
                     <p
-                      className={`px-3 py-[2px] rounded-full  ${statusColorsConfig[item.status].textColor} ${statusColorsConfig[item.status].bgColor}`}
+                      className={`px-3 py-[2px] rounded-full  ${cardVisualConfig[item.status].iconColor} ${cardVisualConfig[item.status].iconBackground}`}
                     >
                       {item.status}
                     </p>
