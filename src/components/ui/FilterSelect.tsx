@@ -13,21 +13,21 @@ type FilterOption = {
   value: string;
 };
 
-type FilterSelectProps = {
+type FilterSelectProps<T extends string> = {
   label: string;
   icon: LucideIcon;
-  value: string;
+  value: T;
   options: FilterOption[];
-  onValueChange: (value: string) => void;
+  onValueChange: (value: T) => void;
 };
 
-export default function FilterSelect({
+export default function FilterSelect<T extends string>({
   label,
   icon: Icon,
   value,
   options,
   onValueChange,
-}: FilterSelectProps) {
+}: FilterSelectProps<T>) {
   return (
     <Select value={value} onValueChange={(d) => (d ? onValueChange(d) : '')}>
       <SelectTrigger className="bg-white min-w-48 px-4 py-6">
