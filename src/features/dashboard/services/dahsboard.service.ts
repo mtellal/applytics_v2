@@ -1,13 +1,10 @@
+import type { Application, ApplicationStatusDistribution } from '@/models/applications';
 import type { StatCardType } from '../components/StatCard';
-import { applicationActivityMock, ApplicationsActivityDatas } from '../data/applicationActivity';
+import { applicationActivityMock } from '../data/applicationActivity';
 import { applicationStatusDistributionMock } from '../data/applicationStatusDistribution';
 import { recentApplicationsMock } from '../data/recentApplications';
 import { StatCardDatas } from '../data/stats';
-import type {
-  ApplicationActivity,
-  ApplicationStatusDistribution,
-  RecentApplication,
-} from '../types/types';
+import type { ApplicationActivity } from '../types/types';
 
 export async function getDashboardStats(): Promise<StatCardType[]> {
   return new Promise((resolve, reject) => {
@@ -33,7 +30,7 @@ export async function getApplicationStatusDistribution(): Promise<ApplicationSta
   });
 }
 
-export async function getRecentApplications(): Promise<RecentApplication[]> {
+export async function getRecentApplications(): Promise<Application[]> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(recentApplicationsMock);

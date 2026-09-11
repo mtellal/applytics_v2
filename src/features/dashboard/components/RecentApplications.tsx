@@ -1,10 +1,10 @@
 import { ArrowRight, Ellipsis, EllipsisVertical, ExternalLink } from 'lucide-react';
-import type { ApplicationStatus, RecentApplication as RecentApplicationType } from '../types/types';
 import { applicationStatusConfig } from './ApplicationStatusChart';
 import { Link } from 'react-router-dom';
+import type { Application, ApplicationStatus } from '@/models/applications';
 
 type RecentApplciationsProps = {
-  data: RecentApplicationType[];
+  data: Application[];
 };
 
 type StatusColor = {
@@ -12,7 +12,7 @@ type StatusColor = {
   bgColor: string;
 };
 
-const statusColorsConfig: Record<ApplicationStatus, StatusColor> = {
+export const statusColorsConfig: Record<ApplicationStatus, StatusColor> = {
   'in-progress': {
     bgColor: 'bg-blue-100',
     textColor: 'text-blue-800',
@@ -56,7 +56,11 @@ export default function RecentApplications({ data }: RecentApplciationsProps) {
           return (
             <div className="grid grid-cols-[1.5fr_2fr_1fr_1fr_1.5fr_1.5fr_48px] px-4 py-2 text-sm items-center text-gray-800 hover:bg-gray-50">
               <div className="flex items-center gap-2">
-                <img className="w-8 h-8 rounded-full " src={item.companyLogo} />
+                {item.companyLogo && item.companyLogo !== '' ? (
+                  <img className="w-8 h-8 rounded-full " src={item.companyLogo} />
+                ) : (
+                  <div className="w-8 h-8 rounded-full "></div>
+                )}
                 <p>{item.company}</p>
               </div>
               <p className="truncate">{item.position}</p>
