@@ -20,7 +20,7 @@ import { createApplication, editApplication } from '../services/applications.ser
 type ApplicationDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onApplicationCreated: () => void;
+  onApplicationChange: () => void;
   currentApplication?: Application;
 };
 
@@ -84,14 +84,14 @@ const initialForm: ApplicationForm = {
 export default function ApplicationDialog({
   open,
   onOpenChange,
-  onApplicationCreated,
+  onApplicationChange,
   currentApplication,
 }: ApplicationDialogProps) {
   const [form, setForm] = useState<ApplicationForm>(initialForm);
 
   useEffect(() => {
     if (currentApplication) {
-      setForm((p) => ({
+      setForm({
         company: currentApplication.company,
         jobTitle: currentApplication.jobTitle,
         field: currentApplication.field as ApplicationField,
@@ -100,7 +100,7 @@ export default function ApplicationDialog({
         location: currentApplication.location,
         link: currentApplication.link,
         notes: currentApplication.notes,
-      }));
+      });
     } else {
       setForm(initialForm);
     }
@@ -121,7 +121,7 @@ export default function ApplicationDialog({
       if (currentApplication) await editApplication({ id: currentApplication.id, ...form });
       else await createApplication(form);
       onOpenChange(false);
-      onApplicationCreated();
+      onApplicationChange();
       setForm(initialForm);
     } catch (error) {
       console.log(error);
@@ -133,9 +133,16 @@ export default function ApplicationDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[480px]">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-semibold">New application</DialogTitle>
+          <DialogTitle className="text-2xl font-semibold">
+            {currentApplication ? 'Edit application' : 'New application'}
+          </DialogTitle>
 
-          <DialogDescription>Add a new job application to your tracker.</DialogDescription>
+          <DialogDescription>
+            {' '}
+            {currentApplication
+              ? 'Update your job application.'
+              : 'Add a new job application to your tracker.'}
+          </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3 ">
@@ -220,7 +227,7 @@ export default function ApplicationDialog({
             </Button>
 
             <Button type="submit" className="bg-blue-500 hover:bg-blue-400">
-              {currentApplication ? 'Edit application' : 'Add application'}
+              {currentApplication ? 'Save changes' : 'Add application'}
             </Button>
           </DialogFooter>
         </form>

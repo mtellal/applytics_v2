@@ -21,3 +21,10 @@ export type ApplicationForm = {
   link?: string;
   notes?: string;
 };
+
+export type ApplicationFiltersState = {
+  search: string;
+  sort: SortFilter;
+  status: StatusFilter;
+  field: FieldFilter;
+};

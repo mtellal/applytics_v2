@@ -13,7 +13,7 @@ export type ApplicationtableProps = {
   total: number;
   onPageChange: (page: number) => void;
   tableLoading: boolean;
-  onEdit: (a: Application) => void;
+  openEditDialog: (a: Application) => void;
   onDelete: (id: string) => void;
 };
 
@@ -23,7 +23,7 @@ export default function ApplicationsTable({
   total,
   onPageChange,
   tableLoading,
-  onEdit,
+  openEditDialog,
   onDelete,
 }: ApplicationtableProps) {
   const emptyRows = APPLICATIONS_PAGE_SIZE - applications.length;
@@ -94,7 +94,7 @@ export default function ApplicationsTable({
 
                 <td>
                   <ApplicationActions
-                    onEdit={() => onEdit(item)}
+                    onEdit={() => openEditDialog(item)}
                     onDelete={() => onDelete(item.id)}
                   />
                 </td>

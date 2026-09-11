@@ -2,10 +2,10 @@ import ActionButton from '@/components/ui/ActionButton';
 import { Plus, Upload } from 'lucide-react';
 
 export type ApplicationHeaderProps = {
-  onClick?: () => void;
+  openCreateDialog: () => void;
 };
 
-export default function ApplicationHeader({ onClick }: ApplicationHeaderProps) {
+export default function ApplicationHeader({ openCreateDialog }: ApplicationHeaderProps) {
   return (
     <header className="flex justify-between items-center">
       <div className="flex flex-col text-gray-600">
@@ -18,7 +18,7 @@ export default function ApplicationHeader({ onClick }: ApplicationHeaderProps) {
           Import CSV
         </ActionButton>
 
-        <ActionButton variant="primary" icon={Plus} onClick={onClick}>
+        <ActionButton variant="primary" icon={Plus} onClick={openCreateDialog}>
           New application
         </ActionButton>
       </div>
