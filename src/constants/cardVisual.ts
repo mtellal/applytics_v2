@@ -35,8 +35,8 @@ export const cardVisualConfig: Record<CardVisualType, CardVisualConfig> = {
   offer: {
     label: 'Offers',
     icon: Trophy,
-    iconColor: 'text-yellow-500',
-    iconBackground: 'bg-yellow-100',
+    iconColor: 'text-green-500',
+    iconBackground: 'bg-green-100',
   },
 
   'in-progress': {
