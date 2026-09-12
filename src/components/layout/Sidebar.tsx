@@ -1,4 +1,5 @@
 import ApplyticsLogo from '@/assets/Applytics_logo.png';
+import useAuth from '@/features/auth/hooks/useAuth';
 import { BriefcaseBusiness, CircleUserRound, LayoutDashboard, LogOut } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -16,6 +17,8 @@ const nagigationItems = [
 ];
 
 export default function Sidebar() {
+  const { signOut } = useAuth();
+
   return (
     <aside className="flex-1 flex flex-col gap-8 p-4 border-r border-width-1 border-gray-100 bg-white">
       <header className="flex flex-row justify-center gap-2">
@@ -69,13 +72,13 @@ export default function Sidebar() {
             </NavLink>
           </li>
           <li>
-            <Link
-              to="/login"
+            <button
+              onClick={signOut}
               className="flex w-full items-center gap-3 p-3 text-slate-600 text-sm font-medium transitions-colors hover:bg-gray-50 hover:text-slate-900"
             >
               <LogOut className="w-6" />
               <span>Logout</span>
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>

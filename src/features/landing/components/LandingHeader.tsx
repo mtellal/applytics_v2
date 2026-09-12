@@ -1,10 +1,6 @@
 import logo from '@/assets/Applytics_logo.png';
 
-type LandingHeaderProps = {
-  onLogin: () => void;
-};
-
-export default function LandingHeader({ onLogin }: LandingHeaderProps) {
+export default function LandingHeader() {
   return (
     <header className="border-b border-slate-200 bg-white">
       <div className="mx-auto flex h-18 max-w-[1360px] items-center justify-between px-6 lg:px-10">
@@ -29,14 +25,6 @@ export default function LandingHeader({ onLogin }: LandingHeaderProps) {
             À propos
           </a>
         </nav>
-
-        <button
-          type="button"
-          onClick={onLogin}
-          className="cursor-pointer rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
-        >
-          Se connecter
-        </button>
       </div>
     </header>
   );

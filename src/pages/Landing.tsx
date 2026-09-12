@@ -3,18 +3,16 @@ import HeroCarousel from '@/features/landing/components/HeroCarousel';
 import LandingFooter from '@/features/landing/components/LandingFooter';
 import LandingHeader from '@/features/landing/components/LandingHeader';
 
-import google from '@/assets/companies/google.svg';
+import '@/lib/supabase';
+import GoogleAuthButton from '@/features/auth/components/GoogleAuthButton';
+import useAuth from '@/features/auth/hooks/useAuth';
 
 export default function Landing() {
-  const handleGoogleLogin = () => {
-    // Plus tard :
-    // window.location.href = `${API_URL}/auth/google`;
-    console.log('Google login');
-  };
+  const { signInGoogle } = useAuth();
 
   return (
     <main className="min-h-screen bg-white text-slate-950">
-      <LandingHeader onLogin={handleGoogleLogin} />
+      <LandingHeader />
 
       <section className="mx-auto max-w-[1360px] px-6 pt-14 pb-20 lg:px-10">
         <div className="grid items-center gap-14 lg:grid-cols-[0.85fr_1.4fr]">
@@ -37,17 +35,7 @@ export default function Landing() {
               votre recherche. Simple, rapide et efficace.
             </p>
 
-            <button
-              type="button"
-              onClick={handleGoogleLogin}
-              className="bg-gray-50  mt-8 flex w-full max-w-[330px] cursor-pointer items-center justify-center gap-3 rounded-xl  px-6 py-4 text-lg font-medium shadow-[0_10px_30px_rgba(37,99,235,0.20)] transition hover:bg-white border"
-            >
-              <img
-                src={google}
-                className="flex size-8 items-center justify-center text-sm font-bold"
-              />
-              Continuer avec Google
-            </button>
+            <GoogleAuthButton handleGoogleAuth={signInGoogle} />
 
             <p className="mt-4 flex items-center gap-2 text-sm text-slate-400">
               <span>🔒</span>
