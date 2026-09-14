@@ -58,20 +58,6 @@ export default function Sidebar() {
       <nav>
         <ul className="space-y-1">
           <li>
-            <NavLink
-              to="/account"
-              className={({ isActive }) =>
-                [
-                  'flex items-center gap-3 rounded-lg p-3 text-sm font-medium transitions-colors',
-                  isActive ? 'bg-blue-50 text-blue-900' : 'bg-transparent text-gray-600',
-                ].join(' ')
-              }
-            >
-              <CircleUserRound className="w-6" />
-              <span>Account</span>
-            </NavLink>
-          </li>
-          <li>
             <button
               onClick={signOut}
               className="flex w-full items-center gap-3 p-3 text-slate-600 text-sm font-medium transitions-colors hover:bg-gray-50 hover:text-slate-900"

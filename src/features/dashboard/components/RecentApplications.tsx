@@ -1,34 +1,10 @@
 import { ArrowRight, Ellipsis, EllipsisVertical, ExternalLink } from 'lucide-react';
-import { applicationStatusConfig } from './ApplicationStatusChart';
 import { Link } from 'react-router-dom';
 import type { Application, ApplicationStatus } from '@/models/applications';
+import { applicationStatusConfig, statusColorsConfig } from '@/constants/statusVisual';
 
 type RecentApplciationsProps = {
   data: Application[];
-};
-
-type StatusColor = {
-  textColor: string;
-  bgColor: string;
-};
-
-export const statusColorsConfig: Record<ApplicationStatus, StatusColor> = {
-  'in-progress': {
-    bgColor: 'bg-blue-100',
-    textColor: 'text-blue-800',
-  },
-  interview: {
-    bgColor: 'bg-violet-100',
-    textColor: 'text-violet-800',
-  },
-  offer: {
-    bgColor: 'bg-green-100',
-    textColor: 'text-green-800',
-  },
-  rejected: {
-    bgColor: 'bg-red-100',
-    textColor: 'text-red-800',
-  },
 };
 
 export default function RecentApplications({ data }: RecentApplciationsProps) {
@@ -63,7 +39,7 @@ export default function RecentApplications({ data }: RecentApplciationsProps) {
                 )}
                 <p>{item.company}</p>
               </div>
-              <p className="truncate">{item.position}</p>
+              <p className="truncate">{item.jobTitle}</p>
               <span className={`flex items-center justify-center mr-5 rounded-full`}>
                 <p
                   className={`px-3 py-[2px] rounded-full ${applicationStatusConfig[item.status]} ${statusColorsConfig[item.status].textColor} ${statusColorsConfig[item.status].bgColor}`}

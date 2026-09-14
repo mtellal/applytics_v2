@@ -4,16 +4,15 @@ import type { Application } from '@/models/applications';
 import type { ApplicationStatusDistribution } from '@/models/applications';
 import type { ApplicationActivity } from '../types/types';
 
-import {
-  getApplicationActivity,
-  getApplicationStatusDistribution,
-  getDashboardStats,
-  getRecentApplications,
-} from '../services/dahsboard.service';
-import type { StatCardType } from '../components/StatCard';
+import { getApplicationActivity, getRecentApplications } from '../services/dashboard.service';
+import { getApplicationStatusDistribution } from '@/features/applications/services/applications.service';
+import type { InformationCardType } from '@/components/ui/InformationCard';
+import { FileText } from 'lucide-react';
+import { cardVisualConfig } from '@/constants/cardVisual';
+import { getApplicationActivitySupabase } from '../services/supabase.dashboard.service';
 
 export function useDashboard() {
-  const [stats, setStats] = useState<StatCardType[]>([]);
+  const [cards, setCards] = useState<InformationCardType[]>([]);
 
   const [applicationsActivity, setApplicationsActivity] = useState<ApplicationActivity[]>([]);
 
@@ -27,27 +26,50 @@ export function useDashboard() {
 
   const [loadingRecents, setLoadingRecents] = useState(true);
 
-  const [statsLoading, setStatsLoading] = useState(true);
+  const [loadingCards, setLoadingCards] = useState(true);
 
   useEffect(() => {
     loadDashboard();
+    getApplicationActivitySupabase();
   }, []);
 
   const loadDashboard = async () => {
     await Promise.all([
-      loadStats(),
+      loadCards(),
       loadApplicationsActivity(),
       loadApplicationStatusDistribution(),
       loadRecentApplications(),
     ]);
   };
 
-  const loadStats = async () => {
+  const loadCards = async () => {
+    setLoadingCards(true);
+
     try {
-      const data = await getDashboardStats();
-      setStats(data);
+      const data = await getApplicationStatusDistribution();
+
+      const totalApplications = data.reduce((acc, item) => acc + item.count, 0);
+
+      const formattedData: InformationCardType[] = [
+        {
+          label: 'Applications',
+          value: totalApplications,
+          icon: FileText,
+          textColor: 'text-gray-400',
+          bgColor: 'bg-gray-100',
+        },
+        ...data.map((item) => ({
+          label: cardVisualConfig[item.status].label,
+          value: item.count,
+          icon: cardVisualConfig[item.status].icon,
+          textColor: cardVisualConfig[item.status].iconColor,
+          bgColor: cardVisualConfig[item.status].iconBackground,
+        })),
+      ];
+
+      setCards(formattedData);
     } finally {
-      setStatsLoading(false);
+      setLoadingCards(false);
     }
   };
 
@@ -87,12 +109,12 @@ export function useDashboard() {
   };
 
   return {
-    stats,
+    cards,
     applicationsActivity,
     statusDistribution,
     recents,
 
-    statsLoading,
+    loadingCards,
     activityLoading,
     statusLoading,
     loadingRecents,

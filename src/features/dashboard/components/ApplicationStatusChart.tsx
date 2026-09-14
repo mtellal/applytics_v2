@@ -1,47 +1,15 @@
-import type { ApplicationStatus, ApplicationStatusDistribution } from '../types/types';
-
-import { PieChart, Pie, Label, Cell, Sector, type PieSectorShapeProps } from 'recharts';
-
-type ApplicationStatusChartProps = {
-  data: ApplicationStatusDistribution[];
-};
-
-type ApplicationStatusConfig = {
-  label: string;
-  color: string;
-  dotClass: string;
-};
-
-export const applicationStatusConfig: Record<ApplicationStatus, ApplicationStatusConfig> = {
-  'in-progress': {
-    label: 'In progress',
-    color: '#93C5FD',
-    dotClass: 'bg-blue-300',
-  },
-
-  interview: {
-    label: 'Interviews',
-    color: '#C4B5FD',
-    dotClass: 'bg-violet-300',
-  },
-
-  offer: {
-    label: 'Offers',
-    color: '#86EFAC',
-    dotClass: 'bg-green-300',
-  },
-
-  rejected: {
-    label: 'Rejected',
-    color: '#FCA5A5',
-    dotClass: 'bg-red-300',
-  },
-};
+import { applicationStatusConfig } from '@/constants/statusVisual';
+import type { ApplicationStatus, ApplicationStatusDistribution } from '@/models/applications';
+import { PieChart, Pie, Sector, type PieSectorShapeProps } from 'recharts';
 
 const renderStatusShape = (props: PieSectorShapeProps) => {
   const status: ApplicationStatus = props.name as ApplicationStatus;
   const config = applicationStatusConfig[status];
   return <Sector {...props} fill={config.color} />;
+};
+
+type ApplicationStatusChartProps = {
+  data: ApplicationStatusDistribution[];
 };
 
 export default function ApplicationStatusChart({ data }: ApplicationStatusChartProps) {

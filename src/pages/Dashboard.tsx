@@ -5,31 +5,39 @@ import ApplicationStatusChart from '@/features/dashboard/components/ApplicationS
 import ApplicationStatusChartSkeleton from '@/features/dashboard/components/ApplicationStatusChartSkeleton';
 
 import DashboardHeader from '@/features/dashboard/components/DahsboardHeader';
-import StatGrid from '@/features/dashboard/components/StatGrid';
 
 import RecentApplications from '@/features/dashboard/components/RecentApplications';
 import RecentApplicationsSkeleton from '@/features/dashboard/components/RecentApplicationsSkeleton';
 
 import { useDashboard } from '@/features/dashboard/hooks/useDashboard';
+import useAuth from '@/features/auth/hooks/useAuth';
+import InformationCardSkeleton from '@/components/ui/InformationCardSkeleton';
+import InformationCard from '@/components/ui/InformationCard';
 
 export default function Dashboard() {
   const {
-    stats,
+    cards,
     applicationsActivity,
     statusDistribution,
     recents,
 
-    statsLoading,
+    loadingCards,
     activityLoading,
     statusLoading,
     loadingRecents,
   } = useDashboard();
 
+  const {} = useAuth();
+
   return (
     <main className="min-h-screen space-y-3 p-4">
       <DashboardHeader name="Jean" />
 
-      <StatGrid stats={stats} loading={statsLoading} />
+      <section className="flex gap-2">
+        {loadingCards
+          ? Array.from({ length: 5 }).map((_, i) => <InformationCardSkeleton key={i} />)
+          : cards.map((item) => <InformationCard key={item.label} {...item} />)}
+      </section>
 
       <section className="flex gap-5">
         {activityLoading ? (
