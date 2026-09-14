@@ -16,6 +16,7 @@ import FormInput from '@/components/ui/FormInput';
 import FormInputSelect from '@/components/ui/FormInputSelect';
 import type { ApplicationForm, FieldFilter } from '../types/types';
 import { createApplication, editApplication } from '../services/applications.service';
+import useAuth from '@/features/auth/hooks/useAuth';
 
 type ApplicationDialogProps = {
   open: boolean;
@@ -89,6 +90,8 @@ export default function ApplicationDialog({
 }: ApplicationDialogProps) {
   const [form, setForm] = useState<ApplicationForm>(initialForm);
 
+  const { user } = useAuth();
+
   useEffect(() => {
     if (currentApplication) {
       setForm({
@@ -107,7 +110,6 @@ export default function ApplicationDialog({
   }, [currentApplication]);
 
   const updateField = <K extends keyof ApplicationForm>(field: K, value: ApplicationForm[K]) => {
-    console.log('form update');
     setForm((prev) => ({
       ...prev,
       [field]: value,
@@ -118,9 +120,9 @@ export default function ApplicationDialog({
     event.preventDefault();
 
     try {
-      if (currentApplication) await editApplication({ id: currentApplication.id, ...form });
-      else await createApplication(form);
       onOpenChange(false);
+      if (currentApplication) await editApplication(currentApplication.id, form);
+      else await createApplication(form, user?.id);
       onApplicationChange();
       setForm(initialForm);
     } catch (error) {

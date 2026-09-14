@@ -11,6 +11,11 @@ export type StatusFilter = 'all' | 'in-progress' | 'interview' | 'offer' | 'reje
 export type FieldFilter =
   'all' | 'frontend' | 'backend' | 'full-stack' | 'mobile' | 'devops' | 'cybersecurity';
 
+export type StatusStat = {
+  status: ApplicationStatus;
+  count: number;
+};
+
 export type ApplicationForm = {
   company: string;
   jobTitle: string;
@@ -27,4 +32,25 @@ export type ApplicationFiltersState = {
   sort: SortFilter;
   status: StatusFilter;
   field: FieldFilter;
+};
+
+export type ApplicationRow = {
+  id: string;
+  user_id: string;
+  company: string;
+  job_title: string;
+  field: FieldFilter;
+  status: ApplicationStatus;
+  applied_at: string;
+  location: string;
+  link?: string;
+  notes?: string;
+};
+
+export type GetPaginatedApplicationsParams = {
+  page: number;
+  search?: string;
+  sort?: SortFilter;
+  field?: FieldFilter;
+  status?: StatusFilter;
 };

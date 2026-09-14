@@ -5,7 +5,7 @@ import { ApplicationsTableBodySkeleton } from './ApplicationsTableSkeleton';
 import { APPLICATIONS_PAGE_SIZE } from '../constants';
 
 import ApplicationActions from './ApplicationsActions';
-import { cardVisualConfig } from '@/constants/cardVisual';
+import { statusColorsConfig } from '@/constants/statusVisual';
 
 export type ApplicationtableProps = {
   applications: Application[];
@@ -68,7 +68,7 @@ export default function ApplicationsTable({
                 <td>
                   <span className={`flex items-center justify-center mr-5 rounded-full`}>
                     <p
-                      className={`px-3 py-[2px] rounded-full  ${cardVisualConfig[item.status].iconColor} ${cardVisualConfig[item.status].iconBackground}`}
+                      className={`px-3 py-[2px] rounded-full  ${statusColorsConfig[item.status].bgColor} ${statusColorsConfig[item.status].textColor}`}
                     >
                       {item.status}
                     </p>

@@ -28,15 +28,15 @@ export const cardVisualConfig: Record<CardVisualType, CardVisualConfig> = {
   interview: {
     label: 'Interviews',
     icon: CalendarDays,
-    iconColor: 'text-violet-400',
-    iconBackground: 'bg-violet-100',
+    iconColor: 'text-green-400',
+    iconBackground: 'bg-green-100',
   },
 
   offer: {
     label: 'Offers',
     icon: Trophy,
-    iconColor: 'text-green-500',
-    iconBackground: 'bg-green-100',
+    iconColor: 'text-yellow-500',
+    iconBackground: 'bg-yellow-100',
   },
 
   'in-progress': {

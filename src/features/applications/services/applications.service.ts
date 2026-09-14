@@ -1,16 +1,41 @@
-import { applicationsMock } from '../data/applications';
-import { APPLICATIONS_PAGE_SIZE } from '../constants';
-import type { ApplicationForm, FieldFilter, SortFilter, StatusFilter } from '../types/types';
-import type { Application } from '@/models/applications';
-import { applicationActivityMock } from '@/features/dashboard/data/applicationActivity';
+import { isProduction } from '../constants';
+import type {
+  ApplicationForm,
+  ApplicationRow,
+  GetPaginatedApplicationsParams,
+  PaginatedApplications,
+  StatusStat,
+} from '../types/types';
+import { type Application } from '@/models/applications';
 
-type GetPaginatedApplicationsParams = {
-  page: number;
-  search?: string;
-  sort?: SortFilter;
-  field?: FieldFilter;
-  status?: StatusFilter;
-};
+import {
+  getPaginatedApplicationsMock,
+  createApplicationMock,
+  editApplicationMock,
+  deleteApplicationMock,
+  getApplicationStatusDistributionMock,
+} from './mock.applications.service';
+import {
+  getPaginatedApplicationsSupabase,
+  createApplicationSupabase,
+  editApplicationSupabase,
+  deleteApplicationSupabase,
+  getApplicationStatusDistributionSupabase,
+} from './supabase.applications.service';
+
+export function mapApplication(row: ApplicationRow): Application {
+  return {
+    id: row.id,
+    company: row.company,
+    jobTitle: row.job_title,
+    field: row.field,
+    status: row.status,
+    appliedAt: row.applied_at,
+    location: row.location,
+    link: row.link ?? undefined,
+    notes: row.notes ?? undefined,
+  };
+}
 
 export async function getPaginatedApplications({
   page,
@@ -18,85 +43,30 @@ export async function getPaginatedApplications({
   sort = undefined,
   field = undefined,
   status = undefined,
-}: GetPaginatedApplicationsParams) {
-  let results = [...applicationsMock];
-
-  await new Promise((resolve) => setTimeout(resolve, 500));
-
-  if (search) {
-    const query = search.trim().toLowerCase();
-
-    results = applicationsMock.filter((application) =>
-      application.company.toLowerCase().includes(query),
-    );
-  }
-
-  if (sort) {
-    results.sort((a, b) => {
-      const dateA = new Date(a.appliedAt).getTime();
-      const dateB = new Date(b.appliedAt).getTime();
-      return sort === 'newest' ? dateB - dateA : dateA - dateB;
-    });
-  }
-
-  if (field && field !== 'all') results = results.filter((i) => i.field === field);
-
-  if (status && status !== 'all') {
-    results = results.filter((i) => i.status === status);
-  }
-
-  const totalPages = Math.ceil(results.length / APPLICATIONS_PAGE_SIZE);
-  if (totalPages < page) {
-    page = Math.max(totalPages, 1);
-  }
-
-  const start = (page - 1) * APPLICATIONS_PAGE_SIZE;
-  const end = start + APPLICATIONS_PAGE_SIZE;
-
-  return {
-    data: results.slice(start, end),
-    page,
-    total: results.length,
-  };
+}: GetPaginatedApplicationsParams): Promise<PaginatedApplications> {
+  if (isProduction) return getPaginatedApplicationsSupabase({ page, search, sort, field, status });
+  else return getPaginatedApplicationsMock({ page, search, sort, field, status });
 }
 
 export async function createApplication(
-  application: Omit<Application, 'id'>,
-): Promise<Application> {
-  await new Promise((resolve) => setTimeout(resolve, 500));
-
-  const newApplication: Application = {
-    ...application,
-    id: crypto.randomUUID(),
-  };
-
-  applicationsMock.unshift(newApplication);
-
-  return newApplication;
+  application: ApplicationForm,
+  userID?: string,
+): Promise<void> {
+  if (isProduction) return createApplicationSupabase(application, userID);
+  else return createApplicationMock(application);
 }
 
-export async function deleteApplication(id: string): Promise<void> {
-  await new Promise((resolve) => setTimeout(resolve, 500));
-
-  const index = applicationsMock.findIndex((application) => application.id === id);
-
-  if (index === -1) {
-    throw new Error('Application not found');
-  }
-
-  applicationsMock.splice(index, 1);
+export async function editApplication(appID: string, application: ApplicationForm): Promise<void> {
+  if (isProduction) return editApplicationSupabase(appID, application);
+  else return editApplicationMock(appID, application);
 }
 
-export async function editApplication(app: Application): Promise<void> {
-  await new Promise((resolve) => setTimeout(resolve, 800));
+export async function deleteApplication(appID: string): Promise<void> {
+  if (isProduction) return deleteApplicationSupabase(appID);
+  else return deleteApplicationMock(appID);
+}
 
-  const index = applicationsMock.findIndex((item) => item.id == app.id);
-
-  if (index === -1) {
-    throw new Error('Application not found');
-  }
-
-  applicationsMock[index] = {
-    ...app,
-  };
+export async function getApplicationStatusDistribution(): Promise<StatusStat[]> {
+  if (isProduction) return getApplicationStatusDistributionSupabase();
+  else return getApplicationStatusDistributionMock();
 }

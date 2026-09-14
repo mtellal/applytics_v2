@@ -4,7 +4,11 @@ import { FileText } from 'lucide-react';
 import type { InformationCardType } from '@/components/ui/InformationCard';
 import { cardVisualConfig } from '@/constants/cardVisual';
 
-import { deleteApplication, getPaginatedApplications } from '../services/applications.service';
+import {
+  deleteApplication,
+  getApplicationStatusDistribution,
+  getPaginatedApplications,
+} from '../services/applications.service';
 
 import type {
   ApplicationFiltersState,
@@ -12,8 +16,6 @@ import type {
   SortFilter,
   StatusFilter,
 } from '../types/types';
-
-import { getApplicationStatusDistribution } from '@/features/dashboard/services/dahsboard.service';
 
 import type { Application } from '@/models/applications';
 
