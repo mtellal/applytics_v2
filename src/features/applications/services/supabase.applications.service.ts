@@ -6,13 +6,9 @@ import type {
   ApplicationForm,
   StatusStat,
 } from '../types/types';
-import {
-  getPaginatedApplicationsMock,
-  getPaginatedApplications,
-  mapApplication,
-  createApplicationMock,
-} from './applications.service';
+import { getPaginatedApplications, mapApplication } from './applications.service';
 import { APPLICATIONS_STATUSES } from '@/models/applications';
+import { getPaginatedApplicationsMock } from './mock.applications.service';
 
 export async function getPaginatedApplicationsSupabase({
   page,
@@ -80,24 +76,20 @@ export async function createApplicationSupabase(
   application: ApplicationForm,
   userID?: string,
 ): Promise<void> {
-  if (isProduction) {
-    if (!userID) throw 'User ID is required';
+  if (!userID) throw 'User ID is required';
 
-    const { error } = await supabase.from('applications').insert({
-      user_id: userID,
-      company: application.company,
-      job_title: application.jobTitle,
-      field: application.field,
-      status: application.status,
-      location: application.location,
-      link: application.link,
-      notes: application.notes,
-    });
+  const { error } = await supabase.from('applications').insert({
+    user_id: userID,
+    company: application.company,
+    job_title: application.jobTitle,
+    field: application.field,
+    status: application.status,
+    location: application.location,
+    link: application.link,
+    notes: application.notes,
+  });
 
-    if (error) throw error;
-  } else {
-    createApplicationMock(application, userID);
-  }
+  if (error) throw error;
 }
 
 export async function editApplicationSupabase(

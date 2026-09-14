@@ -51,10 +51,7 @@ export async function getPaginatedApplicationsMock({
   };
 }
 
-export async function createApplicationMock(
-  application: ApplicationForm,
-  userID?: string,
-): Promise<void> {
+export async function createApplicationMock(application: ApplicationForm): Promise<void> {
   await new Promise((resolve) => setTimeout(resolve, 500));
 
   const newApplication: Application = {
