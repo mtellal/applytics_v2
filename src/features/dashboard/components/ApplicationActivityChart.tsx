@@ -48,9 +48,9 @@ export default function ApplicationActivityChart({ data }: ApplicationActivityCh
         <Selector items={periods} value={period} onValueChange={setPeriod} />
       </div>
 
-      <div className="h-60 w-full">
+      <div className="h-60 w-full [&_svg_*:focus]:outline-none">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={filteredData}>
+          <BarChart data={filteredData} accessibilityLayer={false}>
             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
             <XAxis
               dataKey="date"

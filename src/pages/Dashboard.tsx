@@ -27,11 +27,20 @@ export default function Dashboard() {
     loadingRecents,
   } = useDashboard();
 
+<<<<<<< Updated upstream:src/pages/Dashboard.tsx
   const {} = useAuth();
 
+=======
+<<<<<<< Updated upstream:src/pages/Dahsboard.tsx
+=======
+  console.log(applicationsActivity);
+
+  const { user } = useAuth();
+>>>>>>> Stashed changes:src/pages/Dashboard.tsx
+>>>>>>> Stashed changes:src/pages/Dahsboard.tsx
   return (
     <main className="min-h-screen space-y-3 p-4">
-      <DashboardHeader name="Jean" />
+      <DashboardHeader name={user?.identities?.[0].identity_data?.name.split(' ')[0]} />
 
       <section className="flex gap-2">
         {loadingCards

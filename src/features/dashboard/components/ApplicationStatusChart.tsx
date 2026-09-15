@@ -5,7 +5,7 @@ import { PieChart, Pie, Sector, type PieSectorShapeProps } from 'recharts';
 const renderStatusShape = (props: PieSectorShapeProps) => {
   const status: ApplicationStatus = props.name as ApplicationStatus;
   const config = applicationStatusConfig[status];
-  return <Sector {...props} fill={config.color} />;
+  return <Sector {...props} fill={config.color} tabIndex={-1} style={{ outline: 'none' }} />;
 };
 
 type ApplicationStatusChartProps = {
@@ -23,6 +23,7 @@ export default function ApplicationStatusChart({ data }: ApplicationStatusChartP
         <div className="relative flex flex-1 items-center">
           <PieChart
             responsive
+            accessibilityLayer={false}
             style={{
               width: '100%',
               aspectRatio: 1,
