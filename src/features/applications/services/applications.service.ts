@@ -22,6 +22,8 @@ import {
   deleteApplicationSupabase,
   getApplicationStatusDistributionSupabase,
 } from './supabase.applications.service';
+import { supabase } from '@/lib/supabase';
+import type { CsvApplication } from '../types/csv.types';
 
 export function mapApplication(row: ApplicationRow): Application {
   return {
@@ -69,4 +71,25 @@ export async function deleteApplication(appID: string): Promise<void> {
 export async function getApplicationStatusDistribution(): Promise<StatusStat[]> {
   if (isProduction) return getApplicationStatusDistributionSupabase();
   else return getApplicationStatusDistributionMock();
+}
+
+export async function importApplicationsSupabase(
+  applications: CsvApplication[],
+  userId: string,
+): Promise<void> {
+  const rows = applications.map((application) => ({
+    user_id: userId,
+    company: application.company,
+    job_title: application.jobTitle,
+    field: application.field,
+    status: application.status,
+    applied_at: application.appliedAt,
+    location: application.location,
+    link: application.link || null,
+    notes: application.notes || null,
+  }));
+
+  const { error } = await supabase.from('applications').insert(rows);
+
+  if (error) throw error;
 }

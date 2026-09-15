@@ -6,6 +6,7 @@ import ApplicationFilters from '@/features/applications/components/ApplicationsF
 import ApplicationHeader from '@/features/applications/components/ApplicationsHeader';
 import ApplicationsTable from '@/features/applications/components/ApplicationsTable';
 import ApplicationsTableSkeleton from '@/features/applications/components/ApplicationsTableSkeleton';
+import { ImportCsvDialog } from '@/features/applications/components/ImportCsvDialog';
 
 import { useApplications } from '@/features/applications/hooks/useApplications';
 
@@ -26,6 +27,8 @@ export default function Applications() {
 
     dialogOpen,
     setDialogOpen,
+    importDialogOpen,
+    setImportDialogOpen,
     currentApplication,
 
     onPageChange,
@@ -43,7 +46,10 @@ export default function Applications() {
 
   return (
     <main className="min-h-screen space-y-3 p-4">
-      <ApplicationHeader openCreateDialog={openCreateDialog} />
+      <ApplicationHeader
+        openCreateDialog={openCreateDialog}
+        openDialogImport={setImportDialogOpen}
+      />
 
       <ApplicationFilters
         value={searchInput}
@@ -82,6 +88,12 @@ export default function Applications() {
         onOpenChange={setDialogOpen}
         onApplicationChange={refreshApplications}
         currentApplication={currentApplication}
+      />
+
+      <ImportCsvDialog
+        open={importDialogOpen}
+        onOpenChange={setImportDialogOpen}
+        onImported={refreshApplications}
       />
     </main>
   );

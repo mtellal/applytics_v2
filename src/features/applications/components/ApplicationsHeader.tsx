@@ -3,9 +3,13 @@ import { Plus, Upload } from 'lucide-react';
 
 export type ApplicationHeaderProps = {
   openCreateDialog: () => void;
+  openDialogImport: (e: boolean) => void;
 };
 
-export default function ApplicationHeader({ openCreateDialog }: ApplicationHeaderProps) {
+export default function ApplicationHeader({
+  openCreateDialog,
+  openDialogImport,
+}: ApplicationHeaderProps) {
   return (
     <header className="flex justify-between items-center">
       <div className="flex flex-col text-gray-600">
@@ -14,7 +18,7 @@ export default function ApplicationHeader({ openCreateDialog }: ApplicationHeade
       </div>
 
       <div className="flex gap-3">
-        <ActionButton variant="secondary" icon={Upload}>
+        <ActionButton variant="secondary" icon={Upload} onClick={() => openDialogImport(true)}>
           Import CSV
         </ActionButton>
 

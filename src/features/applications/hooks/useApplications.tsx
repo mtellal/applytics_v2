@@ -41,6 +41,8 @@ export function useApplications() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [currentApplication, setCurrentApplication] = useState<Application>();
 
+  const [importDialogOpen, setImportDialogOpen] = useState(false);
+
   useEffect(() => {
     loadInitialData();
   }, []);
@@ -187,6 +189,8 @@ export function useApplications() {
 
     dialogOpen,
     setDialogOpen,
+    importDialogOpen,
+    setImportDialogOpen,
     currentApplication,
 
     onPageChange,
