@@ -13,7 +13,7 @@ export default function LandingHeader() {
             <img src={logo} alt="Applytics" />
           </div>
 
-          <h1 className="text-3xl font-bold">Applytics</h1>
+          <span className="text-3xl font-bold">Applytics</span>
         </a>
 
         <nav className="hidden items-center gap-10 text-sm text-slate-600 md:flex">
