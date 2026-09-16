@@ -163,6 +163,16 @@
       "link": "Lien",
       "notes": "Notes",
       "actions": "Actions"
+    },
+    "status": {
+      "in-progress": "en attente",
+      "interview": "entretien",
+      "offer": "offre",
+      "rejected": "refus"
+    },
+    "buttons": {
+      "edit": "Modifier",
+      "delete": "Supprimer"
     }
   },
 
