@@ -27,8 +27,6 @@ export async function getPaginatedApplicationsSupabase({
     });
   }
 
-  console.log(page, search, sort, field, status);
-
   const from = (page - 1) * APPLICATIONS_PAGE_SIZE;
   const to = from + APPLICATIONS_PAGE_SIZE - 1;
 

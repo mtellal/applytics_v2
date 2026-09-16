@@ -132,7 +132,8 @@ export function useApplications() {
     };
 
     setFilters(nextFilters);
-    loadApplications(page, nextFilters);
+    setPage(1);
+    loadApplications(1, nextFilters);
   };
 
   const onSearch = (search: string) => {
