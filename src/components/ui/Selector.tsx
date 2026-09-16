@@ -33,7 +33,9 @@ export default function Selector({ items, value, onValueChange }: SelectorProps)
       onValueChange={(item) => item && onValueChange(item as ActivityPeriod)}
     >
       <SelectTrigger className="w-30">
-        <SelectValue>{selectedItem ? t(selectedItem.label) : t('common.period')}</SelectValue>
+        <SelectValue>
+          {selectedItem ? t(selectedItem.label) : t('ApplicationActivity.periods.all')}
+        </SelectValue>
       </SelectTrigger>
 
       <SelectContent>

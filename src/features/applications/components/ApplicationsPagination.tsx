@@ -23,7 +23,7 @@ export default function ApplicationsPagination({
   return (
     <div className="flex items-center justify-between border-t px-4 py-3">
       <p className="text-sm text-gray-500">
-        Showing {start} to {end} of {total} applications
+        Showing {start} to {end} of <span className="text-gray-900 ">{total} applications</span>
       </p>
 
       <div className="flex items-center gap-2">

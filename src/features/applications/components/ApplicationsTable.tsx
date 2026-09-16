@@ -29,45 +29,54 @@ export default function ApplicationsTable({
 }: ApplicationtableProps) {
   const emptyRows = APPLICATIONS_PAGE_SIZE - applications.length;
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
-    <section className=" border bg-white rounded-lg">
-      <table className="w-full text-left">
-        <thead className="text-gray-600 border-b bg-gray-50">
+    <section className="rounded-lg border bg-white">
+      <table className="w-full table-fixed text-left">
+        <thead className="border-b bg-gray-50 text-gray-600">
           <tr className="[&>th]:px-4 [&>th]:py-3">
-            <th>{t('ApplicationsTable.fields.company')}</th>
-            <th>{t('ApplicationsTable.fields.job')}</th>
-            <th>{t('ApplicationsTable.fields.status')}</th>
-            <th>{t('ApplicationsTable.fields.date')}</th>
-            <th>{t('ApplicationsTable.fields.location')}</th>
-            <th>{t('ApplicationsTable.fields.field')}</th>
-            <th>{t('ApplicationsTable.fields.link')}</th>
-            <th>{t('ApplicationsTable.fields.actions')}</th>
+            <th className="w-[18%]">{t('ApplicationsTable.fields.company')}</th>
+
+            <th className="w-[22%]">{t('ApplicationsTable.fields.job')}</th>
+
+            <th className="w-[12%]">{t('ApplicationsTable.fields.status')}</th>
+
+            <th className="w-[12%]">{t('ApplicationsTable.fields.date')}</th>
+
+            <th className="w-[14%]">{t('ApplicationsTable.fields.location')}</th>
+
+            <th className="w-[12%]">{t('ApplicationsTable.fields.field')}</th>
+
+            <th className="w-[5%]">{t('ApplicationsTable.fields.link')}</th>
+
+            <th className="w-[5%]">{t('ApplicationsTable.fields.actions')}</th>
           </tr>
         </thead>
 
         {tableLoading ? (
           <ApplicationsTableBodySkeleton />
         ) : (
-          <tbody className="h">
+          <tbody>
             {applications.map((item) => (
               <tr
                 key={item.id}
-                className="h-14 border-b text-sm text-gray-800 transition-colors last:border-b-0 hover:bg-gray-50 [&>td]:px-4 [&>td]:py-3"
+                className="h-13 border-b text-sm text-gray-800 transition-colors last:border-b-0 hover:bg-gray-50 [&>td]:px-4"
               >
                 <td>
                   <p className="truncate">{item.company}</p>
                 </td>
 
                 <td>
-                  <p>{item.jobTitle}</p>
+                  <p className="truncate">{item.jobTitle}</p>
                 </td>
 
                 <td>
-                  <span className={`flex items-center justify-center mr-5 rounded-full`}>
+                  <span className="mr-5 flex rounded-full">
                     <p
-                      className={`px-3 py-[2px] rounded-full  ${statusColorsConfig[item.status].bgColor} ${statusColorsConfig[item.status].textColor}`}
+                      className={`inline truncate rounded-full px-3 py-[1.5px] ${
+                        statusColorsConfig[item.status].bgColor
+                      } ${statusColorsConfig[item.status].textColor}`}
                     >
                       {item.status}
                     </p>
@@ -75,20 +84,32 @@ export default function ApplicationsTable({
                 </td>
 
                 <td>
-                  {new Date(item.appliedAt).toLocaleDateString('en-US', {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric',
-                  })}
+                  <p className="truncate">
+                    {new Date(item.appliedAt).toLocaleDateString(
+                      i18n.language === 'fr' ? 'fr-FR' : 'en-US',
+                      {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                      },
+                    )}
+                  </p>
                 </td>
 
-                <td className="truncate">{item.location}</td>
-                <td>{item.field}</td>
+                <td>
+                  <p className="truncate">{item.location}</p>
+                </td>
 
                 <td>
-                  <a href={item.link}>
-                    <ExternalLink className="size-5 text-gray-500" />
-                  </a>
+                  <p className="truncate">{item.field}</p>
+                </td>
+
+                <td>
+                  {item.link && (
+                    <a href={item.link} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="size-5 text-gray-500" />
+                    </a>
+                  )}
                 </td>
 
                 <td>
@@ -99,14 +120,16 @@ export default function ApplicationsTable({
                 </td>
               </tr>
             ))}
+
             {Array.from({ length: emptyRows }).map((_, i) => (
-              <tr key={`empty-${i}`} className="h-14 last:border-b-0" aria-hidden="true">
-                <td colSpan={7} className="p-0" />
+              <tr key={`empty-${i}`} className="h-13 last:border-b-0" aria-hidden="true">
+                <td colSpan={8} className="p-0" />
               </tr>
             ))}
           </tbody>
         )}
       </table>
+
       <ApplicationsPagination
         page={page}
         total={total}

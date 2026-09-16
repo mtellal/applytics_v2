@@ -27,6 +27,8 @@ export async function getPaginatedApplicationsSupabase({
     });
   }
 
+  console.log(page, search, sort, field, status);
+
   const from = (page - 1) * APPLICATIONS_PAGE_SIZE;
   const to = from + APPLICATIONS_PAGE_SIZE - 1;
 
@@ -53,17 +55,6 @@ export async function getPaginatedApplicationsSupabase({
   const { data, error, count } = await query;
 
   if (error) throw error;
-
-  const totalPages = Math.max(Math.ceil((count ?? 0) / APPLICATIONS_PAGE_SIZE), 1);
-
-  if (page > totalPages) {
-    return getPaginatedApplications({
-      search,
-      sort,
-      status,
-      page: totalPages,
-    });
-  }
 
   return {
     data: (data ?? []).map(mapApplication),

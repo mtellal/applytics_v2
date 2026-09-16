@@ -1,25 +1,27 @@
+import { APPLICATIONS_PAGE_SIZE } from '../constants';
+
 export function ApplicationsTableBodySkeleton() {
   return (
     <tbody>
-      {Array.from({ length: 10 }).map((_, index) => (
-        <tr key={index} className="border-b last:border-b-0 [&>td]:px-4 [&>td]:py-3">
+      {Array.from({ length: APPLICATIONS_PAGE_SIZE }).map((_, index) => (
+        <tr key={index} className="h-13 border-b last:border-b-0 [&>td]:px-4">
           <td>
-            <div className="flex items-center gap-2">
-              <div className="size-8 shrink-0 animate-pulse rounded-full bg-gray-200" />
-              <div className="h-4 w-24 animate-pulse rounded bg-gray-200" />
-            </div>
+            <div className="h-4 w-24 animate-pulse rounded bg-gray-200" />
           </td>
           <td>
             <div className="h-4 w-36 animate-pulse rounded bg-gray-200" />
           </td>
           <td>
-            <div className="h-6 w-20 animate-pulse rounded-full bg-gray-200" />
+            <div className="h-6 w-24 animate-pulse rounded-full bg-gray-200" />
           </td>
           <td>
             <div className="h-4 w-24 animate-pulse rounded bg-gray-200" />
           </td>
           <td>
             <div className="h-4 w-28 animate-pulse rounded bg-gray-200" />
+          </td>
+          <td>
+            <div className="h-4 w-20 animate-pulse rounded bg-gray-200" />
           </td>
           <td>
             <div className="size-5 animate-pulse rounded bg-gray-200" />
@@ -51,7 +53,7 @@ export default function ApplicationsTableSkeleton() {
 
         <tbody>
           {Array.from({ length: 10 }).map((_, index) => (
-            <tr key={index} className="border-b last:border-b-0 [&>td]:px-4 [&>td]:py-3">
+            <tr key={index} className="h-13 border-b last:border-b-0 py-0">
               <td>
                 <div className="flex items-center gap-2">
                   <div className="size-8 shrink-0 animate-pulse rounded-full bg-gray-200" />
