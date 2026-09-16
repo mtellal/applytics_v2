@@ -8,6 +8,7 @@ export async function getRecentApplicationsSupabase(): Promise<Application[]> {
     .from('applications')
     .select('*')
     .order('applied_at', { ascending: false })
+    .order('id', { ascending: true })
     .limit(5);
 
   if (error) throw error;
