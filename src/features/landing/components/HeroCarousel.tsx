@@ -17,12 +17,6 @@ const slides = [
     annotation: 'landing.carousel.applications.description',
     image: applications,
   },
-  {
-    id: 3,
-    label: 'landing.carousel.statistics.label',
-    annotation: 'landing.carousel.statistics.description',
-    image: dashboard,
-  },
 ];
 
 export default function HeroCarousel() {
@@ -44,7 +38,7 @@ export default function HeroCarousel() {
     <div className="relative min-w-0">
       <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_25px_70px_rgba(15,23,42,0.08)]">
         <div className="aspect-[16/9] bg-slate-50">
-          <img src={slide.image} alt={slide.label} className="h-full w-full " />
+          <img src={slide.image} alt={t(slide.label)} className="h-full w-full" />
         </div>
       </div>
 

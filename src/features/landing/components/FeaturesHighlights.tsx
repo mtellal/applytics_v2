@@ -36,12 +36,12 @@ export default function FeatureHighlights() {
   const { t } = useTranslation();
 
   return (
-    <section id="features" className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <section id="features" className="mt-20 mx-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 ">
       {features.map((feature) => {
         const Icon = feature.icon;
 
         return (
-          <article key={feature.title} className="flex items-start gap-5">
+          <article key={feature.title} className="flex items-start gap-5 justify-center">
             <div
               className={`flex size-14 shrink-0 items-center justify-center rounded-xl ${feature.backgroundClassName}`}
             >
