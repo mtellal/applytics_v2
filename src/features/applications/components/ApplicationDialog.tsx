@@ -28,19 +28,19 @@ type ApplicationDialogProps = {
 
 const statusOptions: Array<{ label: string; value: ApplicationStatus }> = [
   {
-    label: 'In progress',
+    label: 'ApplicationsTable.status.in-progress',
     value: 'in-progress',
   },
   {
-    label: 'Interview',
+    label: 'ApplicationsTable.status.interview',
     value: 'interview',
   },
   {
-    label: 'Offer',
+    label: 'ApplicationsTable.status.offer',
     value: 'offer',
   },
   {
-    label: 'Rejected',
+    label: 'ApplicationsTable.status.rejected',
     value: 'rejected',
   },
 ];

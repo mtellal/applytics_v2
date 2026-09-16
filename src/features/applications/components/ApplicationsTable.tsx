@@ -78,7 +78,7 @@ export default function ApplicationsTable({
                         statusColorsConfig[item.status].bgColor
                       } ${statusColorsConfig[item.status].textColor}`}
                     >
-                      {item.status}
+                      {t(`ApplicationsTable.status.${item.status}`)}
                     </p>
                   </span>
                 </td>

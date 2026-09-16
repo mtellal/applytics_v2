@@ -1,16 +1,9 @@
 import type { Application } from '@/models/applications';
 
-import quonto from '@/assets/companies/quonto.svg';
-import alan from '@/assets/companies/alan.webp';
-import doctolib from '@/assets/companies/doctolib.svg';
-import backMarket from '@/assets/companies/backMarket.png';
-import swile from '@/assets/companies/swile.svg';
-
 export const applicationsMock: Application[] = [
   {
     id: '1',
     company: 'Theodo',
-    companyLogo: quonto,
     jobTitle: 'Frontend Developer Intern',
     field: 'frontend',
     status: 'interview',
@@ -21,7 +14,6 @@ export const applicationsMock: Application[] = [
   {
     id: '2',
     company: 'Sopra Steria',
-    companyLogo: doctolib,
     jobTitle: 'Full-stack Developer Intern',
     field: 'full-stack',
     status: 'in-progress',
@@ -32,7 +24,6 @@ export const applicationsMock: Application[] = [
   {
     id: '3',
     company: 'Capgemini',
-    companyLogo: alan,
     jobTitle: 'Backend Developer Intern',
     field: 'backend',
     status: 'rejected',
@@ -43,7 +34,6 @@ export const applicationsMock: Application[] = [
   {
     id: '4',
     company: 'OVHcloud',
-    companyLogo: backMarket,
     jobTitle: 'Cloud Platform Developer Intern',
     field: 'devops',
     status: 'in-progress',
@@ -54,7 +44,6 @@ export const applicationsMock: Application[] = [
   {
     id: '5',
     company: 'Doctolib',
-    companyLogo: swile,
     jobTitle: 'Software Engineer Intern',
     field: 'full-stack',
     status: 'interview',
