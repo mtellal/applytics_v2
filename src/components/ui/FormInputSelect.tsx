@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useTranslation } from 'react-i18next';
 
 type SelectOption<T extends string> = {
   label: string;
@@ -32,6 +33,10 @@ export default function FormInputSelect<T extends string>({
   icon: Icon,
   onValueChange,
 }: FormInputSelectProps<T>) {
+  const { t } = useTranslation();
+
+  const selectedOption = options.find((e) => e.value === value);
+
   return (
     <div className="space-y-2">
       <label>
@@ -44,13 +49,13 @@ export default function FormInputSelect<T extends string>({
         <SelectTrigger className="w-full">
           {Icon && <Icon className="mr-2 size-4 text-gray-500" />}
 
-          <SelectValue placeholder={placeholder} />
+          <SelectValue>{selectedOption && t(selectedOption.label)}</SelectValue>
         </SelectTrigger>
 
         <SelectContent alignItemWithTrigger={false}>
           {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
-              {option.label}
+              {t(option.label)}
             </SelectItem>
           ))}
         </SelectContent>

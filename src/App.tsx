@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import AppLayout from './layouts/AppLayout/AppLayout';
 import Applications from './pages/Applications';
@@ -19,6 +19,7 @@ function App() {
           <Route path="/account" element={<Account />} />
         </Route>
       </Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
