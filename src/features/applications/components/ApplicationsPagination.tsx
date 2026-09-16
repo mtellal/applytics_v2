@@ -42,9 +42,8 @@ export default function ApplicationsPagination({
           return (
             <button
               key={pageNumber}
-              disabled={tableLoading}
               type="button"
-              onClick={() => onPageChange(pageNumber)}
+              onClick={() => page !== pageNumber && onPageChange(pageNumber)}
               className={`flex size-9 items-center justify-center rounded-md text-sm transition-colors ${
                 page === pageNumber
                   ? 'bg-blue-400 text-white'

@@ -48,6 +48,10 @@ export async function getPaginatedApplicationsSupabase({
     ascending: sort === 'oldest',
   });
 
+  query = query.order('id', {
+    ascending: true,
+  });
+
   query = query.range(from, to);
 
   const { data, error, count } = await query;

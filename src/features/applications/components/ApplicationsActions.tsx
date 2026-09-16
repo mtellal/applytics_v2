@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useTranslation } from 'react-i18next';
 
 type ApplicationActionsProps = {
   onEdit: () => void;
@@ -14,6 +15,7 @@ type ApplicationActionsProps = {
 };
 
 export default function ApplicationActions({ onEdit, onDelete }: ApplicationActionsProps) {
+  const { t } = useTranslation();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button variant="ghost" size="icon-sm" />}>
@@ -24,12 +26,12 @@ export default function ApplicationActions({ onEdit, onDelete }: ApplicationActi
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={onEdit}>
           <Pencil />
-          Edit
+          {t('ApplicationsTable.buttons.edit')}
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={onDelete} className="text-red-600">
           <Trash2 />
-          Delete
+          {t('ApplicationsTable.buttons.delete')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
