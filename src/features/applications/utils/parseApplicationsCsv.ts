@@ -7,9 +7,13 @@ import type { ApplicationField, ApplicationStatus } from '@/models/applications'
 
 const REQUIRED_COLUMNS = ['company', 'jobTitle', 'field', 'status', 'appliedAt', 'location'];
 
-export function parseApplicationsCsv(file: File): Promise<CsvParseResult> {
+export async function readCsvFile(file: File): Promise<string> {
+  return file.text();
+}
+
+export function parseApplicationsCsv(csv: string): Promise<CsvParseResult> {
   return new Promise((resolve, reject) => {
-    Papa.parse<Record<string, string>>(file, {
+    Papa.parse<Record<string, string>>(csv, {
       header: true,
       skipEmptyLines: true,
 
@@ -26,8 +30,8 @@ export function parseApplicationsCsv(file: File): Promise<CsvParseResult> {
         const applications: ApplicationForm[] = [];
         const errors: CsvParseResult['errors'] = [];
 
-        results.data.forEach((row, index) => {
-          const rowErrors = validateCsvApplication(row, index + 2);
+        results.data.forEach((row, rowIndex) => {
+          const rowErrors = validateCsvApplication(row, rowIndex + 2);
 
           if (rowErrors.length > 0) {
             errors.push(...rowErrors);
@@ -52,7 +56,7 @@ export function parseApplicationsCsv(file: File): Promise<CsvParseResult> {
         });
       },
 
-      error: (error) => {
+      error: (error: any) => {
         reject(error);
       },
     });

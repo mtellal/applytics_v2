@@ -23,7 +23,6 @@ import {
   getApplicationStatusDistributionSupabase,
 } from './supabase.applications.service';
 import { supabase } from '@/lib/supabase';
-import type { CsvApplication } from '../types/csv.types';
 
 export function mapApplication(row: ApplicationRow): Application {
   return {
@@ -74,7 +73,7 @@ export async function getApplicationStatusDistribution(): Promise<StatusStat[]> 
 }
 
 export async function importApplicationsSupabase(
-  applications: CsvApplication[],
+  applications: ApplicationForm[],
   userId: string,
 ): Promise<void> {
   const rows = applications.map((application) => ({

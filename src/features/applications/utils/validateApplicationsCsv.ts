@@ -13,8 +13,27 @@ function isApplicationField(value: string): value is ApplicationField {
   return APPLICATION_FIELDS.includes(value as ApplicationField);
 }
 
-function isValidDate(value: string) {
-  return /^\d{4}-\d{2}-\d{2}$/.test(value);
+export function isValidDate(value: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return false;
+  }
+
+  const date = new Date(`${value}T00:00:00`);
+
+  if (Number.isNaN(date.getTime())) {
+    return false;
+  }
+
+  const [year, month, day] = value.split('-').map(Number);
+
+  if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
+    return false;
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  return date.getTime() <= today.getTime();
 }
 
 export function validateCsvApplication(row: Record<string, string>, rowIndex: number) {
@@ -31,7 +50,7 @@ export function validateCsvApplication(row: Record<string, string>, rowIndex: nu
   if (!row.field?.trim()) {
     errors.push('field manquant');
   } else if (!isApplicationField(row.field)) {
-    // errors.push(`field "${row.field}" invalide`);
+    errors.push(`field "${row.field}" invalide`);
   }
 
   if (!row.status?.trim()) {

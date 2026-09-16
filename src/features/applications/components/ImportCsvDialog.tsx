@@ -13,7 +13,7 @@ import {
 
 import { importApplicationsSupabase } from '../services/applications.service';
 import type { CsvParseResult, CsvValidationError } from '../types/csv.types';
-import { parseApplicationsCsv } from '../utils/parseApplicationsCsv';
+import { parseApplicationsCsv, readCsvFile } from '../utils/parseApplicationsCsv';
 import useAuth from '@/features/auth/hooks/useAuth';
 
 type ImportCsvDialogProps = {
@@ -78,8 +78,8 @@ export function ImportCsvDialog({ open, onOpenChange, onImported }: ImportCsvDia
     try {
       setImporting(true);
       setGlobalError('');
-
-      const result: CsvParseResult = await parseApplicationsCsv(file);
+      const csv = await readCsvFile(file);
+      const result: CsvParseResult = await parseApplicationsCsv(csv);
 
       setErrors(result.errors);
       setValidCount(result.applications.length);
