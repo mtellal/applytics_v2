@@ -1,4 +1,4 @@
-import type { ApplicationStatusDistribution } from '@/features/dashboard/types/types';
+import type { ApplicationStatusDistribution } from '@/models/applications';
 
 export const applicationStatusDistributionMock: ApplicationStatusDistribution[] = [
   { status: 'in-progress', count: 24 },

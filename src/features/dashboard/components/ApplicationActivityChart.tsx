@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import type { ActivityPeriod, ApplicationActivity } from '../types/types';
 import Selector from '@/components/ui/Selector';
+import { useTranslation } from 'react-i18next';
 
 type ApplicationActivityChartProps = {
   data: ApplicationActivity[];
@@ -9,19 +10,19 @@ type ApplicationActivityChartProps = {
 
 const periods = [
   {
-    label: '7 days ago',
+    label: 'ApplicationActivity.periods.7d',
     value: '7d',
   },
   {
-    label: '14 days ago',
+    label: 'ApplicationActivity.periods.14d',
     value: '14d',
   },
   {
-    label: '30 days ago',
+    label: 'ApplicationActivity.periods.30d',
     value: '30d',
   },
   {
-    label: 'All time',
+    label: 'ApplicationActivity.periods.all',
     value: 'All',
   },
 ];
@@ -33,16 +34,17 @@ const filterActivityByPeriod = (data: ApplicationActivity[], period: string) => 
 };
 
 export default function ApplicationActivityChart({ data }: ApplicationActivityChartProps) {
-  const [period, setPeriod] = useState<ActivityPeriod>('14d');
+  const [period, setPeriod] = useState<ActivityPeriod>('all');
 
+  const { t } = useTranslation();
   const filteredData = filterActivityByPeriod(data, period);
 
   return (
     <section className="flex-3 border p-3 rounded-lg bg-white space-y-3">
       <div className="flex justify-between">
         <div>
-          <h2 className="text-xl leading-5 mt-1 font-semibold">Applications activity</h2>
-          <p className="text-sm text-gray-700">Number of applications sent</p>
+          <h2 className="text-xl leading-5 mt-1 font-semibold">{t('ApplicationActivity.title')}</h2>
+          <p className="text-sm text-gray-700">{t('ApplicationActivity.description')}</p>
         </div>
 
         <Selector items={periods} value={period} onValueChange={setPeriod} />

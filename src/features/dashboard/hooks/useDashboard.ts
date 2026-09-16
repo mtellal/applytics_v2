@@ -10,6 +10,7 @@ import type { InformationCardType } from '@/components/ui/InformationCard';
 import { FileText } from 'lucide-react';
 import { cardVisualConfig } from '@/constants/cardVisual';
 import { getApplicationActivitySupabase } from '../services/supabase.dashboard.service';
+import { useTranslation } from 'react-i18next';
 
 export function useDashboard() {
   const [cards, setCards] = useState<InformationCardType[]>([]);
@@ -27,6 +28,8 @@ export function useDashboard() {
   const [loadingRecents, setLoadingRecents] = useState(true);
 
   const [loadingCards, setLoadingCards] = useState(true);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     loadDashboard();
@@ -52,14 +55,14 @@ export function useDashboard() {
 
       const formattedData: InformationCardType[] = [
         {
-          label: 'Applications',
+          label: t('applicationsCards.applications.label'),
           value: totalApplications,
           icon: FileText,
           textColor: 'text-gray-400',
           bgColor: 'bg-gray-100',
         },
         ...data.map((item) => ({
-          label: cardVisualConfig[item.status].label,
+          label: t(cardVisualConfig[item.status].label),
           value: item.count,
           icon: cardVisualConfig[item.status].icon,
           textColor: cardVisualConfig[item.status].iconColor,

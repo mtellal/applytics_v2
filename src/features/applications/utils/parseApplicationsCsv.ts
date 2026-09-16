@@ -4,6 +4,7 @@ import type { CsvParseResult } from '../types/csv.types';
 import { validateCsvApplication } from './validateApplicationsCsv';
 import type { ApplicationForm } from '../types/types';
 import type { ApplicationField, ApplicationStatus } from '@/models/applications';
+import type { TFunction } from 'i18next';
 
 const REQUIRED_COLUMNS = ['company', 'jobTitle', 'field', 'status', 'appliedAt', 'location'];
 
@@ -11,7 +12,7 @@ export async function readCsvFile(file: File): Promise<string> {
   return file.text();
 }
 
-export function parseApplicationsCsv(csv: string): Promise<CsvParseResult> {
+export function parseApplicationsCsv(csv: string, t: TFunction): Promise<CsvParseResult> {
   return new Promise((resolve, reject) => {
     Papa.parse<Record<string, string>>(csv, {
       header: true,
@@ -31,7 +32,7 @@ export function parseApplicationsCsv(csv: string): Promise<CsvParseResult> {
         const errors: CsvParseResult['errors'] = [];
 
         results.data.forEach((row, rowIndex) => {
-          const rowErrors = validateCsvApplication(row, rowIndex + 2);
+          const rowErrors = validateCsvApplication(row, rowIndex + 2, t);
 
           if (rowErrors.length > 0) {
             errors.push(...rowErrors);

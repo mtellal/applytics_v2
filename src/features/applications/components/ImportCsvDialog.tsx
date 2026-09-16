@@ -15,6 +15,7 @@ import { importApplicationsSupabase } from '../services/applications.service';
 import type { CsvParseResult, CsvValidationError } from '../types/csv.types';
 import { parseApplicationsCsv, readCsvFile } from '../utils/parseApplicationsCsv';
 import useAuth from '@/features/auth/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 type ImportCsvDialogProps = {
   open: boolean;
@@ -32,6 +33,8 @@ export function ImportCsvDialog({ open, onOpenChange, onImported }: ImportCsvDia
   const [validCount, setValidCount] = useState(0);
   const [importing, setImporting] = useState(false);
   const [globalError, setGlobalError] = useState('');
+
+  const { t } = useTranslation();
 
   function resetDialog() {
     setFile(null);
@@ -79,7 +82,7 @@ export function ImportCsvDialog({ open, onOpenChange, onImported }: ImportCsvDia
       setImporting(true);
       setGlobalError('');
       const csv = await readCsvFile(file);
-      const result: CsvParseResult = await parseApplicationsCsv(csv);
+      const result: CsvParseResult = await parseApplicationsCsv(csv, t);
 
       setErrors(result.errors);
       setValidCount(result.applications.length);
@@ -116,11 +119,10 @@ export function ImportCsvDialog({ open, onOpenChange, onImported }: ImportCsvDia
             </div>
 
             <div>
-              <DialogTitle className="text-xl">Importer des candidatures</DialogTitle>
+              <DialogTitle className="text-xl">{t('ImportCSVDialog.title')}</DialogTitle>
 
               <DialogDescription className="mt-1 max-w-xl">
-                Importez plusieurs candidatures à partir d&apos;un fichier CSV. Le fichier doit
-                respecter le format indiqué ci-dessous.
+                {t('ImportCSVDialog.description')}
               </DialogDescription>
             </div>
           </div>
@@ -131,10 +133,10 @@ export function ImportCsvDialog({ open, onOpenChange, onImported }: ImportCsvDia
             <Upload className="mx-auto mb-4 size-8 text-slate-500" />
 
             <Button type="button" onClick={() => fileInputRef.current?.click()}>
-              Choisir un fichier CSV
+              {t('ImportCSVDialog.buttonImport')}
             </Button>
 
-            <p className="mt-3 text-sm text-slate-500">Formats acceptés : .csv</p>
+            <p className="mt-3 text-sm text-slate-500">{t('ImportCSVDialog.csvFormat')}</p>
 
             <input
               ref={fileInputRef}
@@ -168,17 +170,19 @@ export function ImportCsvDialog({ open, onOpenChange, onImported }: ImportCsvDia
               <Info className="mt-0.5 size-5 shrink-0 text-blue-600" />
 
               <div>
-                <h3 className="font-semibold">Format attendu du CSV</h3>
+                <h3 className="font-semibold">{t('ImportCSVDialog.requirement.title')}</h3>
 
                 <p className="text-sm text-slate-500">
-                  Votre fichier doit contenir les colonnes suivantes.
+                  {t('ImportCSVDialog.requirement.description')}
                 </p>
               </div>
             </div>
 
             <div className="grid gap-5 md:grid-cols-2">
               <div>
-                <p className="mb-2 text-sm font-medium">Colonnes obligatoires</p>
+                <p className="mb-2 text-sm font-medium">
+                  {t('ImportCSVDialog.requirement.columns')}
+                </p>
 
                 <div className="flex flex-wrap gap-2">
                   {['company', 'jobTitle', 'field', 'status', 'appliedAt', 'location'].map(
@@ -195,7 +199,9 @@ export function ImportCsvDialog({ open, onOpenChange, onImported }: ImportCsvDia
               </div>
 
               <div>
-                <p className="mb-2 text-sm font-medium">Colonnes optionnelles</p>
+                <p className="mb-2 text-sm font-medium">
+                  {t('ImportCSVDialog.requirement.optional')}
+                </p>
 
                 <div className="flex gap-2">
                   {['link', 'notes'].map((column) => (
@@ -212,31 +218,34 @@ export function ImportCsvDialog({ open, onOpenChange, onImported }: ImportCsvDia
 
             <div className="mt-5 grid gap-5 md:grid-cols-3">
               <div>
-                <p className="text-sm font-medium">Format de la date</p>
-                <p className="mt-1 text-sm text-slate-500">YYYY-MM-DD</p>
-              </div>
-
-              <div>
-                <p className="text-sm font-medium">Statuts acceptés</p>
+                <p className="text-sm font-medium">{t('ImportCSVDialog.requirement.dateFormat')}</p>
                 <p className="mt-1 text-sm text-slate-500">
-                  in-progress, interview, offer, rejected
+                  {t('ImportCSVDialog.requirement.dateExample')}
                 </p>
               </div>
 
               <div>
-                <p className="text-sm font-medium">Domaines acceptés</p>
+                <p className="text-sm font-medium">{t('ImportCSVDialog.requirement.status')}</p>
                 <p className="mt-1 text-sm text-slate-500">
-                  frontend, backend, full-stack, mobile, devops, cybersecurity, other
+                  {t('ImportCSVDialog.requirement.statusExample')}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm font-medium">{t('ImportCSVDialog.requirement.fields')}</p>
+                <p className="mt-1 text-sm text-slate-500">
+                  {t('ImportCSVDialog.requirement.fieldsExample')}
                 </p>
               </div>
             </div>
 
             <div className="mt-5">
-              <p className="mb-2 text-sm font-medium">Exemple de fichier CSV</p>
+              <p className="mb-2 text-sm font-medium">
+                {t('ImportCSvDialog.requirement.csvExample')}
+              </p>
 
               <pre className="overflow-x-auto rounded-lg border bg-white p-3 text-xs text-slate-600">
-                {`company,jobTitle,field,status,appliedAt,location,link,notes
-Google,Frontend Developer,frontend,in-progress,2026-09-10,Paris,https://example.com,`}
+                {t('ImportCSVDialog.requirement.csvExample')}
               </pre>
             </div>
           </div>
@@ -248,25 +257,38 @@ Google,Frontend Developer,frontend,in-progress,2026-09-10,Paris,https://example.
           )}
 
           {errors.length > 0 && (
-            <div className="rounded-lg border border-orange-200 bg-orange-50 p-4">
-              <p className="font-medium text-orange-900">
-                {errors.length} erreur
-                {errors.length > 1 ? 's' : ''} détectée
-                {errors.length > 1 ? 's' : ''}
-              </p>
+            <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+              <div className="mb-3">
+                <p className="font-medium text-red-900">
+                  {errors.length} {t('ImportCSVDialog.requirement.error')}
+                  {errors.length > 1 ? 's' : ''} {t('ImportCSVDialog.requirement.detected')}
+                  {errors.length > 1 ? 's' : ''}
+                </p>
 
-              <div className="mt-2 max-h-32 space-y-1 overflow-y-auto">
+                <p className="mt-1 text-sm text-red-700">
+                  {t('ImportCSVDialog.requirement.correct')}
+                </p>
+              </div>
+
+              <div className="max-h-40 overflow-y-auto rounded-lg border border-red-200 bg-white">
                 {errors.map((error, index) => (
-                  <p key={`${error.row}-${index}`} className="text-sm text-orange-800">
-                    Ligne {error.row} : {error.message}
-                  </p>
+                  <div
+                    key={`${error.row}-${index}`}
+                    className="flex gap-3 border-b border-red-100 px-3 py-2 last:border-b-0"
+                  >
+                    <span className="shrink-0 text-sm font-medium text-red-700">
+                      {t('ImportCSVDialog.requirement.line')} {error.row}
+                    </span>
+
+                    <span className="text-sm text-slate-600">{error.message}</span>
+                  </div>
                 ))}
               </div>
 
               {validCount > 0 && (
-                <p className="mt-3 text-sm text-orange-800">
-                  {validCount} ligne
-                  {validCount > 1 ? 's' : ''} valide
+                <p className="mt-3 text-sm text-red-700">
+                  {validCount} {t('ImportCSVDialog.requirement.line')}
+                  {validCount > 1 ? 's' : ''} {t('ImportCSVDialog.requirement.valid')}
                   {validCount > 1 ? 's' : ''}.
                 </p>
               )}
@@ -281,11 +303,13 @@ Google,Frontend Developer,frontend,in-progress,2026-09-10,Paris,https://example.
             onClick={() => handleOpenChange(false)}
             disabled={importing}
           >
-            Annuler
+            {t('ImportCSVDialog.buttons.cancel')}
           </Button>
 
           <Button type="button" onClick={handleImport} disabled={!file || importing}>
-            {importing ? 'Importation...' : 'Importer'}
+            {importing
+              ? t('ImportCSVDialog.buttons.importation')
+              : t('ImportCSVDialog.buttons.import')}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -19,35 +19,35 @@ type CardVisualConfig = {
 
 export const cardVisualConfig: Record<CardVisualType, CardVisualConfig> = {
   applications: {
-    label: 'Applications',
+    label: 'applicationsCards.applications.label',
     icon: FileText,
     iconColor: 'text-blue-400',
     iconBackground: 'bg-blue-100',
   },
 
   interview: {
-    label: 'Interviews',
+    label: 'applicationsCards.interview.label',
     icon: CalendarDays,
     iconColor: 'text-green-400',
     iconBackground: 'bg-green-100',
   },
 
   offer: {
-    label: 'Offers',
+    label: 'applicationsCards.offer.label',
     icon: Trophy,
     iconColor: 'text-yellow-500',
     iconBackground: 'bg-yellow-100',
   },
 
   'in-progress': {
-    label: 'In progress',
+    label: 'applicationsCards.in-progress.label',
     icon: Send,
     iconColor: 'text-blue-400',
     iconBackground: 'bg-blue-100',
   },
 
   rejected: {
-    label: 'Rejected',
+    label: 'applicationsCards.rejected.label',
     icon: X,
     iconColor: 'text-red-400',
     iconBackground: 'bg-red-100',

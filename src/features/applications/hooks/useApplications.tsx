@@ -18,6 +18,7 @@ import type {
 } from '../types/types';
 
 import type { Application } from '@/models/applications';
+import { useTranslation } from 'react-i18next';
 
 export function useApplications() {
   const [cards, setCards] = useState<InformationCardType[]>([]);
@@ -43,6 +44,8 @@ export function useApplications() {
 
   const [importDialogOpen, setImportDialogOpen] = useState(false);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     loadInitialData();
   }, []);
@@ -65,14 +68,14 @@ export function useApplications() {
 
       const formattedData: InformationCardType[] = [
         {
-          label: 'Applications',
+          label: t('applicationsCards.applications.label'),
           value: totalApplications,
           icon: FileText,
           textColor: 'text-gray-400',
           bgColor: 'bg-gray-100',
         },
         ...data.map((item) => ({
-          label: cardVisualConfig[item.status].label,
+          label: t(cardVisualConfig[item.status].label),
           value: item.count,
           icon: cardVisualConfig[item.status].icon,
           textColor: cardVisualConfig[item.status].iconColor,

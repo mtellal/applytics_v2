@@ -1,5 +1,6 @@
 import { Search } from 'lucide-react';
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type SearchBarProps = {
   label?: string;
@@ -9,12 +10,14 @@ type SearchBarProps = {
 };
 
 export default function Searchbar({
-  label = 'Search a company, a job',
+  label = 'ApplicationFilters.searchBar',
   value,
   onChange,
   onSearch,
 }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { t } = useTranslation();
 
   return (
     <form
@@ -29,7 +32,7 @@ export default function Searchbar({
       <input
         ref={inputRef}
         className="h-full  w-full outline-none text-base text-gray-800 placeholder:text-gray-500"
-        placeholder={label}
+        placeholder={t(label)}
         value={value}
         onChange={(e) => {
           if (e) onChange(e.target.value);

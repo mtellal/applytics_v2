@@ -1,0 +1,237 @@
+{
+  "landing": {
+    "header": {
+      "features": "Fonctionnalités",
+      "why": "Pourquoi Applytics ?",
+      "about": "À propos"
+    },
+
+    "hero": {
+      "badge": "Organisez · Suivez · Réussissez",
+      "title1": "Prenez le contrôle",
+      "title2": "de votre recherche",
+      "title3": "de ",
+      "internship": "stage",
+      "description": "Centralisez vos candidatures, suivez vos progrès et restez motivé tout au long de votre recherche. Simple, rapide et efficace.",
+      "login": "Continuer avec Google",
+      "password": "Aucun mot de passe requis"
+    },
+
+    "carousel": {
+      "dashboard": {
+        "label": "Dashboard",
+        "description": "Un tableau de bord clair pour suivre vos progrès"
+      },
+
+      "applications": {
+        "label": "Candidatures",
+        "description": "Toutes vos candidatures au même endroit"
+      },
+
+      "statistics": {
+        "label": "Statistiques",
+        "description": "Visualisez rapidement votre progression"
+      }
+    },
+
+    "features": {
+      "tracking": {
+        "title": "Centralisez",
+        "description": "Toutes vos candidatures au même endroit"
+      },
+
+      "analytics": {
+        "title": "Analysez",
+        "description": "Visualisez vos progrès en un coup d’œil"
+      },
+
+      "organization": {
+        "title": "Restez motivé",
+        "description": "Suivez vos objectifs et célébrez vos réussites"
+      },
+
+      "time": {
+        "title": "Gagnez du temps",
+        "description": "Un outil simple et efficace pour aller plus loin"
+      }
+    },
+
+    "dev": "“ Un outil pensé par un développeur, pour les chercheurs d’opportunités. ”",
+
+    "footer": {
+      "text": "Votre recherche. En mieux.",
+      "privacy": "Confidentialité",
+      "terms": "Conditions d'utilisation",
+      "contact": "Contact"
+    }
+  },
+
+  "dashboard": {
+    "header": {
+      "title": "Tableau de bord",
+      "welcome": "Bienvenue {{name}},",
+      "description": "Voici un aperçu de votre recherche de stage"
+    }
+  },
+
+  "Applications": {
+    "title": "Candidatures",
+    "description": "Gérez et suivez toutes vos candidatures",
+    "header": {
+      "import": "Importer un CSV",
+      "new": "Nouvelle candidature"
+    }
+  },
+
+  "applicationsCards": {
+    "applications": {
+      "label": "Candidatures"
+    },
+    "interview": {
+      "label": "Entretiens"
+    },
+    "offer": {
+      "label": "Offres"
+    },
+    "in-progress": {
+      "label": "En attente"
+    },
+    "rejected": {
+      "label": "Refus"
+    }
+  },
+
+  "ApplicationActivity": {
+    "title": "Activité des candidatures",
+    "description": "Nombre de candidatures envoyées",
+    "periods": {
+      "7d": "7 jours",
+      "14d": "14 jours",
+      "30d": "30 jours",
+      "all": "Tout"
+    }
+  },
+
+  "ApplicationStatusChart": {
+    "title": "Répartition par status"
+  },
+
+  "RecentApplications": {
+    "title": "Candidatures récentes",
+    "seeAll": "Voir toutes les candidatures",
+    "fields": {
+      "company": "Entreprise",
+      "job": "Poste",
+      "status": "Status",
+      "date": "Date",
+      "location": "Localisation",
+      "field": "Spécialité",
+      "link": "Lien",
+      "notes": "Notes"
+    }
+  },
+
+  "ApplicationFilters": {
+    "status": "Statut",
+    "field": "Spécialité",
+    "sort": "Tri",
+    "searchBar": "Cherche une entreprise, un poste ...",
+    "statusOptions": {
+      "all": "Tous",
+      "in-progress": "En Attente",
+      "interview": "Entretien",
+      "offer": "Offres",
+      "rejected": "Refus"
+    },
+    "fieldOptions": {
+      "all": "Toutes"
+    },
+    "sortOptions": {
+      "mostRecent": "Plus récentes",
+      "oldest": "Plus anciennes"
+    }
+  },
+
+  "ApplicationsTable": {
+    "fields": {
+      "company": "Entreprise",
+      "job": "Poste",
+      "status": "Status",
+      "date": "Date",
+      "location": "Localisation",
+      "field": "Spécialité",
+      "link": "Lien",
+      "notes": "Notes",
+      "actions": "Actions"
+    }
+  },
+
+  "ApplicationDialog": {
+    "new": "Nouvelle candidature",
+    "edit": "Modifier une candidature",
+    "newDescription": "Ajoutez une nouvelle candidature à votre suivi.",
+    "editDescription": "Mettez à jour votre candidature.",
+    "fields": {
+      "company": "Entreprise",
+      "job": "Poste",
+      "status": "Statut",
+      "location": "Localisation",
+      "date": "Date",
+      "field": "Spécialité",
+      "link": "Lien",
+      "notes": "Notes supplémentaires",
+      "optional": "(optionel)",
+      "additionalNotes": "Ajoutez des notes, comme le nom du recruteur, les étapes du processus d’entretien, etc."
+    },
+    "buttons": {
+      "cancel": "Annuler",
+      "new": "Ajouter la candidature",
+      "edit": "Mettre à jour"
+    }
+  },
+
+  "ImportCSVDialog": {
+    "title": "Importer des candidatures",
+    "description": "Importez plusieurs candidatures à partir d&apos;un fichier CSV. Le fichier doit respecter le format indiqué ci-dessous.",
+    "buttonImport": "Choisir un fichier CSV",
+    "csvFormat": "Formats acceptés : .csv",
+    "requirement": {
+      "title": "Format attendu du CSV",
+      "description": " Votre fichier doit contenir les colonnes suivantes.",
+      "columns": "Colonnes obligatoires",
+      "optional": "Colonnes optionnelles",
+      "dateFormat": "Format de la date",
+      "dateExample": "YYYY-MM-DD",
+      "status": "Statuts acceptés",
+      "statusExample": "in-progress, interview, offer, rejected",
+      "fields": "Domaines acceptés",
+      "fieldsExample": "frontend, backend, full-stack, mobile, devops, cybersecurity, other",
+      "csv": "Exemple de fichier CSV",
+      "csvExample": "company,jobTitle,field,status,appliedAt,location,link,notes\nGoogle,Frontend Developer,frontend,in-progress,2026-09-10,Paris,https://example.com,",
+      "error": "erreur",
+      "detected": "détectée",
+      "line": "Ligne",
+      "valid": "valide",
+      "correct": "Corrigez les lignes suivantes avant d'importer le fichier."
+    },
+    "buttons": {
+      "cancel": "Annuler",
+      "import": "Importer",
+      "importation": "Importation..."
+    }
+  },
+
+  "parseApplicationsCsv": {},
+  "validateCsvApplication": {
+    "missing": "manquant",
+    "invalid": "invalide",
+    "dateFormat": "doit être au format YYYY-MM-DD"
+  },
+
+  "applications": "candidatures",
+  "_Applications": "Candidatures",
+  "_Dashboard": "Tableau de bord",
+  "common": {
+    "period": "Période"
+  }
+}

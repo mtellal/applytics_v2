@@ -17,6 +17,7 @@ import FormInputSelect from '@/components/ui/FormInputSelect';
 import type { ApplicationForm, FieldFilter } from '../types/types';
 import { createApplication, editApplication } from '../services/applications.service';
 import useAuth from '@/features/auth/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 type ApplicationDialogProps = {
   open: boolean;
@@ -92,6 +93,8 @@ export default function ApplicationDialog({
 
   const { user } = useAuth();
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (currentApplication) {
       setForm({
@@ -136,21 +139,21 @@ export default function ApplicationDialog({
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[480px]">
         <DialogHeader>
           <DialogTitle className="text-2xl font-semibold">
-            {currentApplication ? 'Edit application' : 'New application'}
+            {currentApplication ? t('ApplicationDialog.edit') : t('ApplicationDialog.new')}
           </DialogTitle>
 
           <DialogDescription>
             {' '}
             {currentApplication
-              ? 'Update your job application.'
-              : 'Add a new job application to your tracker.'}
+              ? t('ApplicationDialog.editDescription')
+              : t('ApplicationDialog.newDescription')}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3 ">
           <FormInput
             id="company"
-            label="Company"
+            label={t('ApplicationDialog.fields.company')}
             placeholder="e.g. Capgemini"
             value={form.company}
             required
@@ -159,7 +162,7 @@ export default function ApplicationDialog({
 
           <FormInput
             id="jobTitle"
-            label="Job title"
+            label={t('ApplicationDialog.fields.job')}
             placeholder="e.g. Full-stack Engineer Intern"
             value={form.jobTitle}
             required
@@ -167,7 +170,7 @@ export default function ApplicationDialog({
           />
 
           <FormInputSelect<ApplicationField>
-            label="Field"
+            label={t('ApplicationDialog.fields.field')}
             value={form.field}
             options={fieldOptions}
             placeholder="Select a field"
@@ -176,10 +179,10 @@ export default function ApplicationDialog({
           />
 
           <FormInputSelect<ApplicationStatus>
-            label="Status"
+            label={t('ApplicationDialog.fields.status')}
             value={form.status}
             options={statusOptions}
-            placeholder="Select a status"
+            placeholder={t('ApplicationDialog.fields.status')}
             required
             onValueChange={(value) => updateField('status', value)}
           />
@@ -187,7 +190,7 @@ export default function ApplicationDialog({
           <FormInput
             id="location"
             icon={Map}
-            label="Location"
+            label={t('ApplicationDialog.fields.location')}
             placeholder="e.g. Paris, France"
             value={form.location}
             onChange={(e) => updateField('location', e.target.value)}
@@ -196,7 +199,7 @@ export default function ApplicationDialog({
           <FormInput
             id="link"
             icon={Link}
-            label="Link"
+            label={t('ApplicationDialog.fields.link')}
             placeholder="e.g. https://example.com/jobs/123"
             value={form.link}
             required
@@ -206,7 +209,10 @@ export default function ApplicationDialog({
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label htmlFor="notes">
-                Additional notes <span className="font-normal text-gray-500">(optional)</span>
+                {t('ApplicationDialog.fields.notes')}{' '}
+                <span className="font-normal text-gray-500">
+                  {t('ApplicationDialog.fields.optional')}
+                </span>
               </label>
 
               <span className="text-xs text-gray-500">{form.notes?.length}/500</span>
@@ -217,7 +223,7 @@ export default function ApplicationDialog({
               value={form.notes}
               maxLength={500}
               rows={4}
-              placeholder="Add any notes, such as recruiter name, interview process, etc."
+              placeholder={t('ApplicationDialog.fields.additionalNotes')}
               className="resize-none w-full border rounded-lg p-2"
               onChange={(event) => updateField('notes', event.target.value)}
             />
@@ -225,11 +231,13 @@ export default function ApplicationDialog({
 
           <DialogFooter className="pt-2">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
+              {t('ApplicationDialog.buttons.cancel')}
             </Button>
 
             <Button type="submit" className="bg-blue-500 hover:bg-blue-400">
-              {currentApplication ? 'Save changes' : 'Add application'}
+              {currentApplication
+                ? t('ApplicationDialog.buttons.edit')
+                : t('ApplicationDialog.buttons.new')}
             </Button>
           </DialogFooter>
         </form>

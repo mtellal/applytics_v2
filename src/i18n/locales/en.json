@@ -1,0 +1,239 @@
+{
+  "landing": {
+    "header": {
+      "features": "Features",
+      "why": "Why Applytics?",
+      "about": "About"
+    },
+
+    "hero": {
+      "badge": "Organize · Track · Succeed",
+      "title1": "Take control",
+      "title2": "of your",
+      "title3": "",
+      "internship": "internship search",
+      "description": "Centralize your applications, track your progress, and stay motivated throughout your search. Simple, fast, and effective.",
+      "login": "Continue with Google",
+      "password": "No password required"
+    },
+
+    "carousel": {
+      "dashboard": {
+        "label": "Dashboard",
+        "description": "A clear dashboard to track your progress"
+      },
+
+      "applications": {
+        "label": "Applications",
+        "description": "All your applications in one place"
+      },
+
+      "statistics": {
+        "label": "Statistics",
+        "description": "Quickly visualize your progress"
+      }
+    },
+
+    "features": {
+      "tracking": {
+        "title": "Centralize",
+        "description": "All your applications in one place"
+      },
+
+      "analytics": {
+        "title": "Analyze",
+        "description": "See your progress at a glance"
+      },
+
+      "organization": {
+        "title": "Stay motivated",
+        "description": "Track your goals and celebrate your achievements"
+      },
+
+      "time": {
+        "title": "Save time",
+        "description": "A simple and effective tool to help you go further"
+      }
+    },
+
+    "dev": "“ A tool designed by a developer, for opportunity seekers. ”",
+
+    "footer": {
+      "text": "Your search. Made better.",
+      "privacy": "Privacy",
+      "terms": "Terms of Use",
+      "contact": "Contact"
+    }
+  },
+
+  "dashboard": {
+    "header": {
+      "title": "Dashboard",
+      "welcome": "Welcome {{name}},",
+      "description": "Here's an overview of your internship search"
+    }
+  },
+
+  "Applications": {
+    "title": "Applications",
+    "description": "Manage and track all your applications",
+    "header": {
+      "import": "Import CSV",
+      "new": "New application"
+    }
+  },
+
+  "applicationsCards": {
+    "applications": {
+      "label": "Applications"
+    },
+    "interview": {
+      "label": "Interviews"
+    },
+    "offer": {
+      "label": "Offers"
+    },
+    "in-progress": {
+      "label": "Pending"
+    },
+    "rejected": {
+      "label": "Rejected"
+    }
+  },
+
+  "ApplicationActivity": {
+    "title": "Application activity",
+    "description": "Number of applications sent",
+    "periods": {
+      "7d": "7 days",
+      "14d": "14 days",
+      "30d": "30 days",
+      "all": "All"
+    }
+  },
+
+  "ApplicationStatusChart": {
+    "title": "Status distribution"
+  },
+
+  "RecentApplications": {
+    "title": "Recent applications",
+    "seeAll": "View all applications",
+    "fields": {
+      "company": "Company",
+      "job": "Position",
+      "status": "Status",
+      "date": "Date",
+      "location": "Location",
+      "field": "Field",
+      "link": "Link",
+      "notes": "Notes"
+    }
+  },
+
+  "ApplicationFilters": {
+    "status": "Status",
+    "field": "Field",
+    "sort": "Sort",
+    "searchBar": "Search for a company, position...",
+    "statusOptions": {
+      "all": "All",
+      "in-progress": "Pending",
+      "interview": "Interview",
+      "offer": "Offers",
+      "rejected": "Rejected"
+    },
+    "fieldOptions": {
+      "all": "All"
+    },
+    "sortOptions": {
+      "mostRecent": "Most recent",
+      "oldest": "Oldest"
+    }
+  },
+
+  "ApplicationsTable": {
+    "fields": {
+      "company": "Company",
+      "job": "Position",
+      "status": "Status",
+      "date": "Date",
+      "location": "Location",
+      "field": "Field",
+      "link": "Link",
+      "notes": "Notes",
+      "actions": "Actions"
+    }
+  },
+
+  "ApplicationDialog": {
+    "new": "New application",
+    "edit": "Edit application",
+    "newDescription": "Add a new job application to your tracker.",
+    "editDescription": "Update your job application.",
+    "fields": {
+      "company": "Company",
+      "job": "Position",
+      "status": "Status",
+      "location": "Location",
+      "date": "Date",
+      "field": "Field",
+      "link": "Link",
+      "notes": "Additional notes",
+      "optional": "(optional)",
+      "additionalNotes": "Add any notes, such as the recruiter's name, interview process, etc."
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "new": "Add application",
+      "edit": "Update"
+    }
+  },
+
+  "ImportCSVDialog": {
+    "title": "Import applications",
+    "description": "Import multiple applications from a CSV file. The file must follow the format shown below.",
+    "buttonImport": "Choose a CSV file",
+    "csvFormat": "Accepted formats: .csv",
+    "requirement": {
+      "title": "Expected CSV format",
+      "description": "Your file must contain the following columns.",
+      "columns": "Required columns",
+      "optional": "Optional columns",
+      "dateFormat": "Date format",
+      "dateExample": "YYYY-MM-DD",
+      "status": "Accepted statuses",
+      "statusExample": "in-progress, interview, offer, rejected",
+      "fields": "Accepted fields",
+      "fieldsExample": "frontend, backend, full-stack, mobile, devops, cybersecurity, other",
+      "csv": "CSV file example",
+      "csvExample": "company,jobTitle,field,status,appliedAt,location,link,notes\nGoogle,Frontend Developer,frontend,in-progress,2026-09-10,Paris,https://example.com,",
+      "error": "error",
+      "detected": "detected",
+      "line": "Line",
+      "valid": "valid",
+      "correct": "Correct the following lines before importing the file."
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "import": "Import",
+      "importation": "Importing..."
+    }
+  },
+
+  "parseApplicationsCsv": {},
+
+  "validateCsvApplication": {
+    "missing": "missing",
+    "invalid": "invalid",
+    "dateFormat": "must be in YYYY-MM-DD format"
+  },
+
+  "applications": "applications",
+  "_Applications": "Applications",
+  "_Dashboard": "Dashboard",
+
+  "common": {
+    "period": "Period"
+  }
+}

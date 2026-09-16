@@ -6,9 +6,12 @@ import LandingHeader from '@/features/landing/components/LandingHeader';
 import '@/lib/supabase';
 import GoogleAuthButton from '@/features/auth/components/GoogleAuthButton';
 import useAuth from '@/features/auth/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 export default function Landing() {
   const { signInGoogle } = useAuth();
+
+  const { t } = useTranslation();
 
   return (
     <main className="min-h-screen bg-white text-slate-950">
@@ -19,27 +22,27 @@ export default function Landing() {
           <div className="max-w-xl">
             <div className="mb-7 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-medium text-blue-600">
               <span className="size-2 rounded-full bg-blue-500" />
-              Organisez · Suivez · Réussissez
+              {t('landing.hero.badge')}
             </div>
 
             <h1 className="leading-[1.08] font-bold tracking-[-0.03em] sm:text-5xl lg:text-[52px]">
-              Prenez le contrôle
+              {t('landing.hero.title1')}
               <br />
-              de votre recherche
+              {t('landing.hero.title2')}
               <br />
-              de <span className="text-blue-600">stage</span>
+              {t('landing.hero.title3')}
+              <span className="text-blue-600">{t('landing.hero.internship')}</span>
             </h1>
 
             <p className="mt-7 max-w-[500px] text-lg leading-8 text-slate-500">
-              Centralisez vos candidatures, suivez vos progrès et restez motivé tout au long de
-              votre recherche. Simple, rapide et efficace.
+              {t('landing.hero.description')}
             </p>
 
             <GoogleAuthButton handleGoogleAuth={signInGoogle} />
 
             <p className="mt-4 flex items-center gap-2 text-sm text-slate-400">
               <span>🔒</span>
-              Aucun mot de passe requis
+              {t('landing.hero.password')}
             </p>
           </div>
 
@@ -49,9 +52,7 @@ export default function Landing() {
         <FeatureHighlights />
 
         <div className="mt-16 border-t border-slate-200 pt-8 text-center">
-          <p className="text-sm text-slate-400">
-            “ Un outil pensé par un développeur, pour les chercheurs d’opportunités. ”
-          </p>
+          <p className="text-sm text-slate-400">{t('landing.dev')}</p>
         </div>
       </section>
 

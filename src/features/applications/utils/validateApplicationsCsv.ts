@@ -5,6 +5,8 @@ import {
   type ApplicationStatus,
 } from '@/models/applications';
 
+import type { TFunction } from 'i18next';
+
 function isApplicationStatus(value: string): value is ApplicationStatus {
   return APPLICATIONS_STATUSES.includes(value as ApplicationStatus);
 }
@@ -36,37 +38,41 @@ export function isValidDate(value: string): boolean {
   return date.getTime() <= today.getTime();
 }
 
-export function validateCsvApplication(row: Record<string, string>, rowIndex: number) {
+export function validateCsvApplication(
+  row: Record<string, string>,
+  rowIndex: number,
+  t: TFunction,
+) {
   const errors: string[] = [];
 
   if (!row.company?.trim()) {
-    errors.push('company manquant');
+    errors.push(`company ${t('validateCsvApplication.missing')}`);
   }
 
   if (!row.jobTitle?.trim()) {
-    errors.push('jobTitle manquant');
+    errors.push(`jobTitle ${t('validateCsvApplication.missing')}`);
   }
 
   if (!row.field?.trim()) {
-    errors.push('field manquant');
+    errors.push(`field ${t('validateCsvApplication.missing')}`);
   } else if (!isApplicationField(row.field)) {
-    errors.push(`field "${row.field}" invalide`);
+    errors.push(`field "${row.field}" ${t('validateCsvApplication.invalid')}`);
   }
 
   if (!row.status?.trim()) {
-    errors.push('status manquant');
+    errors.push(`status ${t('validateCsvApplication.missing')}`);
   } else if (!isApplicationStatus(row.status)) {
-    errors.push(`status "${row.status}" invalide`);
+    errors.push(`status "${row.status}" ${t('validateCsvApplication.invalid')}`);
   }
 
   if (!row.appliedAt?.trim()) {
-    errors.push('appliedAt manquant');
+    errors.push(`appliedAt ${t('validateCsvApplication.missing')}`);
   } else if (!isValidDate(row.appliedAt)) {
-    errors.push('appliedAt doit être au format YYYY-MM-DD');
+    errors.push(`appliedAt ${t('validateCsvApplication.dateFormat')}`);
   }
 
   if (!row.location?.trim()) {
-    errors.push('location manquant');
+    errors.push(`location ${t('validateCsvApplication.missing')}`);
   }
 
   return errors.map((message) => ({

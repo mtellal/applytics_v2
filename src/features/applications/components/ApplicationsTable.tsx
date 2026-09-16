@@ -6,6 +6,7 @@ import { APPLICATIONS_PAGE_SIZE } from '../constants';
 
 import ApplicationActions from './ApplicationsActions';
 import { statusColorsConfig } from '@/constants/statusVisual';
+import { useTranslation } from 'react-i18next';
 
 export type ApplicationtableProps = {
   applications: Application[];
@@ -28,19 +29,21 @@ export default function ApplicationsTable({
 }: ApplicationtableProps) {
   const emptyRows = APPLICATIONS_PAGE_SIZE - applications.length;
 
+  const { t } = useTranslation();
+
   return (
     <section className=" border bg-white rounded-lg">
       <table className="w-full text-left">
         <thead className="text-gray-600 border-b bg-gray-50">
           <tr className="[&>th]:px-4 [&>th]:py-3">
-            <th>Company</th>
-            <th>Position</th>
-            <th>Status</th>
-            <th>Date</th>
-            <th>Location</th>
-            <th>Field</th>
-            <th>Link</th>
-            <th>Actions</th>
+            <th>{t('ApplicationsTable.fields.company')}</th>
+            <th>{t('ApplicationsTable.fields.job')}</th>
+            <th>{t('ApplicationsTable.fields.status')}</th>
+            <th>{t('ApplicationsTable.fields.date')}</th>
+            <th>{t('ApplicationsTable.fields.location')}</th>
+            <th>{t('ApplicationsTable.fields.field')}</th>
+            <th>{t('ApplicationsTable.fields.link')}</th>
+            <th>{t('ApplicationsTable.fields.actions')}</th>
           </tr>
         </thead>
 
@@ -54,11 +57,7 @@ export default function ApplicationsTable({
                 className="h-14 border-b text-sm text-gray-800 transition-colors last:border-b-0 hover:bg-gray-50 [&>td]:px-4 [&>td]:py-3"
               >
                 <td>
-                  <div className="flex items-center gap-2">
-                    <img className="w-8 h-8 rounded-full " src={item.companyLogo} />
-
-                    <p>{item.company}</p>
-                  </div>
+                  <p className="truncate">{item.company}</p>
                 </td>
 
                 <td>

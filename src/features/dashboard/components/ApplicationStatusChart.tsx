@@ -1,5 +1,6 @@
 import { applicationStatusConfig } from '@/constants/statusVisual';
 import type { ApplicationStatus, ApplicationStatusDistribution } from '@/models/applications';
+import { useTranslation } from 'react-i18next';
 import { PieChart, Pie, Sector, type PieSectorShapeProps } from 'recharts';
 
 const renderStatusShape = (props: PieSectorShapeProps) => {
@@ -15,9 +16,11 @@ type ApplicationStatusChartProps = {
 export default function ApplicationStatusChart({ data }: ApplicationStatusChartProps) {
   const totalApplications = data.reduce((total, item) => total + item.count, 0);
 
+  const { t } = useTranslation();
+
   return (
     <section className="flex-2 border p-3  rounded-lg bg-white">
-      <h2 className="text-lg leading-5 mt-1 font-semibold">Status applications</h2>
+      <h2 className="text-lg leading-5 mt-1 font-semibold">{t('ApplicationStatusChart.title')}</h2>
 
       <div className="flex flex-1 h-full items-center">
         <div className="relative flex flex-1 items-center">
@@ -43,7 +46,7 @@ export default function ApplicationStatusChart({ data }: ApplicationStatusChartP
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-2xl font-semibold text-gray-900">{totalApplications}</span>
 
-            <span className="text-xs text-gray-500">Applications</span>
+            <span className="text-xs text-gray-500">{t('_Applications')}</span>
           </div>
         </div>
 
@@ -57,7 +60,7 @@ export default function ApplicationStatusChart({ data }: ApplicationStatusChartP
                 <div
                   className={`h-2.5 w-2.5 rounded-full ${applicationStatusConfig[item.status].dotClass}`}
                 ></div>
-                <span className="flex-1">{item.status}</span>
+                <span className="flex-1">{t(`applicationsCards.${item.status}.label`)}</span>
                 <span className="w-8 text-right font-semibold text-gray-900">{item.count}</span>
                 <span className="w-10 text-right">
                   {totalApplications

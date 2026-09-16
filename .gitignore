@@ -13,6 +13,7 @@ dist-ssr
 *.local
 .env
 .vitest
+src/test/csv_examples
 
 # Editor directories and files
 .vscode/*

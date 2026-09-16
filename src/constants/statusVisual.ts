@@ -32,25 +32,25 @@ export type ApplicationStatusConfig = {
 
 export const applicationStatusConfig: Record<ApplicationStatus, ApplicationStatusConfig> = {
   'in-progress': {
-    label: 'In progress',
+    label: 'applicationsCards.in-progress.label',
     color: '#93C5FD',
     dotClass: 'bg-blue-300',
   },
 
   interview: {
-    label: 'Interviews',
-    color: '#C4B5FD',
+    label: 'applicationsCards.interview.label',
+    color: '#86EFAC',
     dotClass: 'bg-green-300',
   },
 
   offer: {
-    label: 'Offers',
-    color: '#86EFAC',
+    label: 'applicationsCards.offer.label',
+    color: '#FDE047',
     dotClass: 'bg-yellow-300',
   },
 
   rejected: {
-    label: 'Rejected',
+    label: 'applicationsCards.rejected.label',
     color: '#FCA5A5',
     dotClass: 'bg-red-300',
   },

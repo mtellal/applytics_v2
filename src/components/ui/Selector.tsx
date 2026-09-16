@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from '@/components/ui/select.tsx';
 import type { ActivityPeriod } from '@/features/dashboard/types/types';
+import { useTranslation } from 'react-i18next';
 
 type BaseData = {
   label: string;
@@ -21,6 +22,10 @@ type SelectorProps = {
 };
 
 export default function Selector({ items, value, onValueChange }: SelectorProps) {
+  const { t } = useTranslation();
+
+  const selectedItem = items.find((item) => item.value === value);
+
   return (
     <SelectRechart
       items={items}
@@ -28,14 +33,16 @@ export default function Selector({ items, value, onValueChange }: SelectorProps)
       onValueChange={(item) => item && onValueChange(item as ActivityPeriod)}
     >
       <SelectTrigger className="w-30">
-        <SelectValue placeholder="Period" />
+        <SelectValue>{selectedItem ? t(selectedItem.label) : t('common.period')}</SelectValue>
       </SelectTrigger>
+
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Period</SelectLabel>
+          <SelectLabel>{t('common.period')}</SelectLabel>
+
           {items.map((item) => (
-            <SelectItem key={item.value} value={item.value} onClick={(item) => console.log(item)}>
-              {item.label}
+            <SelectItem key={item.value} value={item.value}>
+              {t(item.label)}
             </SelectItem>
           ))}
         </SelectGroup>

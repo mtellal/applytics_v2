@@ -1,16 +1,17 @@
 import ApplyticsLogo from '@/assets/Applytics_logo.png';
 import useAuth from '@/features/auth/hooks/useAuth';
-import { BriefcaseBusiness, CircleUserRound, LayoutDashboard, LogOut } from 'lucide-react';
-import { Link, NavLink } from 'react-router-dom';
+import { BriefcaseBusiness, LayoutDashboard, LogOut } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 
 const nagigationItems = [
   {
-    label: 'Dahsboard',
+    label: '_Dashboard',
     path: '/dashboard',
     icon: LayoutDashboard,
   },
   {
-    label: 'Applications',
+    label: '_Applications',
     path: '/applications',
     icon: BriefcaseBusiness,
   },
@@ -18,6 +19,8 @@ const nagigationItems = [
 
 export default function Sidebar() {
   const { signOut } = useAuth();
+
+  const { t } = useTranslation();
 
   return (
     <aside className="flex-1 flex flex-col gap-8 p-4 border-r border-width-1 border-gray-100 bg-white">
@@ -45,7 +48,7 @@ export default function Sidebar() {
                   }
                 >
                   <Icon className="w-6" />
-                  <span>{item.label}</span>
+                  <span>{t(item.label)}</span>
                 </NavLink>
               </li>
             );

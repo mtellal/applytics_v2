@@ -2,30 +2,33 @@ import { useEffect, useState } from 'react';
 
 import dashboard from '@/assets/carousel_dashboard.png';
 import applications from '@/assets/carousel_applications.png';
+import { useTranslation } from 'react-i18next';
 
 const slides = [
   {
     id: 1,
-    label: 'Dashboard',
-    annotation: 'Un tableau de bord clair pour suivre vos progrès',
+    label: 'landing.carousel.dashboard.label',
+    annotation: 'landing.carousel.dashboard.description',
     image: dashboard,
   },
   {
     id: 2,
-    label: 'Candidatures',
-    annotation: 'Toutes vos candidatures au même endroit',
+    label: 'landing.carousel.applications.label',
+    annotation: 'landing.carousel.applications.description',
     image: applications,
   },
   {
     id: 3,
-    label: 'Statistiques',
-    annotation: 'Visualisez rapidement votre progression',
+    label: 'landing.carousel.statistics.label',
+    annotation: 'landing.carousel.statistics.description',
     image: dashboard,
   },
 ];
 
 export default function HeroCarousel() {
   const [activeSlide, setActiveSlide] = useState(0);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -45,14 +48,14 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      <p className="mt-6 text-right text-sm font-medium text-blue-600">↳ {slide.annotation}</p>
+      <p className="mt-6 text-right text-sm font-medium text-blue-600">{t(slide.annotation)}</p>
 
       <div className="mt-6 flex justify-center gap-3">
         {slides.map((item, index) => (
           <button
             key={item.id}
             type="button"
-            aria-label={`Afficher ${item.label}`}
+            aria-label={t(item.label)}
             onClick={() => setActiveSlide(index)}
             className={`size-2.5 cursor-pointer rounded-full transition-all ${
               index === activeSlide ? 'bg-blue-600' : 'bg-slate-200 hover:bg-slate-300'
