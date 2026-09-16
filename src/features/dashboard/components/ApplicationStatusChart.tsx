@@ -19,10 +19,10 @@ export default function ApplicationStatusChart({ data }: ApplicationStatusChartP
   const { t } = useTranslation();
 
   return (
-    <section className="flex-2 border p-3  rounded-lg bg-white">
+    <section className="flex-2 border p-3  pb-0 rounded-lg bg-white">
       <h2 className="text-lg leading-5 mt-1 font-semibold">{t('ApplicationStatusChart.title')}</h2>
 
-      <div className="flex flex-1 h-full items-center">
+      <div className="flex flex-1  items-center ">
         <div className="relative flex flex-1 items-center">
           <PieChart
             responsive

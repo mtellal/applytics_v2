@@ -16,7 +16,10 @@ export async function getRecentApplicationsSupabase(): Promise<Application[]> {
 }
 
 export async function getApplicationActivitySupabase(): Promise<ApplicationActivity[]> {
-  const { data, error } = await supabase.from('applications').select('applied_at');
+  const { data, error } = await supabase
+    .from('applications')
+    .select('applied_at')
+    .order('applied_at', { ascending: true });
 
   if (error) throw error;
 
@@ -28,8 +31,10 @@ export async function getApplicationActivitySupabase(): Promise<ApplicationActiv
     {} as Record<string, number>,
   );
 
-  return Object.entries(results).map(([appliedAt, count]) => ({
+  const final = Object.entries(results).map(([appliedAt, count]) => ({
     date: appliedAt,
     applications: count,
   }));
+
+  return final;
 }
