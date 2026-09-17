@@ -7,9 +7,11 @@ import { Label } from '@/components/ui/label';
 type FormInputProps = ComponentProps<typeof Input> & {
   label: string;
   icon?: LucideIcon;
+  error?: string;
 };
 
 export default function FormInput({
+  error,
   label,
   icon: Icon,
   required = false,
@@ -34,6 +36,7 @@ export default function FormInput({
           {...props}
         />
       </div>
+      {error && <p className="text-xs text-red-600">{error}</p>}
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default function FilterSelect<T extends string>({
         }
       }}
     >
-      <SelectTrigger className="min-w-48 bg-white px-4 py-6">
+      <SelectTrigger className="w-full md:max-w-50 bg-white px-4 py-6">
         <div className="flex items-center gap-3">
           <Icon className="size-6 text-gray-600" />
 

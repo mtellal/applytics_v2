@@ -12,7 +12,7 @@ import {
 const languages = [
   {
     value: 'fr',
-    label: 'FR - French',
+    label: 'FR - Français',
   },
   {
     value: 'en',

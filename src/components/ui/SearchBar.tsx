@@ -26,7 +26,7 @@ export default function Searchbar({
         inputRef.current?.blur();
         onSearch?.(value);
       }}
-      className="h-full flex gap-3 bg-white border items-center px-3 rounded-lg"
+      className="h-full flex gap-3 py-3 bg-white border items-center px-3 rounded-lg"
     >
       <Search className="h-5 w-5 text-gray-500" />
       <input
