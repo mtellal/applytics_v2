@@ -1,15 +1,38 @@
-import { Outlet } from 'react-router-dom';
-
-import Sidebar from '@/components/layout/Sidebar';
+import AppHeader from '@/components/layout/AppHeader';
+import DeleteAccountDialog from '@/features/auth/components/DeleteAccountDialog';
+import { deleteAccount } from '@/features/auth/services/auth.service';
+import { useState } from 'react';
+import { Outlet } from 'react-router';
 
 export default function AppLayout() {
-  return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
-      <Sidebar />
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
-      <main className="flex-6 p-6 min-h-0 flex-1 overflow-hidden">
+  const [deletingAccount, setDeletingAccount] = useState(false);
+
+  async function handleDeleteAccount() {
+    try {
+      setDeletingAccount(true);
+      await deleteAccount();
+      setDeleteDialogOpen(false);
+    } finally {
+      setDeletingAccount(false);
+    }
+  }
+
+  return (
+    <div className="flex h-screen flex-col bg-gray-50">
+      <AppHeader onDeleteAccount={() => setDeleteDialogOpen(true)} />
+
+      <main className="min-h-0 flex-1 overflow-y-auto px-5 py-5 md:px-20 md:py-2 ">
         <Outlet />
       </main>
+
+      <DeleteAccountDialog
+        open={deleteDialogOpen}
+        onOpenChange={setDeleteDialogOpen}
+        onConfirm={handleDeleteAccount}
+        loading={deletingAccount}
+      />
     </div>
   );
 }
