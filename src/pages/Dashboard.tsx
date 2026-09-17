@@ -10,7 +10,6 @@ import RecentApplications from '@/features/dashboard/components/RecentApplicatio
 import RecentApplicationsSkeleton from '@/features/dashboard/components/RecentApplicationsSkeleton';
 
 import { useDashboard } from '@/features/dashboard/hooks/useDashboard';
-import useAuth from '@/features/auth/hooks/useAuth';
 import InformationCardGrid from '@/components/ui/InformationCardGrid';
 
 export default function Dashboard() {
@@ -24,8 +23,6 @@ export default function Dashboard() {
     statusLoading,
     loadingRecents,
   } = useDashboard();
-
-  const { user } = useAuth();
 
   return (
     <div className="space-y-4">

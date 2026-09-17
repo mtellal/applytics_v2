@@ -12,7 +12,7 @@ export async function readCsvFile(file: File): Promise<string> {
   return file.text();
 }
 
-export function parseApplicationsCsv(csv: string, t: TFunction): Promise<CsvParseResult> {
+export function parseApplicationsCsv(csv: string, t?: TFunction): Promise<CsvParseResult> {
   return new Promise((resolve, reject) => {
     Papa.parse<Record<string, string>>(csv, {
       header: true,

@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEventHandler } from 'react';
-import { CalendarDays, Link, Link2, Map, MapPin, Upload } from 'lucide-react';
+import { Link, Map } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {

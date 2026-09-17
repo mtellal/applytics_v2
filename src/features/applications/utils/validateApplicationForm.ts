@@ -40,20 +40,6 @@ function isValidStatus(value: string): value is ApplicationStatus {
   return APPLICATION_STATUSES.includes(value as ApplicationStatus);
 }
 
-function isValidDate(value: string): boolean {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
-    return false;
-  }
-
-  const date = new Date(`${value}T00:00:00`);
-
-  if (Number.isNaN(date.getTime())) {
-    return false;
-  }
-
-  return date.toISOString().slice(0, 10) === value;
-}
-
 function isValidHttpUrl(value: string): boolean {
   try {
     const url = new URL(value);

@@ -41,38 +41,38 @@ export function isValidDate(value: string): boolean {
 export function validateCsvApplication(
   row: Record<string, string>,
   rowIndex: number,
-  t: TFunction,
+  t?: TFunction,
 ) {
   const errors: string[] = [];
 
   if (!row.company?.trim()) {
-    errors.push(`company ${t('validateCsvApplication.missing')}`);
+    errors.push(`company ${t ? t('validateCsvApplication.missing') : ''}`);
   }
 
   if (!row.jobTitle?.trim()) {
-    errors.push(`jobTitle ${t('validateCsvApplication.missing')}`);
+    errors.push(`jobTitle ${t ? t('validateCsvApplication.missing'): ''}`);
   }
 
   if (!row.field?.trim()) {
-    errors.push(`field ${t('validateCsvApplication.missing')}`);
+    errors.push(`field ${t ? t('validateCsvApplication.missing'): ''}`);
   } else if (!isApplicationField(row.field)) {
-    errors.push(`field "${row.field}" ${t('validateCsvApplication.invalid')}`);
+    errors.push(`field "${row.field}" ${t ? t('validateCsvApplication.invalid'): ''}`);
   }
 
   if (!row.status?.trim()) {
-    errors.push(`status ${t('validateCsvApplication.missing')}`);
+    errors.push(`status ${t ? t('validateCsvApplication.missing'): ''}`);
   } else if (!isApplicationStatus(row.status)) {
-    errors.push(`status "${row.status}" ${t('validateCsvApplication.invalid')}`);
+    errors.push(`status "${row.status}" ${t ? t('validateCsvApplication.invalid'): ''}`);
   }
 
   if (!row.appliedAt?.trim()) {
-    errors.push(`appliedAt ${t('validateCsvApplication.missing')}`);
+    errors.push(`appliedAt ${t ? t('validateCsvApplication.missing'): ''}`);
   } else if (!isValidDate(row.appliedAt)) {
-    errors.push(`appliedAt ${t('validateCsvApplication.dateFormat')}`);
+    errors.push(`appliedAt ${t ? t('validateCsvApplication.dateFormat'): ''}`);
   }
 
   if (!row.location?.trim()) {
-    errors.push(`location ${t('validateCsvApplication.missing')}`);
+    errors.push(`location ${t ? t('validateCsvApplication.missing'): ''}`);
   }
 
   return errors.map((message) => ({

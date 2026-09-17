@@ -1,6 +1,4 @@
-import InformationCard from '@/components/ui/InformationCard';
 import InformationCardGrid from '@/components/ui/InformationCardGrid';
-import InformationCardSkeleton from '@/components/ui/InformationCardSkeleton';
 
 import ApplicationDialog from '@/features/applications/components/ApplicationDialog';
 import ApplicationFilters from '@/features/applications/components/ApplicationsFilters';

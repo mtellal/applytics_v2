@@ -28,7 +28,6 @@ export default function FormInputSelect<T extends string>({
   label,
   value,
   options,
-  placeholder,
   required = false,
   icon: Icon,
   onValueChange,

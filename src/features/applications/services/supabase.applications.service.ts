@@ -6,7 +6,7 @@ import type {
   ApplicationForm,
   StatusStat,
 } from '../types/types';
-import { getPaginatedApplications, mapApplication } from './applications.service';
+import { mapApplication } from './applications.service';
 import { APPLICATIONS_STATUSES } from '@/models/applications';
 import { getPaginatedApplicationsMock } from './mock.applications.service';
 
@@ -107,7 +107,7 @@ export async function editApplicationSupabase(
 }
 
 export async function deleteApplicationSupabase(appID: string): Promise<void> {
-  const { data, error } = await supabase.from('applications').delete().eq('id', appID);
+  const { error } = await supabase.from('applications').delete().eq('id', appID);
   if (error) throw error;
 }
 

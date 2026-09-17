@@ -1,7 +1,6 @@
 import {
   CalendarDays,
   FileText,
-  MoveUpRight,
   Send,
   Trophy,
   X,
