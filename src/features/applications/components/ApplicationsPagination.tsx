@@ -9,6 +9,22 @@ type ApplicationsPaginationProps = {
   tableLoading: boolean;
 };
 
+function getVisiblePages(page: number, totalPages: number) {
+  if (totalPages <= 3) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  if (page === 1) {
+    return [1, 2, 3];
+  }
+
+  if (page === totalPages) {
+    return [totalPages - 2, totalPages - 1, totalPages];
+  }
+
+  return [page - 1, page, page + 1];
+}
+
 export default function ApplicationsPagination({
   page,
   total,
@@ -20,10 +36,12 @@ export default function ApplicationsPagination({
   const start = (page - 1) * APPLICATIONS_PAGE_SIZE + 1;
   const end = Math.min(page * APPLICATIONS_PAGE_SIZE, total);
 
+  const visiblePages = getVisiblePages(page, totalPages);
+
   return (
-    <div className="flex items-center justify-between border-t px-4 py-3">
+    <div className="flex flex-col items-center justify-between space-y-3 border-t px-4 py-3 md:flex-row md:space-y-0">
       <p className="text-sm text-gray-500">
-        Showing {start} to {end} of <span className="text-gray-900 ">{total} applications</span>
+        Showing {start} to {end} of <span className="text-gray-900">{total} applications</span>
       </p>
 
       <div className="flex items-center gap-2">
@@ -36,24 +54,20 @@ export default function ApplicationsPagination({
           <ChevronLeft className="size-4" />
         </button>
 
-        {Array.from({ length: totalPages }).map((_, index) => {
-          const pageNumber = index + 1;
-
-          return (
-            <button
-              key={pageNumber}
-              type="button"
-              onClick={() => page !== pageNumber && onPageChange(pageNumber)}
-              className={`flex size-9 items-center justify-center rounded-md text-sm transition-colors ${
-                page === pageNumber
-                  ? 'bg-blue-400 text-white'
-                  : 'border text-gray-600 hover:bg-gray-50'
-              }  hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40`}
-            >
-              {pageNumber}
-            </button>
-          );
-        })}
+        {visiblePages.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            type="button"
+            onClick={() => page !== pageNumber && onPageChange(pageNumber)}
+            className={`flex size-9 items-center justify-center rounded-md text-sm transition-colors ${
+              page === pageNumber
+                ? 'bg-blue-400 text-white'
+                : 'border text-gray-600 hover:bg-gray-50'
+            }`}
+          >
+            {pageNumber}
+          </button>
+        ))}
 
         <button
           type="button"

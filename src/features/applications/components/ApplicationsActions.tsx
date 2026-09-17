@@ -18,7 +18,7 @@ export default function ApplicationActions({ onEdit, onDelete }: ApplicationActi
   const { t } = useTranslation();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="ghost" size="icon-sm" />}>
+      <DropdownMenuTrigger className="relative" render={<Button variant="ghost" size="icon-sm" />}>
         <Ellipsis />
         <span className="sr-only">Application actions</span>
       </DropdownMenuTrigger>

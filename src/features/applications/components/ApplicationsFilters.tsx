@@ -2,7 +2,6 @@ import FilterSelect from '@/components/ui/FilterSelect';
 import Searchbar from '@/components/ui/SearchBar';
 import { ArrowUpDown, BriefcaseBusiness, Star } from 'lucide-react';
 import type { FieldFilter } from '../types/types';
-import { useTranslation } from 'react-i18next';
 
 export const statusOptions = [
   {
@@ -92,34 +91,38 @@ export default function ApplicationFilters<T extends string, Y extends string, Z
   status,
   onStatusChange,
 }: ApplicationFiltersProps<T, Y, Z>) {
-  const { t } = useTranslation();
   return (
-    <section className="flex gap-2">
-      <div className="flex-1">
+    <section className="flex flex-col gap-2 lg:flex-row">
+      <div className="w-full lg:flex-1">
         <Searchbar value={value} onChange={onValueChange} onSearch={onSearch} />
       </div>
-      <div className="flex flex-2 gap-2">
+
+      <div className="grid grid-cols-2 gap-2 md:flex md:flex-2">
         <FilterSelect
-          label={t('ApplicationFilters.status')}
+          label="ApplicationFilters.status"
           icon={Star}
           value={status}
           onValueChange={onStatusChange}
           options={statusOptions}
         />
+
         <FilterSelect
-          label={t('ApplicationFilters.field')}
+          label="ApplicationFilters.field"
           icon={BriefcaseBusiness}
           value={field}
           onValueChange={onFieldChange}
           options={fieldOptions}
         />
-        <FilterSelect
-          label={t('ApplicationFilters.sort')}
-          icon={ArrowUpDown}
-          value={sort}
-          onValueChange={onSort}
-          options={sortOptions}
-        />
+
+        <div className="col-span-2 lg:col-span-1">
+          <FilterSelect
+            label="ApplicationFilters.sort"
+            icon={ArrowUpDown}
+            value={sort}
+            onValueChange={onSort}
+            options={sortOptions}
+          />
+        </div>
       </div>
     </section>
   );

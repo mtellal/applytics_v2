@@ -14,10 +14,14 @@ import {
 import type { Application, ApplicationField, ApplicationStatus } from '@/models/applications';
 import FormInput from '@/components/ui/FormInput';
 import FormInputSelect from '@/components/ui/FormInputSelect';
-import type { ApplicationForm, FieldFilter } from '../types/types';
+import type { ApplicationForm } from '../types/types';
 import { createApplication, editApplication } from '../services/applications.service';
 import useAuth from '@/features/auth/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
+import {
+  validateApplicationForm,
+  type ApplicationFormErrors,
+} from '../utils/validateApplicationForm';
 
 type ApplicationDialogProps = {
   open: boolean;
@@ -91,6 +95,8 @@ export default function ApplicationDialog({
 }: ApplicationDialogProps) {
   const [form, setForm] = useState<ApplicationForm>(initialForm);
 
+  const [formErrors, setFormErrors] = useState<ApplicationFormErrors>({});
+
   const { user } = useAuth();
 
   const { t } = useTranslation();
@@ -122,15 +128,26 @@ export default function ApplicationDialog({
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
 
+    const result = validateApplicationForm(form);
+
+    if (!result.success) {
+      setFormErrors(result.errors);
+      return;
+    }
+
     try {
-      onOpenChange(false);
-      if (currentApplication) await editApplication(currentApplication.id, form);
-      else await createApplication(form, user?.id);
+      if (currentApplication) {
+        await editApplication(currentApplication.id, result.data);
+      } else {
+        await createApplication(result.data, user?.id);
+      }
+
       onApplicationChange();
+      onOpenChange(false);
       setForm(initialForm);
+      setFormErrors({});
     } catch (error) {
-      console.log(error);
-    } finally {
+      console.error(error);
     }
   };
 
@@ -156,8 +173,9 @@ export default function ApplicationDialog({
             label={t('ApplicationDialog.fields.company')}
             placeholder="e.g. Capgemini"
             value={form.company}
+            error={formErrors.company}
             required
-            onChange={(e) => updateField('company', e.target.value)}
+            onChange={(e) => e.target.value.length < 150 && updateField('company', e.target.value)}
           />
 
           <FormInput
@@ -165,8 +183,9 @@ export default function ApplicationDialog({
             label={t('ApplicationDialog.fields.job')}
             placeholder="e.g. Full-stack Engineer Intern"
             value={form.jobTitle}
+            error={formErrors.jobTitle}
             required
-            onChange={(e) => updateField('jobTitle', e.target.value)}
+            onChange={(e) => e.target.value.length < 150 && updateField('jobTitle', e.target.value)}
           />
 
           <FormInputSelect<ApplicationField>
@@ -193,6 +212,8 @@ export default function ApplicationDialog({
             label={t('ApplicationDialog.fields.location')}
             placeholder="e.g. Paris, France"
             value={form.location}
+            error={formErrors.location}
+
             onChange={(e) => updateField('location', e.target.value)}
           />
 
@@ -202,8 +223,8 @@ export default function ApplicationDialog({
             label={t('ApplicationDialog.fields.link')}
             placeholder="e.g. https://example.com/jobs/123"
             value={form.link}
-            required
-            onChange={(e) => updateField('link', e.target.value)}
+            error={formErrors.link}
+            onChange={(e) => e.target.value.length < 150 && updateField('link', e.target.value)}
           />
 
           <div className="space-y-2">
@@ -225,7 +246,7 @@ export default function ApplicationDialog({
               rows={4}
               placeholder={t('ApplicationDialog.fields.additionalNotes')}
               className="resize-none w-full border rounded-lg p-2"
-              onChange={(event) => updateField('notes', event.target.value)}
+              onChange={(e) => e.target.value.length <= 500 && updateField('notes', e.target.value)}
             />
           </div>
 
