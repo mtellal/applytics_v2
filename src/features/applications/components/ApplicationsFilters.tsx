@@ -3,7 +3,7 @@ import Searchbar from '@/components/ui/SearchBar';
 import { ArrowUpDown, BriefcaseBusiness, Star } from 'lucide-react';
 import type { FieldFilter } from '../types/types';
 
-export const statusOptions = [
+const statusOptions = [
   {
     label: 'ApplicationFilters.statusOptions.all',
     value: 'all',
@@ -26,7 +26,7 @@ export const statusOptions = [
   },
 ];
 
-export const fieldOptions: Array<{ label: string; value: FieldFilter }> = [
+const fieldOptions: Array<{ label: string; value: FieldFilter }> = [
   {
     label: 'ApplicationFilters.fieldOptions.all',
     value: 'all',
@@ -57,7 +57,7 @@ export const fieldOptions: Array<{ label: string; value: FieldFilter }> = [
   },
 ];
 
-export const sortOptions = [
+const sortOptions = [
   {
     label: 'ApplicationFilters.sortOptions.mostRecent',
     value: 'newest',

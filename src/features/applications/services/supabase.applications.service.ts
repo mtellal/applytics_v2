@@ -115,10 +115,8 @@ export async function getApplicationStatusDistributionSupabase(): Promise<Status
   const { data, error } = await supabase.from('applications').select('status');
   if (error) throw error;
 
-  let final = APPLICATIONS_STATUSES.map((s) => ({
+  return APPLICATIONS_STATUSES.map((s) => ({
     status: s,
     count: data.reduce((acc, value) => (value.status === s ? acc + 1 : acc), 0),
   }));
-
-  return final;
 }

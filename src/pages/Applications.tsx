@@ -84,12 +84,14 @@ export default function Applications() {
         />
       )}
 
-      <ApplicationDialog
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-        onApplicationChange={refreshApplications}
-        currentApplication={currentApplication}
-      />
+      {dialogOpen && (
+        <ApplicationDialog
+          open={dialogOpen}
+          onOpenChange={setDialogOpen}
+          onApplicationChange={refreshApplications}
+          currentApplication={currentApplication}
+        />
+      )}
 
       <ImportCsvDialog
         open={importDialogOpen}

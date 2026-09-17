@@ -15,23 +15,26 @@ import type {
   FieldFilter,
   SortFilter,
   StatusFilter,
+  StatusStat,
 } from '../types/types';
 
 import type { Application } from '@/models/applications';
 import { useTranslation } from 'react-i18next';
 
+const initialFilters: ApplicationFiltersState = {
+  search: '',
+  sort: 'newest',
+  field: 'all',
+  status: 'all',
+};
+
 export function useApplications() {
-  const [cards, setCards] = useState<InformationCardType[]>([]);
+  const [statusStats, setStatusStats] = useState<StatusStat[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
   const [page, setPage] = useState(1);
   const [totalApplications, setTotalApplications] = useState(0);
 
-  const [filters, setFilters] = useState<ApplicationFiltersState>({
-    search: '',
-    sort: 'newest',
-    field: 'all',
-    status: 'all',
-  });
+  const [filters, setFilters] = useState<ApplicationFiltersState>(initialFilters);
 
   const [loadingCards, setLoadingCards] = useState(true);
   const [appLoading, setAppLoading] = useState(true);
@@ -46,44 +49,27 @@ export function useApplications() {
 
   const { t } = useTranslation();
 
-  useEffect(() => {
-    loadInitialData();
-  }, []);
-
-  const loadInitialData = async () => {
-    try {
-      await Promise.all([loadCards(), loadApplications(1, filters)]);
-    } finally {
-      setAppLoading(false);
-    }
-  };
+  const cards: InformationCardType[] = [
+    {
+      label: t('applicationsCards.applications.label'),
+      value: statusStats.reduce((total, item) => total + item.count, 0),
+      icon: FileText,
+      textColor: 'text-gray-400',
+      bgColor: 'bg-gray-100',
+    },
+    ...statusStats.map((item) => ({
+      label: t(cardVisualConfig[item.status].label),
+      value: item.count,
+      icon: cardVisualConfig[item.status].icon,
+      textColor: cardVisualConfig[item.status].iconColor,
+      bgColor: cardVisualConfig[item.status].iconBackground,
+    })),
+  ];
 
   const loadCards = async () => {
     setLoadingCards(true);
-
     try {
-      const data = await getApplicationStatusDistribution();
-
-      const totalApplications = data.reduce((acc, item) => acc + item.count, 0);
-
-      const formattedData: InformationCardType[] = [
-        {
-          label: t('applicationsCards.applications.label'),
-          value: totalApplications,
-          icon: FileText,
-          textColor: 'text-gray-400',
-          bgColor: 'bg-gray-100',
-        },
-        ...data.map((item) => ({
-          label: t(cardVisualConfig[item.status].label),
-          value: item.count,
-          icon: cardVisualConfig[item.status].icon,
-          textColor: cardVisualConfig[item.status].iconColor,
-          bgColor: cardVisualConfig[item.status].iconBackground,
-        })),
-      ];
-
-      setCards(formattedData);
+      setStatusStats(await getApplicationStatusDistribution());
     } finally {
       setLoadingCards(false);
     }
@@ -113,6 +99,38 @@ export function useApplications() {
       setTableLoading(false);
     }
   };
+
+  useEffect(() => {
+    let active = true;
+
+    const loadInitialData = async () => {
+      await Promise.all([
+        getApplicationStatusDistribution()
+          .then((data) => {
+            if (active) setStatusStats(data);
+          })
+          .catch(console.error)
+          .finally(() => {
+            if (active) setLoadingCards(false);
+          }),
+        getPaginatedApplications({ page: 1, ...initialFilters })
+          .then((result) => {
+            if (active) {
+              setApplications(result.data);
+              setPage(result.page);
+              setTotalApplications(result.total);
+            }
+          })
+          .catch(console.error),
+      ]);
+      if (active) setAppLoading(false);
+    };
+
+    void loadInitialData();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const refreshApplications = async () => {
     await Promise.all([loadApplications(page, filters), loadCards()]);

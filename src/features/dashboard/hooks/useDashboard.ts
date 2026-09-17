@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import type { Application } from '@/models/applications';
 import type { ApplicationStatusDistribution } from '@/models/applications';
@@ -9,12 +9,9 @@ import { getApplicationStatusDistribution } from '@/features/applications/servic
 import type { InformationCardType } from '@/components/ui/InformationCard';
 import { FileText } from 'lucide-react';
 import { cardVisualConfig } from '@/constants/cardVisual';
-import { getApplicationActivitySupabase } from '../services/supabase.dashboard.service';
 import { useTranslation } from 'react-i18next';
 
 export function useDashboard() {
-  const [cards, setCards] = useState<InformationCardType[]>([]);
-
   const [applicationsActivity, setApplicationsActivity] = useState<ApplicationActivity[]>([]);
 
   const [statusDistribution, setStatusDistribution] = useState<ApplicationStatusDistribution[]>([]);
@@ -31,84 +28,69 @@ export function useDashboard() {
 
   const { t } = useTranslation();
 
-  useEffect(() => {
-    loadDashboard();
-    getApplicationActivitySupabase();
+  const cards: InformationCardType[] = [
+    {
+      label: t('applicationsCards.applications.label'),
+      value: statusDistribution.reduce((total, item) => total + item.count, 0),
+      icon: FileText,
+      textColor: 'text-gray-400',
+      bgColor: 'bg-gray-100',
+    },
+    ...statusDistribution.map((item) => ({
+      label: t(cardVisualConfig[item.status].label),
+      value: item.count,
+      icon: cardVisualConfig[item.status].icon,
+      textColor: cardVisualConfig[item.status].iconColor,
+      bgColor: cardVisualConfig[item.status].iconBackground,
+    })),
+  ];
+
+  const loadDashboard = useCallback(async (isActive: () => boolean = () => true) => {
+    await Promise.all([
+      getApplicationStatusDistribution()
+        .then((data) => {
+          if (isActive()) setStatusDistribution(data);
+        })
+        .catch(console.error)
+        .finally(() => {
+          if (isActive()) {
+            setStatusLoading(false);
+            setLoadingCards(false);
+          }
+        }),
+      getApplicationActivity()
+        .then((data) => {
+          if (isActive()) setApplicationsActivity(data);
+        })
+        .catch(console.error)
+        .finally(() => {
+          if (isActive()) setActivityLoading(false);
+        }),
+      getRecentApplications()
+        .then((data) => {
+          if (isActive()) setRecents(data);
+        })
+        .catch(console.error)
+        .finally(() => {
+          if (isActive()) setLoadingRecents(false);
+        }),
+    ]);
   }, []);
 
-  const loadDashboard = async () => {
-    await Promise.all([
-      loadCards(),
-      loadApplicationsActivity(),
-      loadApplicationStatusDistribution(),
-      loadRecentApplications(),
-    ]);
-  };
+  useEffect(() => {
+    let active = true;
+    void loadDashboard(() => active);
+    return () => {
+      active = false;
+    };
+  }, [loadDashboard]);
 
-  const loadCards = async () => {
+  const refreshDashboard = async () => {
     setLoadingCards(true);
-
-    try {
-      const data = await getApplicationStatusDistribution();
-
-      const totalApplications = data.reduce((acc, item) => acc + item.count, 0);
-
-      const formattedData: InformationCardType[] = [
-        {
-          label: t('applicationsCards.applications.label'),
-          value: totalApplications,
-          icon: FileText,
-          textColor: 'text-gray-400',
-          bgColor: 'bg-gray-100',
-        },
-        ...data.map((item) => ({
-          label: t(cardVisualConfig[item.status].label),
-          value: item.count,
-          icon: cardVisualConfig[item.status].icon,
-          textColor: cardVisualConfig[item.status].iconColor,
-          bgColor: cardVisualConfig[item.status].iconBackground,
-        })),
-      ];
-
-      setCards(formattedData);
-    } finally {
-      setLoadingCards(false);
-    }
-  };
-
-  const loadApplicationsActivity = async () => {
     setActivityLoading(true);
-
-    try {
-      const data = await getApplicationActivity();
-      setApplicationsActivity(data);
-    } finally {
-      setActivityLoading(false);
-    }
-  };
-
-  const loadApplicationStatusDistribution = async () => {
     setStatusLoading(true);
-
-    try {
-      const data = await getApplicationStatusDistribution();
-
-      setStatusDistribution(data);
-    } finally {
-      setStatusLoading(false);
-    }
-  };
-
-  const loadRecentApplications = async () => {
     setLoadingRecents(true);
-
-    try {
-      const data = await getRecentApplications();
-
-      setRecents(data);
-    } finally {
-      setLoadingRecents(false);
-    }
+    await loadDashboard();
   };
 
   return {
@@ -122,6 +104,6 @@ export function useDashboard() {
     statusLoading,
     loadingRecents,
 
-    refreshDashboard: loadDashboard,
+    refreshDashboard,
   };
 }

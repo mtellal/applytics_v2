@@ -24,7 +24,7 @@ type ValidationResult =
   | {
       success: true;
       data: ApplicationForm;
-      errors: {};
+      errors: object;
     }
   | {
       success: false;

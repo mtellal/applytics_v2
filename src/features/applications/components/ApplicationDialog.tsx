@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEventHandler } from 'react';
+import { useState, type FormEventHandler } from 'react';
 import { Link, Map } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -93,30 +93,28 @@ export default function ApplicationDialog({
   onApplicationChange,
   currentApplication,
 }: ApplicationDialogProps) {
-  const [form, setForm] = useState<ApplicationForm>(initialForm);
-
+  const [form, setForm] = useState<ApplicationForm>(() =>
+    currentApplication
+      ? {
+          company: currentApplication.company,
+          jobTitle: currentApplication.jobTitle,
+          field: currentApplication.field as ApplicationField,
+          status: currentApplication.status,
+          appliedAt: currentApplication.appliedAt,
+          location: currentApplication.location,
+          link: currentApplication.link ?? '',
+          notes: currentApplication.notes ?? '',
+        }
+      : {
+          ...initialForm,
+          appliedAt: new Date().toISOString().split('T')[0],
+        },
+  );
   const [formErrors, setFormErrors] = useState<ApplicationFormErrors>({});
 
   const { user } = useAuth();
 
   const { t } = useTranslation();
-
-  useEffect(() => {
-    if (currentApplication) {
-      setForm({
-        company: currentApplication.company,
-        jobTitle: currentApplication.jobTitle,
-        field: currentApplication.field as ApplicationField,
-        status: currentApplication.status,
-        appliedAt: currentApplication.appliedAt,
-        location: currentApplication.location,
-        link: currentApplication.link,
-        notes: currentApplication.notes,
-      });
-    } else {
-      setForm(initialForm);
-    }
-  }, [currentApplication]);
 
   const updateField = <K extends keyof ApplicationForm>(field: K, value: ApplicationForm[K]) => {
     setForm((prev) => ({

@@ -93,7 +93,7 @@ export async function deleteApplicationMock(appID: string): Promise<void> {
 }
 
 export async function getApplicationStatusDistributionMock(): Promise<StatusStat[]> {
-  let results = [...applicationsMock];
+  const results = [...applicationsMock];
 
   const counts = results.reduce(
     (acc, application) => {

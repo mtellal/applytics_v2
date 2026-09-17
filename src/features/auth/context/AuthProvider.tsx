@@ -1,19 +1,11 @@
-import { createContext, useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
 import type { Session, User } from '@supabase/supabase-js';
 
+import { AuthContext } from './AuthContext';
+
 import { supabase } from '@/lib/supabase';
 import { signOut as signOutService, singInWithGoogle } from '../services/auth.service';
-
-type AuthContextType = {
-  user: User | null;
-  session: Session | null;
-  loading: boolean;
-  signOut: () => Promise<void>;
-  signInGoogle: () => void;
-};
-
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -57,7 +49,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await singInWithGoogle();
     } catch (error) {
       console.log('Sign in with google error ', error);
-    } finally {
     }
   };
 

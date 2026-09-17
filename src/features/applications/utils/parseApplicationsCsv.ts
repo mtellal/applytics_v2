@@ -57,7 +57,7 @@ export function parseApplicationsCsv(csv: string, t?: TFunction): Promise<CsvPar
         });
       },
 
-      error: (error: any) => {
+      error: (error: Error) => {
         reject(error);
       },
     });
