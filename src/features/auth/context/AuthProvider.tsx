@@ -54,9 +54,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const handleGoogleAuth = async () => {
     try {
-      const data = await singInWithGoogle();
+      await singInWithGoogle();
     } catch (error) {
-      console.log(error);
+      console.log('Sign in with google error ', error);
     } finally {
     }
   };
