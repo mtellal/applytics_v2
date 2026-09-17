@@ -55,6 +55,7 @@
     "jsdom": "^30.0.1",
     "postcss": "^8.5.28",
     "prettier": "^3.9.6",
+    "supabase": "^2.117.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.67.0",
