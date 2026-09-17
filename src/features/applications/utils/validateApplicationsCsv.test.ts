@@ -1,3 +1,4 @@
+import { frenchT } from '@/test/i18n';
 import { describe, expect, it } from 'vitest';
 
 import { isValidDate, validateCsvApplication } from './validateApplicationsCsv';
@@ -25,7 +26,7 @@ describe('isValidDate', () => {
 
 describe('validateCsvApplication', () => {
   it('returns no error for a valid application', () => {
-    const result = validateCsvApplication(validRow, 2);
+    const result = validateCsvApplication(validRow, 2, frenchT);
 
     expect(result).toHaveLength(0);
   });
@@ -36,7 +37,7 @@ describe('validateCsvApplication', () => {
       company: '',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {
@@ -52,7 +53,7 @@ describe('validateCsvApplication', () => {
       jobTitle: '',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {
@@ -68,7 +69,7 @@ describe('validateCsvApplication', () => {
       field: '',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {
@@ -84,7 +85,7 @@ describe('validateCsvApplication', () => {
       field: 'lawyer',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {
@@ -100,7 +101,7 @@ describe('validateCsvApplication', () => {
       status: '',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {
@@ -116,7 +117,7 @@ describe('validateCsvApplication', () => {
       status: 'xxx',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {
@@ -132,7 +133,7 @@ describe('validateCsvApplication', () => {
       appliedAt: '',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {
@@ -148,7 +149,7 @@ describe('validateCsvApplication', () => {
       appliedAt: '15/09/2026',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {
@@ -164,7 +165,7 @@ describe('validateCsvApplication', () => {
       location: '',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {
@@ -180,7 +181,7 @@ describe('validateCsvApplication', () => {
       company: '   ',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {
@@ -198,7 +199,7 @@ describe('validateCsvApplication', () => {
       location: '',
     };
 
-    const result = validateCsvApplication(row, 7);
+    const result = validateCsvApplication(row, 7, frenchT);
 
     expect(result).toEqual([
       { row: 7, message: 'company manquant' },
@@ -213,7 +214,7 @@ describe('validateCsvApplication', () => {
       appliedAt: '2026-99-84',
     };
 
-    const result = validateCsvApplication(row, 2);
+    const result = validateCsvApplication(row, 2, frenchT);
 
     expect(result).toEqual([
       {

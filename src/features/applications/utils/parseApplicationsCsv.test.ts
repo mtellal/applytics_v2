@@ -1,3 +1,4 @@
+import { frenchT } from '@/test/i18n';
 import { describe, expect, it } from 'vitest';
 
 import { parseApplicationsCsv } from './parseApplicationsCsv';
@@ -7,7 +8,7 @@ describe('parseApplicationsCsv', () => {
     const csv = `company,jobTitle,field,status,appliedAt,location,link,notes
 Doctolib,Full Stack Developer,full-stack,in-progress,2026-09-15,Paris,,`;
 
-    const result = await parseApplicationsCsv(csv);
+    const result = await parseApplicationsCsv(csv, frenchT);
 
     expect(result.errors).toHaveLength(0);
 
@@ -30,7 +31,7 @@ Doctolib,Full Stack Developer,full-stack,in-progress,2026-09-15,Paris,,`;
 Doctolib,Full Stack Developer,full-stack,in-progress,2026-09-15,Paris,,
 Fleet,Frontend Developer,frontend,interview,2026-09-14,Paris,https://fleet.co,Entretien prévu`;
 
-    const result = await parseApplicationsCsv(csv);
+    const result = await parseApplicationsCsv(csv, frenchT);
 
     expect(result.errors).toHaveLength(0);
     expect(result.applications).toHaveLength(2);
@@ -62,14 +63,14 @@ Fleet,Frontend Developer,frontend,interview,2026-09-14,Paris,https://fleet.co,En
     const csv = `company,jobTitle,status,appliedAt,location
 Doctolib,Full Stack Developer,in-progress,2026-09-15,Paris`;
 
-    await expect(parseApplicationsCsv(csv)).rejects.toThrow('Colonnes manquantes : field');
+    await expect(parseApplicationsCsv(csv, frenchT)).rejects.toThrow('Colonnes manquantes : field');
   });
 
   it('returns an error and ignores an invalid row', async () => {
     const csv = `company,jobTitle,field,status,appliedAt,location
 Doctolib,Full Stack Developer,full-stack,invalid-status,2026-09-15,Paris`;
 
-    const result = await parseApplicationsCsv(csv);
+    const result = await parseApplicationsCsv(csv, frenchT);
 
     expect(result.applications).toHaveLength(0);
 
@@ -87,7 +88,7 @@ Doctolib,Full Stack Developer,full-stack,in-progress,2026-09-15,Paris
 Fleet,Frontend Developer,frontend,invalid-status,2026-09-14,Paris
 Google,Backend Developer,backend,rejected,2026-09-13,Paris`;
 
-    const result = await parseApplicationsCsv(csv);
+    const result = await parseApplicationsCsv(csv, frenchT);
 
     expect(result.applications).toHaveLength(2);
     expect(result.errors).toHaveLength(1);
@@ -107,7 +108,7 @@ Google,Backend Developer,backend,rejected,2026-09-13,Paris`;
     const csv = `company,jobTitle,field,status,appliedAt,location,link,notes
 Doctolib,Full Stack Developer,full-stack,in-progress,2026-09-15,Paris,,`;
 
-    const result = await parseApplicationsCsv(csv);
+    const result = await parseApplicationsCsv(csv, frenchT);
 
     expect(result.applications[0].link).toBeUndefined();
     expect(result.applications[0].notes).toBeUndefined();
@@ -117,7 +118,7 @@ Doctolib,Full Stack Developer,full-stack,in-progress,2026-09-15,Paris,,`;
     const csv = `company,jobTitle,field,status,appliedAt,location,link,notes
 " Doctolib "," Full Stack Developer ",full-stack,in-progress,2026-09-15," Paris "," https://example.com "," Some notes "`;
 
-    const result = await parseApplicationsCsv(csv);
+    const result = await parseApplicationsCsv(csv, frenchT);
 
     expect(result.applications[0]).toEqual({
       company: 'Doctolib',
