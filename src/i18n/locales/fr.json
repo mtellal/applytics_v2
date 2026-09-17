@@ -202,7 +202,7 @@
 
   "ImportCSVDialog": {
     "title": "Importer des candidatures",
-    "description": "Importez plusieurs candidatures à partir d&apos;un fichier CSV. Le fichier doit respecter le format indiqué ci-dessous.",
+    "description": "Importez plusieurs candidatures à partir d'un fichier CSV. Le fichier doit respecter le format indiqué ci-dessous.",
     "buttonImport": "Choisir un fichier CSV",
     "csvFormat": "Formats acceptés : .csv",
     "requirement": {
