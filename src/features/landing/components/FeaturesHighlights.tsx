@@ -36,12 +36,15 @@ export default function FeatureHighlights() {
   const { t } = useTranslation();
 
   return (
-    <section id="features" className="mt-20 mx-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 ">
+    <section
+      id="features"
+      className=" mx-auto mt-14 grid max-w-[1360px] grid-cols-1 gap-8 px-4 sm:grid-cols-2 sm:px-6 lg:mt-20 lg:grid-cols-4 lg:px-10"
+    >
       {features.map((feature) => {
         const Icon = feature.icon;
 
         return (
-          <article key={feature.title} className="flex items-start gap-5 justify-center">
+          <article key={feature.title} className="flex items-start gap-4 ">
             <div
               className={`flex size-14 shrink-0 items-center justify-center rounded-xl ${feature.backgroundClassName}`}
             >
@@ -51,9 +54,7 @@ export default function FeatureHighlights() {
             <div>
               <h2 className="font-semibold">{t(feature.title)}</h2>
 
-              <p className="mt-1 max-w-[200px] text-sm leading-6 text-slate-500">
-                {t(feature.description)}
-              </p>
+              <p className="mt-1 text-sm leading-6 text-slate-500">{t(feature.description)}</p>
             </div>
           </article>
         );
