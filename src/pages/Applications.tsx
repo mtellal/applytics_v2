@@ -1,4 +1,5 @@
 import InformationCard from '@/components/ui/InformationCard';
+import InformationCardGrid from '@/components/ui/InformationCardGrid';
 import InformationCardSkeleton from '@/components/ui/InformationCardSkeleton';
 
 import ApplicationDialog from '@/features/applications/components/ApplicationDialog';
@@ -45,29 +46,31 @@ export default function Applications() {
   } = useApplications();
 
   return (
-    <main className="min-h-screen space-y-3 p-4">
+    <div className="space-y-3 ">
       <ApplicationHeader
         openCreateDialog={openCreateDialog}
         openDialogImport={setImportDialogOpen}
       />
 
-      <ApplicationFilters
-        value={searchInput}
-        onValueChange={setSearchInput}
-        onSearch={onSearch}
-        sort={filters.sort}
-        onSort={onSort}
-        field={filters.field}
-        onFieldChange={onFieldChange}
-        status={filters.status}
-        onStatusChange={onStatusChange}
-      />
+      <div className="flex flex-col gap-3">
+        <div className="order-2 md:order-1">
+          <ApplicationFilters
+            value={searchInput}
+            onValueChange={setSearchInput}
+            onSearch={onSearch}
+            sort={filters.sort}
+            onSort={onSort}
+            field={filters.field}
+            onFieldChange={onFieldChange}
+            status={filters.status}
+            onStatusChange={onStatusChange}
+          />
+        </div>
 
-      <section className="flex gap-2">
-        {loadingCards
-          ? Array.from({ length: 5 }).map((_, i) => <InformationCardSkeleton key={i} />)
-          : cards.map((item) => <InformationCard key={item.label} {...item} />)}
-      </section>
+        <div className="order-1 md:order-2">
+          <InformationCardGrid cards={cards} loading={loadingCards} />
+        </div>
+      </div>
 
       {appLoading ? (
         <ApplicationsTableSkeleton />
@@ -95,6 +98,6 @@ export default function Applications() {
         onOpenChange={setImportDialogOpen}
         onImported={refreshApplications}
       />
-    </main>
+    </div>
   );
 }

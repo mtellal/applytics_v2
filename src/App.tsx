@@ -1,4 +1,3 @@
-import './App.css';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import AppLayout from './layouts/AppLayout/AppLayout';

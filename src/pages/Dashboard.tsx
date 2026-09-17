@@ -11,8 +11,7 @@ import RecentApplicationsSkeleton from '@/features/dashboard/components/RecentAp
 
 import { useDashboard } from '@/features/dashboard/hooks/useDashboard';
 import useAuth from '@/features/auth/hooks/useAuth';
-import InformationCardSkeleton from '@/components/ui/InformationCardSkeleton';
-import InformationCard from '@/components/ui/InformationCard';
+import InformationCardGrid from '@/components/ui/InformationCardGrid';
 
 export default function Dashboard() {
   const {
@@ -20,28 +19,21 @@ export default function Dashboard() {
     applicationsActivity,
     statusDistribution,
     recents,
-
     loadingCards,
     activityLoading,
     statusLoading,
     loadingRecents,
   } = useDashboard();
 
-  const {} = useAuth();
-
   const { user } = useAuth();
 
   return (
-    <main className="min-h-screen space-y-3 p-4">
-      <DashboardHeader name={user?.identities?.[0].identity_data?.name.split(' ')[0]} />
+    <div className="space-y-4">
+      <DashboardHeader />
 
-      <section className="flex gap-2">
-        {loadingCards
-          ? Array.from({ length: 5 }).map((_, i) => <InformationCardSkeleton key={i} />)
-          : cards.map((item) => <InformationCard key={item.label} {...item} />)}
-      </section>
+      <InformationCardGrid cards={cards} loading={loadingCards} />
 
-      <section className="flex gap-5">
+      <section className="grid grid-cols-1 gap-5 lg:grid-cols-[2fr_1fr]">
         {activityLoading ? (
           <ApplicationActivityChartSkeleton />
         ) : (
@@ -55,7 +47,11 @@ export default function Dashboard() {
         )}
       </section>
 
-      {loadingRecents ? <RecentApplicationsSkeleton /> : <RecentApplications data={recents} />}
-    </main>
+      {loadingRecents ? (
+        <RecentApplicationsSkeleton />
+      ) : (
+        <RecentApplications applications={recents} />
+      )}
+    </div>
   );
 }
