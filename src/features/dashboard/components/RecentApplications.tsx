@@ -13,7 +13,7 @@ export default function RecentApplications({ applications }: RecentApplicationsP
   const { t, i18n } = useTranslation();
 
   return (
-    <section className="flex-2 overflow-hidden rounded-lg border bg-white">
+    <section className="flex-2 rounded-lg border bg-white h-fit">
       <div className="flex items-center justify-between gap-3 px-4 py-3">
         <h2 className="min-w-0 flex-1 text-xl font-semibold">{t('RecentApplications.title')}</h2>
 

@@ -23,43 +23,41 @@ const navigation = [
 
 export default function AppHeader({ onDeleteAccount }: AppHeaderProps) {
   return (
-    <header className="shrink-0 border-b bg-white ">
-      <div className="flex md:pl-15 h-16 items-center justify-between px-4 sm:px-6">
-        {/* Logo */}
-        <NavLink to="/dashboard" className="flex items-center gap-2">
-          <div className="bg-slate-50 w-12 rounded-lg">
-            <img src={logo} />
-          </div>
+    <>
+      <header className="shrink-0 border-b bg-white">
+        <div className="flex h-16 items-center justify-between px-4 sm:px-6 md:pl-15">
+          <NavLink to="/dashboard" className="flex items-center gap-2">
+            <div className="w-12 rounded-lg bg-slate-50">
+              <img src={logo} alt="Applytics" />
+            </div>
 
-          <span className="hidden text-lg font-semibold text-gray-900 sm:block">Applytics</span>
-        </NavLink>
+            <span className="hidden text-lg font-semibold text-gray-900 sm:block">Applytics</span>
+          </NavLink>
 
-        {/* Desktop navigation */}
-        <nav className="hidden items-center gap-1 md:flex">
-          {navigation.map(({ label, path, icon: Icon }) => (
-            <NavLink
-              key={path}
-              to={path}
-              className={({ isActive }) =>
-                `flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'bg-blue-50 text-blue-600'
-                    : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
-                }`
-              }
-            >
-              <Icon className="size-4" />
-              {label}
-            </NavLink>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-1 md:flex">
+            {navigation.map(({ label, path, icon: Icon }) => (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) =>
+                  `flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-blue-50 text-blue-600'
+                      : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
+                  }`
+                }
+              >
+                <Icon className="size-4" />
+                {label}
+              </NavLink>
+            ))}
+          </nav>
 
-        {/* Account */}
-        <UserDropdown onDeleteAccount={onDeleteAccount} />
-      </div>
+          <UserDropdown onDeleteAccount={onDeleteAccount} />
+        </div>
+      </header>
 
-      {/* Mobile navigation */}
-      <nav className="grid grid-cols-2 border-t px-2 md:hidden">
+      <nav className="sticky top-0 z-40 grid shrink-0 grid-cols-2 border-b bg-white px-2 md:hidden">
         {navigation.map(({ label, path, icon: Icon }) => (
           <NavLink
             key={path}
@@ -83,6 +81,6 @@ export default function AppHeader({ onDeleteAccount }: AppHeaderProps) {
           </NavLink>
         ))}
       </nav>
-    </header>
+    </>
   );
 }

@@ -20,10 +20,10 @@ export default function AppLayout() {
   }
 
   return (
-    <div className="flex h-screen flex-col bg-gray-50">
+    <div className="flex h-screen flex-col bg-gray-50 overflow-y-auto">
       <AppHeader onDeleteAccount={() => setDeleteDialogOpen(true)} />
 
-      <main className="min-h-0 flex-1 overflow-y-auto px-5 py-5 md:px-20 md:py-2 ">
+      <main className="flex-1  px-5 py-5 md:px-20 md:py-2 ">
         <Outlet />
       </main>
 

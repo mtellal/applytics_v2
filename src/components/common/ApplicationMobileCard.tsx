@@ -31,11 +31,11 @@ export default function ApplicationMobileCard({
 
   return (
     <article className="border-b px-4 py-3 text-sm last:border-b-0">
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-start justify-between gap-3 text-sm">
         <div className="min-w-0">
-          <p className="truncate font-medium text-gray-900">{application.company}</p>
+          <p className="truncate font-semibold text-gray-900 ">{application.company}</p>
 
-          <p className="mt-1 truncate text-gray-600">{application.jobTitle}</p>
+          <p className="mt-1 truncate text-gray-700">{application.jobTitle}</p>
         </div>
 
         <span
