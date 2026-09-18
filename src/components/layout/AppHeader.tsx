@@ -30,8 +30,7 @@ export default function AppHeader({ onDeleteAccount }: AppHeaderProps) {
             <div className="w-12 rounded-lg bg-slate-50">
               <img src={logo} alt="Applytics" />
             </div>
-
-            <span className="hidden text-lg font-semibold text-gray-900 sm:block">Applytics</span>
+            <span className="text-lg font-semibold text-gray-900">Applytics</span>
           </NavLink>
 
           <nav className="hidden items-center gap-1 md:flex">
