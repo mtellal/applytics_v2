@@ -1,3 +1,4 @@
+import { APPLICATION_FIELDS } from '@/models/applications';
 import FilterSelect from '@/components/ui/FilterSelect';
 import Searchbar from '@/components/ui/SearchBar';
 import { ArrowUpDown, BriefcaseBusiness, Star } from 'lucide-react';
@@ -27,34 +28,8 @@ const statusOptions = [
 ];
 
 const fieldOptions: Array<{ label: string; value: FieldFilter }> = [
-  {
-    label: 'ApplicationFilters.fieldOptions.all',
-    value: 'all',
-  },
-  {
-    label: 'Frontend',
-    value: 'frontend',
-  },
-  {
-    label: 'Backend',
-    value: 'backend',
-  },
-  {
-    label: 'Full-stack',
-    value: 'full-stack',
-  },
-  {
-    label: 'Mobile',
-    value: 'mobile',
-  },
-  {
-    label: 'DevOps',
-    value: 'devops',
-  },
-  {
-    label: 'Cybersecurity',
-    value: 'cybersecurity',
-  },
+  { label: 'ApplicationFilters.fieldOptions.all', value: 'all' },
+  ...APPLICATION_FIELDS.map((value) => ({ label: value, value })),
 ];
 
 const sortOptions = [

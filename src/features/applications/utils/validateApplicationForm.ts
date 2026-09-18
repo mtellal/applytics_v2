@@ -1,15 +1,8 @@
+import { APPLICATION_FIELDS } from '@/models/applications';
 import type { ApplicationField, ApplicationStatus } from '@/models/applications';
 
 import type { ApplicationForm } from '../types/types';
 
-const APPLICATION_FIELDS = [
-  'frontend',
-  'backend',
-  'full-stack',
-  'mobile',
-  'devops',
-  'cybersecurity',
-] as const satisfies readonly ApplicationField[];
 
 const APPLICATION_STATUSES = [
   'in-progress',

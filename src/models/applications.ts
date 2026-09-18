@@ -1,19 +1,9 @@
-import type { FieldFilter } from '@/features/applications/types/types';
+import type { ApplicationField } from '@/generated/applicationFields';
+export { APPLICATION_FIELDS, type ApplicationField } from '@/generated/applicationFields';
 
 export const APPLICATIONS_STATUSES = ['in-progress', 'rejected', 'interview', 'offer'] as const;
 
-export const APPLICATION_FIELDS = [
-  'frontend',
-  'backend',
-  'full-stack',
-  'mobile',
-  'devops',
-  'cybersecurity',
-] as const;
-
 export type ApplicationStatus = (typeof APPLICATIONS_STATUSES)[number];
-
-export type ApplicationField = (typeof APPLICATION_FIELDS)[number];
 
 export type ApplicationStatusDistribution = {
   status: ApplicationStatus;
@@ -25,7 +15,7 @@ export type Application = {
   company: string;
   companyLogo?: string;
   jobTitle: string;
-  field: FieldFilter;
+  field: ApplicationField;
   status: ApplicationStatus;
   appliedAt: string;
   location: string;

@@ -1,3 +1,4 @@
+import { APPLICATION_FIELDS } from '@/models/applications';
 import type { Application } from '@/models/applications';
 
 export const recentApplicationsMock: Application[] = [
@@ -6,7 +7,7 @@ export const recentApplicationsMock: Application[] = [
     company: 'Qonto',
     jobTitle: 'Full Stack Developer',
     status: 'interview',
-    field: 'full-stack',
+    field: APPLICATION_FIELDS[2 % APPLICATION_FIELDS.length]!,
     appliedAt: '2024-09-04',
     location: 'Paris, France',
     link: '',
@@ -15,7 +16,7 @@ export const recentApplicationsMock: Application[] = [
     id: '2',
     company: 'Alan',
     jobTitle: 'Frontend Developer',
-    field: 'frontend',
+    field: APPLICATION_FIELDS[0 % APPLICATION_FIELDS.length]!,
     status: 'in-progress',
     appliedAt: '2024-09-02',
     location: 'Paris, France',
@@ -26,7 +27,7 @@ export const recentApplicationsMock: Application[] = [
     company: 'Doctolib',
     jobTitle: 'Software Engineer',
     status: 'rejected',
-    field: 'full-stack',
+    field: APPLICATION_FIELDS[2 % APPLICATION_FIELDS.length]!,
     appliedAt: '2024-08-31',
     location: 'Nantes, France',
     link: '',
@@ -36,7 +37,7 @@ export const recentApplicationsMock: Application[] = [
     company: 'Back Market',
     jobTitle: 'React Developer',
     status: 'in-progress',
-    field: 'full-stack',
+    field: APPLICATION_FIELDS[2 % APPLICATION_FIELDS.length]!,
     appliedAt: '2024-08-28',
     link: '',
     location: 'Remote',
@@ -46,7 +47,7 @@ export const recentApplicationsMock: Application[] = [
     company: 'Swile',
     jobTitle: 'Frontend Developer',
     status: 'in-progress',
-    field: 'frontend',
+    field: APPLICATION_FIELDS[0 % APPLICATION_FIELDS.length]!,
     appliedAt: '2024-08-25',
     link: '',
     location: 'Paris, France',

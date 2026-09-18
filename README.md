@@ -76,6 +76,16 @@ npm run dev
 
 Open the URL printed by Vite. If the port changes, update your OAuth configuration to match.
 
+## Configure application fields
+
+Edit `application-fields.json` at the project root to set the available fields. Use a non-empty list of unique strings; `all` is reserved for filters. The first value is the default for new applications.
+
+The TypeScript array and union type are generated automatically before `npm run dev`, `npm run build`, `npm test`, and `npm run lint`. Restart the dev server after editing the JSON, or run `npm run generate:fields` to regenerate manually. Do not edit `src/generated/applicationFields.ts` directly.
+
+Forms, filters, and CSV validation use this list. CSV values must match exactly. Keep values already used by existing applications unless you migrate those records first.
+
+For an existing database created with the previous setup script, run [docs/remove-field-constraint.sql](docs/remove-field-constraint.sql) once in Supabase to remove the old fixed list constraint. The updated setup script already allows custom fields.
+
 ## Useful commands
 
 | Command             | Purpose                         |

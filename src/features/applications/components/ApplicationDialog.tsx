@@ -1,3 +1,4 @@
+import { APPLICATION_FIELDS } from '@/models/applications';
 import { useState, type FormEventHandler } from 'react';
 import { Link, Map } from 'lucide-react';
 
@@ -49,37 +50,12 @@ const statusOptions: Array<{ label: string; value: ApplicationStatus }> = [
   },
 ];
 
-const fieldOptions: Array<{ label: string; value: ApplicationField }> = [
-  {
-    label: 'Frontend',
-    value: 'frontend',
-  },
-  {
-    label: 'Backend',
-    value: 'backend',
-  },
-  {
-    label: 'Full-stack',
-    value: 'full-stack',
-  },
-  {
-    label: 'Mobile',
-    value: 'mobile',
-  },
-  {
-    label: 'DevOps',
-    value: 'devops',
-  },
-  {
-    label: 'Cybersecurity',
-    value: 'cybersecurity',
-  },
-];
+const fieldOptions = APPLICATION_FIELDS.map((value) => ({ label: value, value }));
 
 const initialForm: ApplicationForm = {
   company: '',
   jobTitle: '',
-  field: 'full-stack',
+  field: APPLICATION_FIELDS[0],
   status: 'in-progress',
   appliedAt: new Date().toISOString().split('T')[0],
   location: 'Paris, France',

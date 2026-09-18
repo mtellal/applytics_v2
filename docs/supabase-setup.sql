@@ -7,9 +7,7 @@ create table public.applications (
   user_id uuid not null references auth.users(id) on delete cascade,
   company text not null,
   job_title text not null,
-  field text not null check (field in (
-    'frontend', 'backend', 'full-stack', 'mobile', 'devops', 'cybersecurity'
-  )),
+  field text not null,
   status text not null default 'in-progress' check (status in (
     'in-progress', 'rejected', 'interview', 'offer'
   )),

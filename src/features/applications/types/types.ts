@@ -8,8 +8,7 @@ export type PaginatedApplications = {
 
 export type SortFilter = 'newest' | 'oldest';
 export type StatusFilter = 'all' | 'in-progress' | 'interview' | 'offer' | 'rejected';
-export type FieldFilter =
-  'all' | 'frontend' | 'backend' | 'full-stack' | 'mobile' | 'devops' | 'cybersecurity';
+export type FieldFilter = 'all' | ApplicationField;
 
 export type StatusStat = {
   status: ApplicationStatus;
@@ -39,7 +38,7 @@ export type ApplicationRow = {
   user_id: string;
   company: string;
   job_title: string;
-  field: FieldFilter;
+  field: ApplicationField;
   status: ApplicationStatus;
   applied_at: string;
   location: string;

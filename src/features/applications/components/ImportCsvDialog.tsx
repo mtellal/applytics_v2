@@ -1,3 +1,4 @@
+import { APPLICATION_FIELDS } from '@/models/applications';
 import { useRef, useState } from 'react';
 import { FileSpreadsheet, Info, Upload, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -358,16 +359,16 @@ function CsvTechnicalDetails({ t }: CsvTechnicalDetailsProps) {
           <p className="text-sm font-medium">{t('ImportCSVDialog.requirement.fields')}</p>
 
           <p className="mt-1 break-words text-sm text-slate-500">
-            {t('ImportCSVDialog.requirement.fieldsExample')}
+            {APPLICATION_FIELDS.join(', ')}
           </p>
         </div>
       </div>
 
       <div className="mt-4 md:mt-5">
-        <p className="mb-2 text-sm font-medium">{t('ImportCSVDialog.requirement.csvExample')}</p>
+        <p className="mb-2 text-sm font-medium">{t('ImportCSVDialog.requirement.csv')}</p>
 
         <pre className="max-w-full overflow-x-auto rounded-lg border bg-white p-3 text-xs text-slate-600">
-          {t('ImportCSVDialog.requirement.csvExample')}
+          {`company,jobTitle,field,status,appliedAt,location,link,notes\nExample,Intern,${APPLICATION_FIELDS[0]},in-progress,2026-01-01,Paris,,`}
         </pre>
       </div>
     </>
