@@ -1,4 +1,4 @@
-import type { TFunction } from 'i18next';
+import type { TFunction } from "i18next";
 
 export type SignupValidationErrors = {
   email?: string;
@@ -13,37 +13,40 @@ export type SigninValidationErrors = {
 
 export function validateEmail(email: string, t: TFunction): string | undefined {
   if (!email.trim()) {
-    return t('auth.validation.emailRequired');
+    return t("auth.validation.emailRequired");
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailRegex.test(email.trim())) {
-    return t('auth.validation.emailInvalid');
+    return t("auth.validation.emailInvalid");
   }
 
   return undefined;
 }
 
-export function validatePassword(password: string, t: TFunction): string | undefined {
+export function validatePassword(
+  password: string,
+  t: TFunction,
+): string | undefined {
   if (password.length < 8) {
-    return t('auth.validation.passwordMinLength');
+    return t("auth.validation.passwordMinLength");
   }
 
   if (!/[A-Z]/.test(password)) {
-    return t('auth.validation.passwordUppercase');
+    return t("auth.validation.passwordUppercase");
   }
 
   if (!/[a-z]/.test(password)) {
-    return t('auth.validation.passwordLowercase');
+    return t("auth.validation.passwordLowercase");
   }
 
   if (!/[0-9]/.test(password)) {
-    return t('auth.validation.passwordDigit');
+    return t("auth.validation.passwordDigit");
   }
 
   if (!/[^A-Za-z0-9]/.test(password)) {
-    return t('auth.validation.passwordSpecialChar');
+    return t("auth.validation.passwordSpecialChar");
   }
 
   return undefined;
@@ -66,11 +69,11 @@ export function validateSignupForm(
   const passwordError = validatePassword(password, t);
 
   if (passwordError) {
-    errors.password = emailError;
+    errors.password = passwordError;
   }
 
   if (password !== confirmPassword) {
-    errors.confirmPassword = t('signupmodal.validateSignup.passwordsDiffer');
+    errors.confirmPassword = t("signupmodal.validateSignup.passwordsDiffer");
   }
 
   return errors;
@@ -90,7 +93,7 @@ export function validateSigninForm(
   }
 
   if (!password) {
-    errors.password = t('auth.validation.passwordRequired');
+    errors.password = t("auth.validation.passwordRequired");
   }
 
   return errors;
