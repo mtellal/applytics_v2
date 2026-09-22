@@ -1,8 +1,8 @@
-import { APPLICATION_FIELDS } from '@/models/applications';
-import { useState, type FormEventHandler } from 'react';
-import { Link, Map } from 'lucide-react';
+import { APPLICATION_FIELDS } from "@/models/applications";
+import { useState, type FormEventHandler } from "react";
+import { Link, Map } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,19 +10,26 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 
-import type { Application, ApplicationField, ApplicationStatus } from '@/models/applications';
-import FormInput from '@/components/ui/FormInput';
-import FormInputSelect from '@/components/ui/FormInputSelect';
-import type { ApplicationForm } from '../types/types';
-import { createApplication, editApplication } from '../services/applications.service';
-import useAuth from '@/features/auth/hooks/useAuth';
-import { useTranslation } from 'react-i18next';
+import type {
+  Application,
+  ApplicationField,
+  ApplicationStatus,
+} from "@/models/applications";
+import FormInput from "@/components/ui/FormInput";
+import FormInputSelect from "@/components/ui/FormInputSelect";
+import type { ApplicationForm } from "../types/types";
+import {
+  createApplication,
+  editApplication,
+} from "../services/applications.service";
+import useAuth from "@/features/auth/hooks/useAuth";
+import { useTranslation } from "react-i18next";
 import {
   validateApplicationForm,
   type ApplicationFormErrors,
-} from '../utils/validateApplicationForm';
+} from "../utils/validateApplicationForm";
 
 type ApplicationDialogProps = {
   open: boolean;
@@ -33,34 +40,37 @@ type ApplicationDialogProps = {
 
 const statusOptions: Array<{ label: string; value: ApplicationStatus }> = [
   {
-    label: 'ApplicationsTable.status.in-progress',
-    value: 'in-progress',
+    label: "ApplicationsTable.status.in-progress",
+    value: "in-progress",
   },
   {
-    label: 'ApplicationsTable.status.interview',
-    value: 'interview',
+    label: "ApplicationsTable.status.interview",
+    value: "interview",
   },
   {
-    label: 'ApplicationsTable.status.offer',
-    value: 'offer',
+    label: "ApplicationsTable.status.offer",
+    value: "offer",
   },
   {
-    label: 'ApplicationsTable.status.rejected',
-    value: 'rejected',
+    label: "ApplicationsTable.status.rejected",
+    value: "rejected",
   },
 ];
 
-const fieldOptions = APPLICATION_FIELDS.map((value) => ({ label: value, value }));
+const fieldOptions = APPLICATION_FIELDS.map((value) => ({
+  label: value,
+  value,
+}));
 
 const initialForm: ApplicationForm = {
-  company: '',
-  jobTitle: '',
+  company: "",
+  jobTitle: "",
   field: APPLICATION_FIELDS[0],
-  status: 'in-progress',
-  appliedAt: new Date().toISOString().split('T')[0],
-  location: 'Paris, France',
-  link: '',
-  notes: '',
+  status: "in-progress",
+  appliedAt: new Date().toISOString().split("T")[0],
+  location: "Paris, France",
+  link: "",
+  notes: "",
 };
 
 export default function ApplicationDialog({
@@ -78,12 +88,12 @@ export default function ApplicationDialog({
           status: currentApplication.status,
           appliedAt: currentApplication.appliedAt,
           location: currentApplication.location,
-          link: currentApplication.link ?? '',
-          notes: currentApplication.notes ?? '',
+          link: currentApplication.link ?? "",
+          notes: currentApplication.notes ?? "",
         }
       : {
           ...initialForm,
-          appliedAt: new Date().toISOString().split('T')[0],
+          appliedAt: new Date().toISOString().split("T")[0],
         },
   );
   const [formErrors, setFormErrors] = useState<ApplicationFormErrors>({});
@@ -92,7 +102,10 @@ export default function ApplicationDialog({
 
   const { t } = useTranslation();
 
-  const updateField = <K extends keyof ApplicationForm>(field: K, value: ApplicationForm[K]) => {
+  const updateField = <K extends keyof ApplicationForm>(
+    field: K,
+    value: ApplicationForm[K],
+  ) => {
     setForm((prev) => ({
       ...prev,
       [field]: value,
@@ -130,87 +143,98 @@ export default function ApplicationDialog({
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[480px]">
         <DialogHeader>
           <DialogTitle className="text-2xl font-semibold">
-            {currentApplication ? t('ApplicationDialog.edit') : t('ApplicationDialog.new')}
+            {currentApplication
+              ? t("ApplicationDialog.edit")
+              : t("ApplicationDialog.new")}
           </DialogTitle>
 
           <DialogDescription>
-            {' '}
+            {" "}
             {currentApplication
-              ? t('ApplicationDialog.editDescription')
-              : t('ApplicationDialog.newDescription')}
+              ? t("ApplicationDialog.editDescription")
+              : t("ApplicationDialog.newDescription")}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3 ">
           <FormInput
             id="company"
-            label={t('ApplicationDialog.fields.company')}
+            label={t("ApplicationDialog.fields.company")}
             placeholder="e.g. Capgemini"
             value={form.company}
             error={formErrors.company}
             required
-            onChange={(e) => e.target.value.length < 150 && updateField('company', e.target.value)}
+            onChange={(e) =>
+              e.target.value.length < 150 &&
+              updateField("company", e.target.value)
+            }
           />
 
           <FormInput
             id="jobTitle"
-            label={t('ApplicationDialog.fields.job')}
+            label={t("ApplicationDialog.fields.job")}
             placeholder="e.g. Full-stack Engineer Intern"
             value={form.jobTitle}
             error={formErrors.jobTitle}
             required
-            onChange={(e) => e.target.value.length < 150 && updateField('jobTitle', e.target.value)}
+            onChange={(e) =>
+              e.target.value.length < 150 &&
+              updateField("jobTitle", e.target.value)
+            }
           />
 
           <FormInputSelect<ApplicationField>
-            label={t('ApplicationDialog.fields.field')}
+            label={t("ApplicationDialog.fields.field")}
             value={form.field}
             options={fieldOptions}
             placeholder="Select a field"
             required
-            onValueChange={(value) => updateField('field', value)}
+            onValueChange={(value) => updateField("field", value)}
           />
 
           <FormInputSelect<ApplicationStatus>
-            label={t('ApplicationDialog.fields.status')}
+            label={t("ApplicationDialog.fields.status")}
             value={form.status}
             options={statusOptions}
-            placeholder={t('ApplicationDialog.fields.status')}
+            placeholder={t("ApplicationDialog.fields.status")}
             required
-            onValueChange={(value) => updateField('status', value)}
+            onValueChange={(value) => updateField("status", value)}
           />
 
           <FormInput
             id="location"
             icon={Map}
-            label={t('ApplicationDialog.fields.location')}
+            label={t("ApplicationDialog.fields.location")}
             placeholder="e.g. Paris, France"
             value={form.location}
             error={formErrors.location}
-
-            onChange={(e) => updateField('location', e.target.value)}
+            onChange={(e) => updateField("location", e.target.value)}
           />
 
           <FormInput
             id="link"
             icon={Link}
-            label={t('ApplicationDialog.fields.link')}
+            label={t("ApplicationDialog.fields.link")}
             placeholder="e.g. https://example.com/jobs/123"
             value={form.link}
             error={formErrors.link}
-            onChange={(e) => e.target.value.length < 150 && updateField('link', e.target.value)}
+            onChange={(e) =>
+              e.target.value.length < 500 && updateField("link", e.target.value)
+            }
           />
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label htmlFor="notes">
-                {t('ApplicationDialog.fields.notes')}{' '}
+                {t("ApplicationDialog.fields.notes")}{" "}
                 <span className="font-normal text-gray-500">
-                  {t('ApplicationDialog.fields.optional')}
+                  {t("ApplicationDialog.fields.optional")}
                 </span>
               </label>
 
-              <span className="text-xs text-gray-500">{form.notes?.length}/500</span>
+              <span className="text-xs text-gray-500">
+                {form.notes?.length}/500
+              </span>
             </div>
 
             <textarea
@@ -218,21 +242,28 @@ export default function ApplicationDialog({
               value={form.notes}
               maxLength={500}
               rows={4}
-              placeholder={t('ApplicationDialog.fields.additionalNotes')}
+              placeholder={t("ApplicationDialog.fields.additionalNotes")}
               className="resize-none w-full border rounded-lg p-2"
-              onChange={(e) => e.target.value.length <= 500 && updateField('notes', e.target.value)}
+              onChange={(e) =>
+                e.target.value.length <= 500 &&
+                updateField("notes", e.target.value)
+              }
             />
           </div>
 
           <DialogFooter className="pt-2">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              {t('ApplicationDialog.buttons.cancel')}
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+            >
+              {t("ApplicationDialog.buttons.cancel")}
             </Button>
 
             <Button type="submit" className="bg-blue-500 hover:bg-blue-400">
               {currentApplication
-                ? t('ApplicationDialog.buttons.edit')
-                : t('ApplicationDialog.buttons.new')}
+                ? t("ApplicationDialog.buttons.edit")
+                : t("ApplicationDialog.buttons.new")}
             </Button>
           </DialogFooter>
         </form>
