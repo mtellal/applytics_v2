@@ -1,10 +1,10 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from "react";
 
-import type { Session, User } from '@supabase/supabase-js';
+import type { Session, User } from "@supabase/supabase-js";
 
-import { AuthContext } from './AuthContext';
+import { AuthContext } from "./AuthContext";
 
-import { supabase } from '@/lib/supabase';
+import { supabase } from "@/lib/supabase";
 import {
   forgetPassword,
   resetPassword,
@@ -12,9 +12,9 @@ import {
   signOut as signOutService,
   signUp,
   singInWithGoogle,
-} from '../services/auth.service';
-import type { UserCredentials } from '../types/auth.types';
-import { useNavigate } from 'react-router-dom';
+} from "../services/auth.service";
+import type { UserCredentials } from "../types/auth.types";
+import { useNavigate } from "react-router-dom";
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -58,9 +58,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const handleSignin = async (payload: UserCredentials): Promise<void> => {
     try {
       await signIn(payload);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (error) {
-      console.log('Error while signing an user (handleSignin): ', error);
+      console.log("Error while signing an user (handleSignin): ", error);
       throw error;
     }
   };
@@ -68,9 +68,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const handleSignup = async (payload: UserCredentials): Promise<void> => {
     try {
       await signUp(payload);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (error) {
-      console.log('Error while creating a new user (handleSignup): ', error);
+      console.log("Error while creating a new user (handleSignup): ", error);
       throw error;
     }
   };
@@ -79,7 +79,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       await singInWithGoogle();
     } catch (error) {
-      console.log('Sign in with google error ', error);
+      console.log("Sign in with google error ", error);
     }
   };
 
@@ -87,7 +87,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       await forgetPassword(email);
     } catch (error) {
-      console.log('Error on ');
+      console.log("Error on forgot password ", error);
     }
   };
 

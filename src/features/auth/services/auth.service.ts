@@ -1,25 +1,30 @@
-import { supabase } from '@/lib/supabase';
-import type { UserCredentials } from '../types/auth.types';
+import { supabase } from "@/lib/supabase";
+import type { UserCredentials } from "../types/auth.types";
 
-export async function signUp({ email, password }: UserCredentials): Promise<any> {
-  const { data, error } = await supabase.auth.signUp({ email, password });
+export async function signUp({
+  email,
+  password,
+}: UserCredentials): Promise<void> {
+  const { error } = await supabase.auth.signUp({ email, password });
 
   if (error) throw error;
-
-  return data;
 }
 
-export async function signIn({ email, password }: UserCredentials): Promise<any> {
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+export async function signIn({
+  email,
+  password,
+}: UserCredentials): Promise<void> {
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
 
   if (error) throw error;
-
-  return data;
 }
 
 export async function singInWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
+    provider: "google",
     options: {
       redirectTo: `${window.location.origin}/dashboard`,
     },
@@ -61,11 +66,11 @@ export async function deleteAccount(): Promise<void> {
   } = await supabase.auth.getSession();
 
   if (!session?.access_token) {
-    throw new Error('No authenticated session');
+    throw new Error("No authenticated session");
   }
 
-  const { data, error } = await supabase.functions.invoke('delete-account', {
-    method: 'POST',
+  const { data, error } = await supabase.functions.invoke("delete-account", {
+    method: "POST",
   });
 
   if (error) {
@@ -73,7 +78,7 @@ export async function deleteAccount(): Promise<void> {
   }
 
   if (!data?.success) {
-    throw new Error(data?.error ?? 'Unable to delete account');
+    throw new Error(data?.error ?? "Unable to delete account");
   }
 
   await supabase.auth.signOut();
