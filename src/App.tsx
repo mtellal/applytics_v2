@@ -5,11 +5,13 @@ import Applications from './pages/Applications';
 import Account from './pages/Account';
 import Landing from './pages/Landing';
 import ProtectedRoute from './features/auth/components/ProtectedRoute';
+import ResetPasswordPage from './pages/ResetPassword';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
 
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>

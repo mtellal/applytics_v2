@@ -5,59 +5,76 @@
       "why": "Why Applytics?",
       "about": "About"
     },
-
     "hero": {
       "badge": "Organize · Track · Succeed",
       "title1": "Take control",
-      "title2": "of your",
-      "title3": "",
-      "internship": "internship search",
+      "title2": "of your search",
+      "title3": "for an ",
+      "internship": "internship",
       "description": "Centralize your applications, track your progress, and stay motivated throughout your search. Simple, fast, and effective.",
-      "login": "Continue with Google",
-      "password": "No password required"
+      "loginButton": "Sign in",
+      "or": "or",
+      "password": "No password required",
+      "continueGoogle": "Continue with Google",
+      "addressEmail": "Email address",
+      "addressEmailPlaceholder": "your@email.com",
+      "passwordLabel": "Password",
+      "passwordForgot": "Forgot password?",
+      "passwordPlaceholder": "Your password",
+      "alreadyAccount": "Already have an account?",
+      "connect": "Sign in",
+      "connecting": "Signing in...",
+      "notAccountYet": "Don't have an account yet?",
+      "startButton": "Let's get started!",
+      "signupText": "Sign up",
+      "signin": {
+        "title": "Sign in",
+        "description": "Access all your internship applications.",
+        "continueGoogle": "Continue with Google"
+      },
+      "signup": {
+        "title": "Create an account",
+        "description": "Start tracking your applications with Applytics.",
+        "confirmPassword": "Confirm password",
+        "confirmPasswordPlaceholder": "Confirm your password",
+        "createAccount": "Create my account",
+        "creatingAccount": "Creating...",
+        "politics": "By creating an account, you agree to our Terms of Use and Privacy Policy."
+      }
     },
-
     "carousel": {
       "dashboard": {
         "label": "Dashboard",
         "description": "A clear dashboard to track your progress"
       },
-
       "applications": {
         "label": "Applications",
         "description": "All your applications in one place"
       },
-
       "statistics": {
         "label": "Statistics",
         "description": "Quickly visualize your progress"
       }
     },
-
     "features": {
       "tracking": {
         "title": "Centralize",
         "description": "All your applications in one place"
       },
-
       "analytics": {
         "title": "Analyze",
         "description": "See your progress at a glance"
       },
-
       "organization": {
         "title": "Stay motivated",
         "description": "Track your goals and celebrate your achievements"
       },
-
       "time": {
         "title": "Save time",
         "description": "A simple and effective tool to help you go further"
       }
     },
-
     "dev": "“ A tool designed by a developer, for opportunity seekers. ”",
-
     "footer": {
       "text": "Your search. Made better.",
       "privacy": "Privacy",
@@ -65,7 +82,60 @@
       "contact": "Contact"
     }
   },
-
+  "auth": {
+    "addressEmail": "Email address",
+    "addressEmailPlaceholder": "your@email.com",
+    "errors": {
+      "invalidCredentials": "Incorrect email address or password.",
+      "userAlreadyExists": "An account already exists with this email address.",
+      "weakPassword": "The password is not secure enough.",
+      "invalidEmail": "The email address is invalid.",
+      "rateLimit": "Too many attempts. Please try again in a few moments.",
+      "generic": "An error occurred. Please try again."
+    },
+    "validation": {
+      "emailRequired": "Email address is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "passwordRequired": "Password is required.",
+      "passwordMinLength": "Password must contain at least 8 characters.",
+      "passwordUppercase": "Password must contain at least one uppercase letter.",
+      "passwordLowercase": "Password must contain at least one lowercase letter.",
+      "passwordDigit": "Password must contain at least one number.",
+      "passwordSpecialChar": "Password must contain at least one special character.",
+      "passwordsDiffer": "Passwords do not match."
+    },
+    "forgotPassword": {
+      "title": "Forgot password?",
+      "description": "Enter your email address to receive a password reset link.",
+      "send": "Send reset link",
+      "sending": "Sending...",
+      "backToSignIn": "Back to sign in",
+      "sentTitle": "Check your inbox",
+      "sentDescription": "If an account matches this email address, you will receive a link to reset your password."
+    },
+    "resetPassword": {
+      "title": "Reset your password",
+      "description": "Choose a new password for your account.",
+      "password": "New password",
+      "confirmPassword": "Confirm new password",
+      "submit": "Change password",
+      "loading": "Updating...",
+      "successTitle": "Password updated",
+      "successDescription": "Your password has been reset successfully. You can now sign in with your new password.",
+      "backToSignIn": "Back to sign in"
+    }
+  },
+  "signupmodal": {
+    "validateSignup": {
+      "invalidEmail": "Invalid email address.",
+      "mini8chars": "Password must contain at least 8 characters.",
+      "upperChar": "Password must contain an uppercase letter.",
+      "lowerChar": "Password must contain a lowercase letter.",
+      "digit": "Password must contain a number.",
+      "specialChar": "Password must contain a special character.",
+      "passwordsDiffer": "Passwords do not match."
+    }
+  },
   "dashboard": {
     "header": {
       "title": "Dashboard",
@@ -73,7 +143,6 @@
       "description": "Here's an overview of your internship search"
     }
   },
-
   "Applications": {
     "title": "Applications",
     "description": "Manage and track all your applications",
@@ -82,7 +151,6 @@
       "new": "New application"
     }
   },
-
   "applicationsCards": {
     "applications": {
       "label": "Applications"
@@ -100,7 +168,6 @@
       "label": "Rejected"
     }
   },
-
   "ApplicationActivity": {
     "title": "Application activity",
     "description": "Number of applications sent",
@@ -111,11 +178,9 @@
       "all": "All"
     }
   },
-
   "ApplicationStatusChart": {
     "title": "Status distribution"
   },
-
   "RecentApplications": {
     "title": "Recent applications",
     "seeAll": "View all applications",
@@ -130,7 +195,6 @@
       "notes": "Notes"
     }
   },
-
   "ApplicationFilters": {
     "status": "Status",
     "field": "Field",
@@ -151,7 +215,6 @@
       "oldest": "Oldest"
     }
   },
-
   "ApplicationsTable": {
     "fields": {
       "company": "Company",
@@ -175,7 +238,6 @@
       "delete": "Delete"
     }
   },
-
   "ApplicationDialog": {
     "new": "New application",
     "edit": "Edit application",
@@ -199,7 +261,6 @@
       "edit": "Update"
     }
   },
-
   "ImportCSVDialog": {
     "title": "Import applications",
     "description": "Import multiple applications from a CSV file. The file must follow the format shown below.",
@@ -230,19 +291,15 @@
       "importation": "Importing..."
     }
   },
-
   "parseApplicationsCsv": {},
-
   "validateCsvApplication": {
     "missing": "missing",
     "invalid": "invalid",
     "dateFormat": "must be in YYYY-MM-DD format"
   },
-
   "applications": "applications",
   "_Applications": "Applications",
   "_Dashboard": "Dashboard",
-
   "common": {
     "period": "Period"
   }

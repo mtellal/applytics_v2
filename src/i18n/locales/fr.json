@@ -13,8 +13,35 @@
       "title3": "de ",
       "internship": "stage",
       "description": "Centralisez vos candidatures, suivez vos progrès et restez motivé tout au long de votre recherche. Simple, rapide et efficace.",
-      "login": "Continuer avec Google",
-      "password": "Aucun mot de passe requis"
+      "loginButton": "Se connecter",
+      "or": "ou",
+      "password": "Aucun mot de passe requis",
+      "continueGoogle": "Continuer avec Google",
+      "addressEmail": "Addresse e-mail",
+      "addressEmailPlaceholder": "votre@email.com",
+      "passwordLabel": "Mot de passe",
+      "passwordForgot": "Mot de passe oublié ?",
+      "passwordPlaceholder": "Votre mot de passe",
+      "alreadyAccount": "Vous avez déjà un compte ?",
+      "connect": "Se connecter",
+      "connecting": "Connexion...",
+      "notAccountYet": "Pas encore de compte ?",
+      "startButton": "C'est parti !",
+      "signupText": "S'inscrire",
+      "signin": {
+        "title": "Connexion",
+        "description": "Accedez à toutes vos candidatures de stages.",
+        "continueGoogle": "Continuer avec Google"
+      },
+      "signup": {
+        "title": "Créer un compte",
+        "description": "Commencez à suivre vos candidatures avec Applytics.",
+        "confirmPassword": "Confirmer le mot de passe",
+        "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+        "createAccount": "Créer mon compte",
+        "creatingAccount": "Création..",
+        "politics": "En créant un compte, vous acceptez nos conditions d'utilisation et notre politique de confidentialité."
+      }
     },
 
     "carousel": {
@@ -63,6 +90,62 @@
       "privacy": "Confidentialité",
       "terms": "Conditions d'utilisation",
       "contact": "Contact"
+    }
+  },
+
+  "auth": {
+    "addressEmail": "Addresse e-mail",
+    "addressEmailPlaceholder": "votre@email.com",
+    "errors": {
+      "invalidCredentials": "Adresse e-mail ou mot de passe incorrect.",
+      "userAlreadyExists": "Un compte existe déjà avec cette adresse e-mail.",
+      "weakPassword": "Le mot de passe n'est pas assez sécurisé.",
+      "invalidEmail": "L'adresse e-mail n'est pas valide.",
+      "rateLimit": "Trop de tentatives. Veuillez réessayer dans quelques instants.",
+      "generic": "Une erreur est survenue. Veuillez réessayer."
+    },
+    "validation": {
+      "emailRequired": "L'adresse e-mail est requise.",
+      "emailInvalid": "Veuillez saisir une adresse e-mail valide.",
+      "passwordRequired": "Le mot de passe est requis.",
+      "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères.",
+      "passwordUppercase": "Le mot de passe doit contenir au moins une majuscule.",
+      "passwordLowercase": "Le mot de passe doit contenir au moins une minuscule.",
+      "passwordDigit": "Le mot de passe doit contenir au moins un chiffre.",
+      "passwordSpecialChar": "Le mot de passe doit contenir au moins un caractère spécial.",
+      "passwordsDiffer": "Les mots de passe ne correspondent pas."
+    },
+    "forgotPassword": {
+      "title": "Mot de passe oublié ?",
+      "description": "Saisissez votre adresse e-mail pour recevoir un lien de réinitialisation de votre mot de passe.",
+      "send": "Envoyer le lien",
+      "sending": "Envoi en cours...",
+      "backToSignIn": "Retour à la connexion",
+      "sentTitle": "Consultez votre boîte mail",
+      "sentDescription": "Si un compte correspond à cette adresse, vous recevrez un lien pour réinitialiser votre mot de passe."
+    },
+    "resetPassword": {
+      "title": "Réinitialiser votre mot de passe",
+      "description": "Choisissez un nouveau mot de passe pour votre compte.",
+      "password": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le nouveau mot de passe",
+      "submit": "Modifier le mot de passe",
+      "loading": "Modification en cours...",
+      "successTitle": "Mot de passe modifié",
+      "successDescription": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+      "backToSignIn": "Retour à la connexion"
+    }
+  },
+
+  "signupmodal": {
+    "validateSignup": {
+      "invalidEmail": "Adresse e-mail invalide.",
+      "mini8chars": "Le mot de passe doit contenir au moins 8 caractères.",
+      "upperChar": "Le mot de passe doit contenir une majuscule.",
+      "lowerChar": "Le mot de passe doit contenir une minuscule.",
+      "digit": "Le mot de passe doit contenir un chiffre.",
+      "specialChar": "Le mot de passe doit contenir un caractère spécial.",
+      "passwordsDiffer": "Les mots de passe ne correspondent pas."
     }
   },
 
